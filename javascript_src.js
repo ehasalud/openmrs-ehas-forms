@@ -9,7 +9,7 @@ var district_id_list = district_id + "_list";
 var village_id = "person_address_city_village";
 var village_id_list = village_id + "_list";
 
-var subvillage_id = "person_address_address1"; // It corresponds to jurisdiccion
+var subvillage_id = "person_address_address1";
 var subvillage_id_list = subvillage_id + "_list";
  
 var location_id = "location_id";
@@ -25,7 +25,6 @@ var patient_id_id = "identifier";
 var patient_id_type_id = "patient_identifier_type_id";
 var default_patient_id_type = "DPI";
  
-// If this identifier type is selected, personal code is used as identifier
 var secundary_patient_id_type = "cribado";
 var use_personal_code_as_identifier = false;
 
@@ -39,16 +38,14 @@ var village = $j("#" + village_id).val();
 var subvillage = $j("#" + subvillage_id).val();
 
 
-// Init dropdown lists and other fields
+/* Initialize dropdown boxes */
 $j(function () {
 
-	// Check if using Internet Explorer. If so, show a warning message
 	var ua = window.navigator.userAgent;
 	if(ua.indexOf("MSIE") > -1 || !!ua.match(/Trident.*rv\:11\./)){
 		alert("Estás utilizando el navegador web Internet Explorer.\nAlgunas de las funciones de esta página no funcionan correctamente con este navegador.\nAconsejamos el uso de Mozilla Firefox o Google Chrome.");
 	}
 
-	// Create the list associated to every field
 	createList(country_id, country_id_list, 8);
 	createList(district_id, district_id_list, 9);
 	createList(village_id, village_id_list, 10);
@@ -62,7 +59,6 @@ $j(function () {
 		country_to_select = default_country;
 	}
 
-	// Create a dropdown with all locations that meet the requirements to be a country
 	options_init.each(function () {
 		var code = $j(this).text().split(" ")[0];
 		if(code.length == 1){
@@ -79,11 +75,9 @@ $j(function () {
 		$j("#" + country_id).val(selected_opt[0].value);
 	}
 	else {
-		// Show all districts
 		update_district("");
 	}
 
-	// Look for an identifier that contains the default_patient_id string
 	var current_id_type = $j("#" + patient_id_type_id + " option:selected");
 	if(current_id_type.length == 1 && current_id_type.first().text().length > 0){
 		check_if_secundary_patient_id_type(current_id_type);
@@ -288,7 +282,6 @@ function generate_personal_code(){
 		return "";
 	}
 	
-	//Delete special characters
 	name_code = name_code.replace(/[Á]/g,"A");
 	name_code = name_code.replace(/[É]/g,"E");
 	name_code = name_code.replace(/[Í]/g,"I");
@@ -309,7 +302,6 @@ function update_personal_code(){
 	}
 }
  
-// Listeners associated to personal code (codigo de cribado)
 
 $j("#" + gender_id).change(function () {
 	update_personal_code();
@@ -327,7 +319,6 @@ $j("input#" + family_name_id).change(function () {
 	update_personal_code();
 });
 
-// Listeners associated a identifier type dropdown
 $j("#" + patient_id_type_id).change(function () {
 	
 	var selected_opt = $j("#" + patient_id_type_id + " option:selected");

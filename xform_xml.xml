@@ -150,10 +150,7 @@
     <xf:select1 bind="location_id">
       <xf:label>Location</xf:label>
       <xf:hint>The patient's location</xf:hint>
-      <xf:item id="1">
-        <xf:label>Unknown Location</xf:label>
-        <xf:value>1</xf:value>
-      </xf:item><xf:item id="2">
+      <xf:item id="2">
         <xf:label>1 Guatemala</xf:label>
         <xf:value>2</xf:value>
       </xf:item>
@@ -174,45 +171,130 @@
       </xf:item><xf:item id="7">
         <xf:label>1208 Tajamulco</xf:label>
         <xf:value>7</xf:value>
-      </xf:item><xf:item id="8">
+      </xf:item>
+      
+      <xf:item id="8">
         <xf:label>1601 Coban</xf:label>
         <xf:value>8</xf:value>
-      </xf:item><xf:item id="9">
+      </xf:item>
+      <xf:item id="9">
         <xf:label>1603 San Cristobal Verapaz</xf:label>
         <xf:value>9</xf:value>
       </xf:item><xf:item id="10">
         <xf:label>1608 Senahu</xf:label>
         <xf:value>10</xf:value>
-      </xf:item><xf:item id="11">
-        <xf:label>12071 Area de tacana1</xf:label>
-        <xf:value>11</xf:value>
+      </xf:item><xf:item id="27">
+        <xf:label>16011 Chicotan</xf:label>
+        <xf:value>27</xf:value>
       </xf:item>
-      <xf:item id="12">
-        <xf:label>12072 Area de tacana2</xf:label>
-        <xf:value>12</xf:value>
-      </xf:item>
-      
-      
-      
-      <xf:item id="13">
-        <xf:label>16011 Area de coban</xf:label>
-        <xf:value>13</xf:value>
+      <xf:item id="35">
+        <xf:label>16012 Nimlajacoc</xf:label>
+        <xf:value>35</xf:value>
       </xf:item>
       
+      <xf:item id="32">
+        <xf:label>16031 San Cristobal Chixoy</xf:label>
+        <xf:value>32</xf:value>
+      </xf:item>
+      <xf:item id="21">
+        <xf:label>1606 Tucuru</xf:label>
+        <xf:value>21</xf:value>
+      </xf:item>
+      <xf:item id="36">
+        <xf:label>16061 Tucuru II</xf:label>
+        <xf:value>36</xf:value>
+      </xf:item>
+      <xf:item id="19">
+        <xf:label>1607 Panzos</xf:label>
+        <xf:value>19</xf:value>
+      </xf:item>
+      <xf:item id="33">
+        <xf:label>16071 Teleman II</xf:label>
+        <xf:value>33</xf:value>
+      </xf:item>
       
-      
+      <xf:item id="29">
+        <xf:label>16081 Senahu I</xf:label>
+        <xf:value>29</xf:value>
+      </xf:item>
+      <xf:item id="30">
+        <xf:label>16082 Senahu II</xf:label>
+        <xf:value>30</xf:value>
+      </xf:item>
+      <xf:item id="31">
+        <xf:label>16083 Senahu III</xf:label>
+        <xf:value>31</xf:value>
+      </xf:item>
+      <xf:item id="15">
+        <xf:label>1609 San Pedro Carcha</xf:label>
+        <xf:value>15</xf:value>
+      </xf:item>
+      <xf:item id="23">
+        <xf:label>16091 Nor Occidente Setal</xf:label>
+        <xf:value>23</xf:value>
+      </xf:item>
+      <xf:item id="24">
+        <xf:label>16092 Nor Occidente San Vicente Chicatal</xf:label>
+        <xf:value>24</xf:value>
+      </xf:item>
+      <xf:item id="37">
+        <xf:label>16093 Sur Oriente I</xf:label>
+        <xf:value>37</xf:value>
+      </xf:item>
+      <xf:item id="17">
+        <xf:label>1611 Lanquin</xf:label>
+        <xf:value>17</xf:value>
+      </xf:item>
+      <xf:item id="26">
+        <xf:label>16111 Lanquin</xf:label>
+        <xf:value>26</xf:value>
+      </xf:item>
+      <xf:item id="18">
+        <xf:label>1612 Cahabon</xf:label>
+        <xf:value>18</xf:value>
+      </xf:item>
+      <xf:item id="28">
+        <xf:label>16121 Cahabon</xf:label>
+        <xf:value>28</xf:value>
+      </xf:item>
+      <xf:item id="39">
+        <xf:label>16122 Chipoc</xf:label>
+        <xf:value>39</xf:value>
+      </xf:item>
+      <xf:item id="40">
+        <xf:label>16123 Sacta</xf:label>
+        <xf:value>40</xf:value>
+      </xf:item>
+      <xf:item id="20">
+        <xf:label>1613 Chisec</xf:label>
+        <xf:value>20</xf:value>
+      </xf:item>
+      <xf:item id="34">
+        <xf:label>16131 Sehix</xf:label>
+        <xf:value>34</xf:value>
+      </xf:item>
+      <xf:item id="22">
+        <xf:label>1614 Chahal</xf:label>
+        <xf:value>22</xf:value>
+      </xf:item>
+      <xf:item id="38">
+        <xf:label>16141 Chahal</xf:label>
+        <xf:value>38</xf:value>
+      </xf:item>
+      <xf:item id="16">
+        <xf:label>1615 Fray Bartolome de las Casas</xf:label>
+        <xf:value>16</xf:value>
+      </xf:item>
+      <xf:item id="25">
+        <xf:label>16151 Fray Bartolome</xf:label>
+        <xf:value>25</xf:value>
+      </xf:item>
       
     </xf:select1>
     <xf:select1 bind="patient_identifier_type_id">
       <xf:label>Tipo de identificador</xf:label>
       <xf:hint>The patient's identifier type</xf:hint>
-      <xf:item id="2">
-        <xf:label>Old Identification Number</xf:label>
-        <xf:value>2</xf:value>
-      </xf:item><xf:item id="1">
-        <xf:label>OpenMRS Identification Number</xf:label>
-        <xf:value>1</xf:value>
-      </xf:item><xf:item id="3">
+      <xf:item id="3">
         <xf:label>Cribado</xf:label>
         <xf:value>3</xf:value>
       </xf:item>
@@ -234,10 +316,7 @@
     <xf:select1 bind="person_attribute7">
       <xf:label>Health Center</xf:label>
       <xf:hint>Specific Location of this person's home health center.</xf:hint>
-      <xf:item id="1">
-        <xf:label>Unknown Location [1]</xf:label>
-        <xf:value>1</xf:value>
-      </xf:item><xf:item id="2">
+      <xf:item id="2">
         <xf:label>1 Guatemala [2]</xf:label>
         <xf:value>2</xf:value>
       </xf:item>
@@ -258,35 +337,126 @@
       </xf:item><xf:item id="7">
         <xf:label>1208 Tajamulco [7]</xf:label>
         <xf:value>7</xf:value>
-      </xf:item><xf:item id="8">
+      </xf:item>
+      
+      <xf:item id="8">
         <xf:label>1601 Coban [8]</xf:label>
         <xf:value>8</xf:value>
-      </xf:item><xf:item id="9">
+      </xf:item>
+      <xf:item id="9">
         <xf:label>1603 San Cristobal Verapaz [9]</xf:label>
         <xf:value>9</xf:value>
       </xf:item><xf:item id="10">
         <xf:label>1608 Senahu [10]</xf:label>
         <xf:value>10</xf:value>
-      </xf:item><xf:item id="11">
-        <xf:label>12071 Area de tacana1 [11]</xf:label>
-        <xf:value>11</xf:value>
+      </xf:item><xf:item id="27">
+        <xf:label>16011 Chicotan [27]</xf:label>
+        <xf:value>27</xf:value>
       </xf:item>
-      <xf:item id="12">
-        <xf:label>12072 Area de tacana2 [12]</xf:label>
-        <xf:value>12</xf:value>
-      </xf:item>
-      
-      
-      
-      <xf:item id="13">
-        <xf:label>16011 Area de coban [13]</xf:label>
-        <xf:value>13</xf:value>
+      <xf:item id="35">
+        <xf:label>16012 Nimlajacoc [35]</xf:label>
+        <xf:value>35</xf:value>
       </xf:item>
       
+      <xf:item id="32">
+        <xf:label>16031 San Cristobal Chixoy [32]</xf:label>
+        <xf:value>32</xf:value>
+      </xf:item>
+      <xf:item id="21">
+        <xf:label>1606 Tucuru [21]</xf:label>
+        <xf:value>21</xf:value>
+      </xf:item>
+      <xf:item id="36">
+        <xf:label>16061 Tucuru II [36]</xf:label>
+        <xf:value>36</xf:value>
+      </xf:item>
+      <xf:item id="19">
+        <xf:label>1607 Panzos [19]</xf:label>
+        <xf:value>19</xf:value>
+      </xf:item>
+      <xf:item id="33">
+        <xf:label>16071 Teleman II [33]</xf:label>
+        <xf:value>33</xf:value>
+      </xf:item>
       
+      <xf:item id="29">
+        <xf:label>16081 Senahu I [29]</xf:label>
+        <xf:value>29</xf:value>
+      </xf:item>
+      <xf:item id="30">
+        <xf:label>16082 Senahu II [30]</xf:label>
+        <xf:value>30</xf:value>
+      </xf:item>
+      <xf:item id="31">
+        <xf:label>16083 Senahu III [31]</xf:label>
+        <xf:value>31</xf:value>
+      </xf:item>
+      <xf:item id="15">
+        <xf:label>1609 San Pedro Carcha [15]</xf:label>
+        <xf:value>15</xf:value>
+      </xf:item>
+      <xf:item id="23">
+        <xf:label>16091 Nor Occidente Setal [23]</xf:label>
+        <xf:value>23</xf:value>
+      </xf:item>
+      <xf:item id="24">
+        <xf:label>16092 Nor Occidente San Vicente Chicatal [24]</xf:label>
+        <xf:value>24</xf:value>
+      </xf:item>
+      <xf:item id="37">
+        <xf:label>16093 Sur Oriente I [37]</xf:label>
+        <xf:value>37</xf:value>
+      </xf:item>
+      <xf:item id="17">
+        <xf:label>1611 Lanquin [17]</xf:label>
+        <xf:value>17</xf:value>
+      </xf:item>
+      <xf:item id="26">
+        <xf:label>16111 Lanquin [26]</xf:label>
+        <xf:value>26</xf:value>
+      </xf:item>
+      <xf:item id="18">
+        <xf:label>1612 Cahabon [18]</xf:label>
+        <xf:value>18</xf:value>
+      </xf:item>
+      <xf:item id="28">
+        <xf:label>16121 Cahabon [28]</xf:label>
+        <xf:value>28</xf:value>
+      </xf:item>
+      <xf:item id="39">
+        <xf:label>16122 Chipoc [39]</xf:label>
+        <xf:value>39</xf:value>
+      </xf:item>
+      <xf:item id="40">
+        <xf:label>16123 Sacta [40]</xf:label>
+        <xf:value>40</xf:value>
+      </xf:item>
+      <xf:item id="20">
+        <xf:label>1613 Chisec [20]</xf:label>
+        <xf:value>20</xf:value>
+      </xf:item>
+      <xf:item id="34">
+        <xf:label>16131 Sehix [34]</xf:label>
+        <xf:value>34</xf:value>
+      </xf:item>
+      <xf:item id="22">
+        <xf:label>1614 Chahal [22]</xf:label>
+        <xf:value>22</xf:value>
+      </xf:item>
+      <xf:item id="38">
+        <xf:label>16141 Chahal [38]</xf:label>
+        <xf:value>38</xf:value>
+      </xf:item>
+      <xf:item id="16">
+        <xf:label>1615 Fray Bartolome de las Casas [16]</xf:label>
+        <xf:value>16</xf:value>
+      </xf:item>
+      <xf:item id="25">
+        <xf:label>16151 Fray Bartolome [25]</xf:label>
+        <xf:value>25</xf:value>
+      </xf:item>
       
-      
-    </xf:select1>
+    <xf:item id="1"><xf:label>Unknown Location [1]</xf:label><xf:value>1</xf:value></xf:item><xf:item id="14"><xf:label>16012 Area2 de coban [14]</xf:label><xf:value>14</xf:value></xf:item><xf:item id="11"><xf:label>12071 Area de tacana1 [11]</xf:label><xf:value>11</xf:value></xf:item><xf:item id="12"><xf:label>12072 Area de tacana2 [12]</xf:label><xf:value>12</xf:value></xf:item><xf:item id="13"><xf:label>16011 Area de coban [13]</xf:label><xf:value>13</xf:value></xf:item></xf:select1>
     <xf:input bind="person_attribute6">
       <xf:label>Health District</xf:label>
       <xf:hint>District/region in which this patient' home health center resides</xf:hint>
@@ -355,10 +525,7 @@
         <xf:select1 bind="other_identifier_location_id">
           <xf:label>Identifier Location</xf:label>
           <xf:hint>The patient's other identifier location</xf:hint>
-          <xf:item id="1">
-            <xf:label>Unknown Location [1]</xf:label>
-            <xf:value>1</xf:value>
-          </xf:item><xf:item id="2">
+          <xf:item id="2">
             <xf:label>1 Guatemala [2]</xf:label>
             <xf:value>2</xf:value>
           </xf:item>
@@ -379,35 +546,126 @@
           </xf:item><xf:item id="7">
             <xf:label>1208 Tajamulco [7]</xf:label>
             <xf:value>7</xf:value>
-          </xf:item><xf:item id="8">
+          </xf:item>
+          
+          <xf:item id="8">
             <xf:label>1601 Coban [8]</xf:label>
             <xf:value>8</xf:value>
-          </xf:item><xf:item id="9">
+          </xf:item>
+          <xf:item id="9">
             <xf:label>1603 San Cristobal Verapaz [9]</xf:label>
             <xf:value>9</xf:value>
           </xf:item><xf:item id="10">
             <xf:label>1608 Senahu [10]</xf:label>
             <xf:value>10</xf:value>
-          </xf:item><xf:item id="11">
-            <xf:label>12071 Area de tacana1 [11]</xf:label>
-            <xf:value>11</xf:value>
+          </xf:item><xf:item id="27">
+            <xf:label>16011 Chicotan [27]</xf:label>
+            <xf:value>27</xf:value>
           </xf:item>
-          <xf:item id="12">
-            <xf:label>12072 Area de tacana2 [12]</xf:label>
-            <xf:value>12</xf:value>
-          </xf:item>
-          
-          
-          
-          <xf:item id="13">
-            <xf:label>16011 Area de coban [13]</xf:label>
-            <xf:value>13</xf:value>
+          <xf:item id="35">
+            <xf:label>16012 Nimlajacoc [35]</xf:label>
+            <xf:value>35</xf:value>
           </xf:item>
           
+          <xf:item id="32">
+            <xf:label>16031 San Cristobal Chixoy [32]</xf:label>
+            <xf:value>32</xf:value>
+          </xf:item>
+          <xf:item id="21">
+            <xf:label>1606 Tucuru [21]</xf:label>
+            <xf:value>21</xf:value>
+          </xf:item>
+          <xf:item id="36">
+            <xf:label>16061 Tucuru II [36]</xf:label>
+            <xf:value>36</xf:value>
+          </xf:item>
+          <xf:item id="19">
+            <xf:label>1607 Panzos [19]</xf:label>
+            <xf:value>19</xf:value>
+          </xf:item>
+          <xf:item id="33">
+            <xf:label>16071 Teleman II [33]</xf:label>
+            <xf:value>33</xf:value>
+          </xf:item>
           
+          <xf:item id="29">
+            <xf:label>16081 Senahu I [29]</xf:label>
+            <xf:value>29</xf:value>
+          </xf:item>
+          <xf:item id="30">
+            <xf:label>16082 Senahu II [30]</xf:label>
+            <xf:value>30</xf:value>
+          </xf:item>
+          <xf:item id="31">
+            <xf:label>16083 Senahu III [31]</xf:label>
+            <xf:value>31</xf:value>
+          </xf:item>
+          <xf:item id="15">
+            <xf:label>1609 San Pedro Carcha [15]</xf:label>
+            <xf:value>15</xf:value>
+          </xf:item>
+          <xf:item id="23">
+            <xf:label>16091 Nor Occidente Setal [23]</xf:label>
+            <xf:value>23</xf:value>
+          </xf:item>
+          <xf:item id="24">
+            <xf:label>16092 Nor Occidente San Vicente Chicatal [24]</xf:label>
+            <xf:value>24</xf:value>
+          </xf:item>
+          <xf:item id="37">
+            <xf:label>16093 Sur Oriente I [37]</xf:label>
+            <xf:value>37</xf:value>
+          </xf:item>
+          <xf:item id="17">
+            <xf:label>1611 Lanquin [17]</xf:label>
+            <xf:value>17</xf:value>
+          </xf:item>
+          <xf:item id="26">
+            <xf:label>16111 Lanquin [26]</xf:label>
+            <xf:value>26</xf:value>
+          </xf:item>
+          <xf:item id="18">
+            <xf:label>1612 Cahabon [18]</xf:label>
+            <xf:value>18</xf:value>
+          </xf:item>
+          <xf:item id="28">
+            <xf:label>16121 Cahabon [28]</xf:label>
+            <xf:value>28</xf:value>
+          </xf:item>
+          <xf:item id="39">
+            <xf:label>16122 Chipoc [39]</xf:label>
+            <xf:value>39</xf:value>
+          </xf:item>
+          <xf:item id="40">
+            <xf:label>16123 Sacta [40]</xf:label>
+            <xf:value>40</xf:value>
+          </xf:item>
+          <xf:item id="20">
+            <xf:label>1613 Chisec [20]</xf:label>
+            <xf:value>20</xf:value>
+          </xf:item>
+          <xf:item id="34">
+            <xf:label>16131 Sehix [34]</xf:label>
+            <xf:value>34</xf:value>
+          </xf:item>
+          <xf:item id="22">
+            <xf:label>1614 Chahal [22]</xf:label>
+            <xf:value>22</xf:value>
+          </xf:item>
+          <xf:item id="38">
+            <xf:label>16141 Chahal [38]</xf:label>
+            <xf:value>38</xf:value>
+          </xf:item>
+          <xf:item id="16">
+            <xf:label>1615 Fray Bartolome de las Casas [16]</xf:label>
+            <xf:value>16</xf:value>
+          </xf:item>
+          <xf:item id="25">
+            <xf:label>16151 Fray Bartolome [25]</xf:label>
+            <xf:value>25</xf:value>
+          </xf:item>
           
-          
-        </xf:select1>
+        <xf:item id="1"><xf:label>Unknown Location [1]</xf:label><xf:value>1</xf:value></xf:item><xf:item id="14"><xf:label>16012 Area2 de coban [14]</xf:label><xf:value>14</xf:value></xf:item><xf:item id="11"><xf:label>12071 Area de tacana1 [11]</xf:label><xf:value>11</xf:value></xf:item><xf:item id="12"><xf:label>12072 Area de tacana2 [12]</xf:label><xf:value>12</xf:value></xf:item><xf:item id="13"><xf:label>16011 Area de coban [13]</xf:label><xf:value>13</xf:value></xf:item></xf:select1>
       </xf:repeat>
     </xf:group><xf:input bind="person_attribute8">
       <xf:label>Cribado</xf:label>
