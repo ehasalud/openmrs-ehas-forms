@@ -606,91 +606,93 @@ if(jQuery){
 
 <script  type="text/javascript">
 if(jQuery){
-   $j(function() {
+   	$j(function() {
 
-         var checkedTraslado= getField('NoTrasladoUrg.value').attr("checked");
+    	var checkedTraslado= getField('NoTrasladoUrg.value').attr("checked");
+        if (checkedTraslado == true) {
+     		$j("span.obsToDisable6").find("input").attr("disabled", true);
+            $j('#TrasladoUrg').fadeTo('slow', 0.2); 
+            setValue('CS.value', false);
+            setValue('HD.value', false);
+            setValue('HR.value', false);
+            setValue('HN.value', false);
+      	}
+      	
+        getField('NoTrasladoUrg.value').change(function() {
+           	var checked = $j(this).attr("checked");
+         	if(checked == true){
+               	$j("span.obsToDisable6").find("input").attr("disabled", true);
+               	$j("span.obsToDisable6").find("input").attr("checked", false);
+               	$j('#TrasladoUrg').fadeTo('slow', 0.2); 
+               	setValue('CS.value', false);
+               	setValue('HD.value', false);
+               	setValue('HR.value', false);
+               	setValue('HN.value', false);
+         	}
+         	else{
+               	$j("span.obsToDisable6").find("input").attr("disabled", false);
+               	$j("span.obsToDisable6").find("input").attr("checked", false);
+               	$j('#TrasladoUrg').fadeTo('slow', 1); 
+         	}
+       	});
+	
+        getField('CS.value').change(function() {
+           	var checked = $j(this).attr("checked");
+         	if(checked == true){
+				setValue('NoReferencia.value', true);
+				$j("span.obsToDisable5").find("input").attr("disabled", true);
+               	$j("span.obsToDisable5").find("input").attr("checked", false);
+               	$j('#Referencia').fadeTo('slow', 0.2); 
+               	setValue('CentroSalud.value', false);
+               	setValue('HospDistrit.value', false);
+               	setValue('HospReg.value', false);
+               	setValue('HospNacion.value', false);
+			}
+      
+		});
 
-              if (checkedTraslado == true) {
-                  $j("span.obsToDisable6").find("input").attr("disabled", true);
-                  $j('#TrasladoUrg').fadeTo('slow', 0.2); 
-                  setValue('CS.value', false);
-                  setValue('HD.value', false);
-                  setValue('HR.value', false);
-                  setValue('HN.value', false);
-              }
-      getField('NoTrasladoUrg.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable6").find("input").attr("disabled", true);
-               $j("span.obsToDisable6").find("input").attr("checked", false);
-               $j('#TrasladoUrg').fadeTo('slow', 0.2); 
-               setValue('CS.value', false);
-               setValue('HD.value', false);
-               setValue('HR.value', false);
-               setValue('HN.value', false);
-         }
-         else{
-               $j("span.obsToDisable6").find("input").attr("disabled", false);
-               $j("span.obsToDisable6").find("input").attr("checked", false);
-               $j('#TrasladoUrg').fadeTo('slow', 1); 
-         }
-       });
-	getField('CS.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-		setValue('NoReferencia.value', true);
-		$j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);
-		}
-      
-	});
-
-	getField('HD.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-		setValue('NoReferencia.value', true);
-		$j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);}
-      
-	});
-	getField('HR.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-		setValue('NoReferencia.value', true);
-		$j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);}
-      
-	});
-	getField('HN.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-		setValue('NoReferencia.value', true);
-		$j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);}
-      
-	});
-    
-  });
+		getField('HD.value').change(function() {
+           	var checked = $j(this).attr("checked");
+         	if(checked == true){
+				setValue('NoReferencia.value', true);
+				$j("span.obsToDisable5").find("input").attr("disabled", true);
+               	$j("span.obsToDisable5").find("input").attr("checked", false);
+               	$j('#Referencia').fadeTo('slow', 0.2); 
+               	setValue('CentroSalud.value', false);
+               	setValue('HospDistrit.value', false);
+               	setValue('HospReg.value', false);
+               	setValue('HospNacion.value', false);
+          	}
+     	});
+	
+		getField('HR.value').change(function() {
+           	var checked = $j(this).attr("checked");
+         	if(checked == true){
+				setValue('NoReferencia.value', true);
+				$j("span.obsToDisable5").find("input").attr("disabled", true);
+               	$j("span.obsToDisable5").find("input").attr("checked", false);
+               	$j('#Referencia').fadeTo('slow', 0.2); 
+               	setValue('CentroSalud.value', false);
+               	setValue('HospDistrit.value', false);
+               	setValue('HospReg.value', false);
+               	setValue('HospNacion.value', false);
+          	}
+     	});
+	
+		getField('HN.value').change(function() {
+           	var checked = $j(this).attr("checked");
+        	if(checked == true){
+				setValue('NoReferencia.value', true);
+				$j("span.obsToDisable5").find("input").attr("disabled", true);
+               	$j("span.obsToDisable5").find("input").attr("checked", false);
+               	$j('#Referencia').fadeTo('slow', 0.2); 
+               	setValue('CentroSalud.value', false);
+               	setValue('HospDistrit.value', false);
+               	setValue('HospReg.value', false);
+               	setValue('HospNacion.value', false);
+          	}
+     	});
+  	});
 }
 </script>
 
@@ -700,40 +702,41 @@ if(jQuery){
 
 <script type="text/javascript">
 if(jQuery){
- $j(function() {
-   getField('FUR.value').change(function() {
-     var FURunico = getValue('FUR.value');
-     var fields = FURunico.split(/-/);
-     var year = fields[0];
-     var month = fields[1];
-     var day = fields [2];
-     
-	var milisegundos=parseInt(280*24*60*60*1000); 
-	var fecha=new Date(); 
-	var dia=fecha.setDate(day); /* el mes es devuelto entre 0 y 11 */ 
-	var mes=fecha.setMonth(month)-1;
- 	var anno=fecha.setFullYear(year);
-	var tiempo=fecha.getTime()
-	var total=fecha.setTime(tiempo+milisegundos);
-	day=fecha.getDate(); 
-	month=fecha.getMonth()+1;
- 	year=fecha.getFullYear();
-	var campo = (year + '-' + month + '-' + day);
-	setValue('FPP.value', campo);		
+	$j(function() {
+   		getField('FUR.value').change(function() {
+	     	var FURunico = getValue('FUR.value');
+	     	var fields = FURunico.split(/-/);
+	     	var year = fields[0];
+	     	var month = fields[1];
+	     	var day = fields [2];
+	     
+			var milisegundos=parseInt(280*24*60*60*1000); 
+			var fecha=new Date(); 
+			fecha.setDate(day);  
+			fecha.setMonth(month-1); /* el mes es devuelto entre 0 y 11 */
+		 	fecha.setFullYear(year);
+			
+		 	var tiempo=fecha.getTime()
+			fecha.setTime(tiempo+milisegundos);
+			day=fecha.getDate(); 
+			month=fecha.getMonth()+1;
+	 		year=fecha.getFullYear();
+			var campo = (year + '-' + month + '-' + day);
+			setValue('FPP.value', campo);		
 
-     /*if(parseInt(FPPsumaMeses) &gt; 12){
-           month = parseInt(FPPsumaMeses) - 12;
-           year= parseInt(year) +1;
-           var campo = (year + '-' + month + '-' + day);
-           setValue('FPP.value', campo);
-
-     }
-     else{
-        var campo = (year + '-' + FPPsumaMeses + '-' + day);
-        setValue('FPP.value', campo);
-     } */   
-   });
-  }); 
+		     /*if(parseInt(FPPsumaMeses) &gt; 12){
+		           month = parseInt(FPPsumaMeses) - 12;
+		           year= parseInt(year) +1;
+		           var campo = (year + '-' + month + '-' + day);
+		           setValue('FPP.value', campo);
+		
+		     }
+		     else{
+		        var campo = (year + '-' + FPPsumaMeses + '-' + day);
+		        setValue('FPP.value', campo);
+		     } */   
+   		});
+  	}); 
 }
 </script>
          
@@ -741,44 +744,43 @@ if(jQuery){
 
 <script type="text/javascript">
 beforeSubmit.push(function() {
-
-       if (getValue('abortos.value') &gt; getValue('gestacion.value')) {
-          window.alert('Abortos no puede ser mayor que Gestaciones');
-          return false;
-       }  
-       return true;
+ 	if (getValue('abortos.value') &gt; getValue('gestacion.value')) {
+    	window.alert('Abortos no puede ser mayor que Gestaciones');
+        return false;
+ 	}  
+    return true;
 });
 </script>
 
 <!-- Comprueba que la suma de hijos nacidos vivos + hijos nacidos muertos = numero de partos. En caso contrario envia un mensaje de error hasta que coincidan los campos -->
 
 <script type="text/javascript">
-    beforeSubmit.push(function() {
-       var valHijosVivos = getValue('hijosNacidosVivos.value');
-       var valHijosMuertos = getValue('hijosNacidosMuertos.value');      
-       var valPartos = parseInt(valHijosVivos) + parseInt(valHijosMuertos);
-   
-       if (getValue('partos.value') == null || getValue('partos.value') == '') {
-          return true;
-       }
-       else{
-         var success = true;
-         if (valHijosVivos == null || valHijosVivos == '') {
-          getField('hijosNacidosVivos.error').html('Campo requerido').show();
-          success = false;
-         }
-         if (valHijosMuertos == null || valHijosMuertos == '') {
-          getField('hijosNacidosMuertos.error').html('Campo requerido').show();
-          success = false;
-         }
-         else if (valPartos != parseInt(getValue('partos.value'))) {
-
-           window.alert('Numero de hijos nacidos vivos y muertos deberia ser igual a Partos');
-           success = false;
-         }
-         return success;
-       }
-       return true;
+beforeSubmit.push(function() {
+	var valHijosVivos = getValue('hijosNacidosVivos.value');
+    var valHijosMuertos = getValue('hijosNacidosMuertos.value');      
+   	var valPartos = parseInt(valHijosVivos) + parseInt(valHijosMuertos);
+    
+   	if (getValue('partos.value') == null || getValue('partos.value') == '') {
+    	return true;
+   	}
+    else{
+		var success = true;
+        if (valHijosVivos == null || valHijosVivos == '') {
+        	getField('hijosNacidosVivos.error').html('Campo requerido').show();
+        	success = false;
+   		}
+    
+    	if (valHijosMuertos == null || valHijosMuertos == '') {
+       		getField('hijosNacidosMuertos.error').html('Campo requerido').show();
+        	success = false;
+    	}
+    	else if (valPartos != parseInt(getValue('partos.value'))) {
+			window.alert('Numero de hijos nacidos vivos y muertos deberia ser igual a Partos');
+        	success = false;
+  		}
+    	return success;
+    }
+    return true;
 });
 </script>
 
@@ -1133,12 +1135,13 @@ beforeSubmit.push(function() {
      <table class="baseline-aligned" id="enfermera">  
              <tr>  <td>  Correcciones en el formulario: </td> </tr>
              <tr>  <td> <obs conceptId="161" rows="5" cols="50" class="obsToDisableAll"/>  </td> </tr>
+             <!-- 
              <tr> <td> <obs conceptId="162" labelText="VIH Corregido por Especialista" answerConceptIds="96,163" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td> 
                     <td> <obs conceptId="171" labelText="Hepatitis B Corregido por Especialista" answerConceptIds="169,170" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td> </tr>
              <tr> <td> <obs conceptId="174" labelText="Sifilis Corregido por Especialista" answerConceptIds="172,173" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td> 
                     <td> <obs conceptId="178" labelText="Hemoglobina Corregido por Especialista" answerConceptIds="175,176" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td> </tr>
              <tr> <td> <obs conceptId="181" labelText="Glucosa Corregido por Especialista" answerConceptIds="179,180" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td> </tr>
-
+			 -->
 	<table>
 	<tr><td>Calidad de la ecografia: <obs conceptId="226" class="obsToDisableAll"/></td></tr>
 	<tr><td> <obs conceptId="238" labelText="Anemia manejada incorrectamente" style="checkbox" class="obsToDisableAll"/></td></tr> 
