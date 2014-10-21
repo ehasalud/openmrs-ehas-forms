@@ -845,6 +845,15 @@ if(jQuery){
                  <tr>
                      <td> Peso:<obs conceptId="41" id="peso" class="obsToDisableEsp"/>Libras</td>
                  </tr>
+                 <!-- Code that looks for 'talla' in last encounter -->
+                 <ifMode mode="ENTER">
+					<lookup complexExpression="#set( $talla = $fn.latestObs('42').valueNumeric) 
+						&lt;script type=&quot;text/javascript&quot;>
+						$j(function () {
+			  				setValue('talla.value',parseInt($talla));
+						});
+					&lt;/script>"/>
+				</ifMode>
                  <tr>
                      <td> Talla: <obs conceptId="42" id="talla" class="obsToDisableEsp"/>cm</td>
                  </tr>
