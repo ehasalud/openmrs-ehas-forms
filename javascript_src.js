@@ -3,14 +3,23 @@ var country_id = "person_address_country";
 var country_id_list = country_id + "_list";
 var default_country = "1 Guatemala";
 
-var district_id = "person_address_state_province";
-var district_id_list = district_id + "_list";
+var province_id = "person_address_state_province";
+var province_id_list = province_id + "_list";
 
 var village_id = "person_address_city_village";
 var village_id_list = village_id + "_list";
 
-var subvillage_id = "person_address_address1";
-var subvillage_id_list = subvillage_id + "_list";
+var district_id = "person_address_county_district";
+var district_id_list = district_id + "_list";
+
+var subdistrict_id = "person_address_address1";
+var subdistrict_id_list = subdistrict_id + "_list";
+
+var community_id = "person_address_address2";
+var community_id_list = community_id + "_list";
+
+var convergence_id = "person_address_neighborhood_cell";
+var convergence_id_list = convergence_id + "_list";
  
 var location_id = "location_id";
 var gender_id = "gender";
@@ -33,23 +42,29 @@ var code_delimiter = " ";
 var options_init = $j("#" + location_id).find("option").clone();
 
 var country = $j("#" + country_id).val();
-var district = $j("#" + district_id).val();
+var province = $j("#" + province_id).val();
 var village = $j("#" + village_id).val();
-var subvillage = $j("#" + subvillage_id).val();
+var district = $j("#" + district_id).val();
+var subdistrict = $j("#" + subdistrict_id).val();
+var community = $j("#" + community_id).val();
+var convergence = $j("#" + convergence_id).val();
 
 
 /* Initialize dropdown boxes */
 $j(function () {
 
+	/* Warning message if using windows */
 	var ua = window.navigator.userAgent;
 	if(ua.indexOf("MSIE") > -1 || !!ua.match(/Trident.*rv\:11\./)){
 		alert("Estás utilizando el navegador web Internet Explorer.\nAlgunas de las funciones de esta página no funcionan correctamente con este navegador.\nAconsejamos el uso de Mozilla Firefox o Google Chrome.");
 	}
 
 	createList(country_id, country_id_list, 8);
-	createList(district_id, district_id_list, 9);
+	createList(province_id, province_id_list, 9);
 	createList(village_id, village_id_list, 10);
-	createList(subvillage_id, subvillage_id_list, 11);
+	createList(district_id, district_id_list, 11);
+	createList(subdistrict_id, subdistrict_id_list, 12);
+	createList(community_id, community_id_list, 13);
 
 	var country_to_select;
 	if(country != null && country.length > 0){
@@ -60,10 +75,11 @@ $j(function () {
 	}
 
 	options_init.each(function () {
-		var code = $j(this).text().split(" ")[0];
+		var code = $j(this).text().split(code_delimiter)[0];
 		if(code.length == 1){
-			$j("#" + country_id_list).append("<option value='" + $j(this).text() + "'>" + $j(this).text() + "</option>");
-			if($j(this).text() == country_to_select){
+			var code_index = $j(this).text().indexOf(code_delimiter);
+			$j("#" + country_id_list).append("<option value='" + $j(this).text() + "'>" + $j(this).text().substring(code_index + 1) + "</option>");
+			if(code == country_to_select.split(code_delimiter)[0]){
 				$j("#" + country_id_list).val($j(this).text());
 			}
 		}
@@ -71,11 +87,11 @@ $j(function () {
 
 	var selected_opt = $j("#" + country_id_list + " option:selected");
 	if(selected_opt.length == 1){
-		update_district(selected_opt[0].value.split(code_delimiter)[0]);
+		update_province(selected_opt[0].value.split(code_delimiter)[0]);
 		$j("#" + country_id).val(selected_opt[0].value);
 	}
 	else {
-		update_district("");
+		update_province("");
 	}
 
 	var current_id_type = $j("#" + patient_id_type_id + " option:selected");
@@ -96,21 +112,53 @@ $j(function () {
 $j("#" + country_id_list).change(function () {
 	var selected_opt = $j("#" + country_id_list + " option:selected");
 	if(selected_opt.length == 1){
-		update_district(selected_opt[0].value.split(code_delimiter)[0]);
+		update_province(selected_opt[0].value.split(code_delimiter)[0]);
 		$j("#" + country_id).val(selected_opt[0].value);
 		update_personal_code();
 	}
 });
 
 function createList(element_id, element_id_list, tab_index){
-	$j("#"+ element_id).before('<select class="gwt-ListBox" tabindex="' + tab_index + '" id="' + element_id_list + '" style="width: 200px; height: 25px; font-size: 16px; font-family: Verdana, \'Lucida Grande\', \'Trebuchet MS\', Arial, sans-serif;"><option value=" "> </option></select>');
+	$j("#"+ element_id).before('<select class="gwt-ListBox" tabindex="' + tab_index + '" id="' + element_id_list + '" style="width: 300px; height: 25px; font-size: 16px; font-family: Verdana, \'Lucida Grande\', \'Trebuchet MS\', Arial, sans-serif;"><option value=" "> </option></select>');
 
 	$j("#" + element_id).hide();
 }
 
-function update_district(filter_code){
+function populateList(element_id_list, filter_reg, current_value){
+	$j("#" + element_id_list).append("<option value></option>");
+	
+	/* Temp array to sort elements */
+	var tempOptions = new Array();
+	var index = 0;
+	
+	options_init.each(function () {
+		if(filter_reg.test($j(this).text())){
+			var code_index = $j(this).text().indexOf(code_delimiter);
+			tempOptions[index] = {"value":$j(this).text(), "text":$j(this).text().substring(code_index + 1)};
+			index = index + 1;			
+		}
+	});
+	
+	tempOptions = tempOptions.sort(function (a, b) { 
+		if (a.text < b.text)
+			return -1;
+		if (a.text > b.text)
+			return 1;
+		return 0;
+	});
+	
+	for(i=0; i<tempOptions.length; i++){
+		$j("#" + element_id_list).append("<option value='" + tempOptions[i].value + "'>" + tempOptions[i].text + "</option>");
+		
+		if(tempOptions[i].value.split(code_delimiter)[0] == current_value.split(code_delimiter)[0]){
+			$j("#" + element_id_list).val(tempOptions[i].text);
+		}
+	}
+}
+
+function update_province(filter_code){
     
-	$j("#" + district_id_list).find("option").remove();
+	$j("#" + province_id_list).find("option").remove();
 		
 	var filter_reg;
 	if(filter_code.length > 0){
@@ -120,27 +168,19 @@ function update_district(filter_code){
 		filter_reg = new RegExp("^[0-9][0-9] ");
 	}
 	
-	$j("#" + district_id_list).append("<option value></option>");
-	options_init.each(function () {
-		if(filter_reg.test($j(this).text())){
-			$j("#" + district_id_list).append("<option value'" + $j(this).text() + "'>" + $j(this).text() + "</option>");
-			if($j(this).text() == district){
-				$j("#" + district_id_list).val($j(this).text());
-			}
-		}
-	});
-	process_district();	
+	populateList(province_id_list, filter_reg, province);
+	process_province();	
  }
 
-$j("#" + district_id_list).change(function () {
-	process_district();
+$j("#" + province_id_list).change(function () {
+	process_province();
 });
 
-function process_district(){
-	var selected_opt = $j("#" + district_id_list + " option:selected");
+function process_province(){
+	var selected_opt = $j("#" + province_id_list + " option:selected");
 	if(selected_opt.length == 1){
 		update_village(selected_opt[0].value.split(code_delimiter)[0]);
-		$j("#" + district_id).val(selected_opt[0].value);
+		$j("#" + province_id).val(selected_opt[0].value);
 	}
 	else {
 		update_village("");
@@ -160,15 +200,7 @@ function update_village(filter_code){
 		filter_reg = new RegExp("^[0-9][0-9][0-9][0-9] ");
 	}
 	
-	$j("#" + village_id_list).append("<option value></option>");
-	options_init.each(function () {
-		if(filter_reg.test($j(this).text())){
-			$j("#" + village_id_list).append("<option value'" + $j(this).text() + "'>" + $j(this).text() + "</option>");
-			if($j(this).text() == village){
-				$j("#" + village_id_list).val($j(this).text());
-			}
-		}
-	});	
+	populateList(village_id_list, filter_reg, village);
 	process_village();
  }
 
@@ -179,20 +211,19 @@ $j("#" + village_id_list).change(function () {
 function process_village(){
 	var selected_opt = $j("#" + village_id_list + " option:selected");
 	if(selected_opt.length == 1){
-		update_subvillage(selected_opt[0].value.split(code_delimiter)[0]);
+		update_district(selected_opt[0].value.split(code_delimiter)[0]);
 		$j("#" + village_id).val(selected_opt[0].value);
-		select_location(selected_opt[0].value);
 	}
 	else {
-		update_subvillage("");
+		update_district("");
 	}
 	update_personal_code();
 }
+
+function update_district(filter_code){
 	
-function update_subvillage(filter_code){
+	$j("#" + district_id_list).find("option").remove();
 	
-	$j("#" + subvillage_id_list).find("option").remove();
-		
 	var filter_reg;
 	if(filter_code.length > 0){
 		filter_reg = new RegExp("^" + filter_code + "[0-9]" + " ");	
@@ -200,27 +231,82 @@ function update_subvillage(filter_code){
 	else {
 		filter_reg = new RegExp("^[0-9][0-9][0-9][0-9][0-9] ");
 	}
-
-	$j("#" + subvillage_id_list).append("<option value></option>");
-	options_init.each(function () {
-		if(filter_reg.test($j(this).text())){
-			$j("#" + subvillage_id_list).append("<option value'" + $j(this).text() + "'>" + $j(this).text() + "</option>");
-			if($j(this).text() == subvillage){
-				$j("#" + subvillage_id_list).val($j(this).text());
-			}
-		}
-	});
-	process_subvillage();
+	
+	populateList(district_id_list, filter_reg, district);
+	process_district();
 }
 
-$j("#" + subvillage_id_list).change(function () {
-	process_subvillage();
+$j("#" + district_id_list).change(function () {
+	process_district();
 });
 
-function process_subvillage(){
-	var selected_opt = $j("#" + subvillage_id_list + " option:selected");
+function process_district(){
+	var selected_opt = $j("#" + district_id_list + " option:selected");
 	if(selected_opt.length == 1){
-		$j("#" + subvillage_id).val(selected_opt[0].value);
+		update_subdistrict(selected_opt[0].value.split(code_delimiter)[0]);
+		$j("#" + district_id).val(selected_opt[0].value);
+	}
+	else {
+		update_subdistrict("");
+	}
+}
+	
+function update_subdistrict(filter_code){
+	
+	$j("#" + subdistrict_id_list).find("option").remove();
+		
+	var filter_reg;
+	if(filter_code.length > 0){
+		filter_reg = new RegExp("^" + filter_code + "[0-9]" + " ");	
+	}	
+	else {
+		filter_reg = new RegExp("^[0-9][0-9][0-9][0-9][0-9][0-9] ");
+	}
+
+	populateList(subdistrict_id_list, filter_reg, subdistrict);
+	process_subdistrict();
+}
+
+$j("#" + subdistrict_id_list).change(function () {
+	process_subdistrict();
+});
+
+function process_subdistrict(){
+	var selected_opt = $j("#" + subdistrict_id_list + " option:selected");
+	if(selected_opt.length == 1){
+		update_community(selected_opt[0].value.split(code_delimiter)[0]);
+		$j("#" + subdistrict_id).val(selected_opt[0].value);
+	}
+	else {
+		update_community("");
+	}
+}
+
+function update_community(filter_code){
+	
+	$j("#" + community_id_list).find("option").remove();
+		
+	var filter_reg;
+	if(filter_code.length > 0){
+		filter_reg = new RegExp("^" + filter_code + "[0-9][0-9]" + " ");	
+	}	
+	else {
+		filter_reg = new RegExp("^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9] ");
+	}
+
+	populateList(community_id_list, filter_reg, community);
+	process_community();
+}
+
+$j("#" + community_id_list).change(function () {
+	process_community();
+});
+
+function process_community(){
+	var selected_opt = $j("#" + community_id_list + " option:selected");
+	if(selected_opt.length == 1){
+		$j("#" + community_id).val(selected_opt[0].value);
+		select_location(selected_opt[0].value);
 	}
 }
 
@@ -334,5 +420,7 @@ function check_if_secundary_patient_id_type(selected_opt){
 	}
 	else {
 		use_personal_code_as_identifier = false;
+		$j("#" + patient_id_id).val('');
 	}
 }
+
