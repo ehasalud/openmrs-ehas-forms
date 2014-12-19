@@ -52,28 +52,36 @@ table.baseline-aligned td {
 </style>
 
 <includeIf velocityTest="$user.getAllRoles().toString().contains('Provider')">
-	<script type="text/javascript">
-	if(jQuery){
-		$j(function() {
-			$j("span.obsToDisableAll").find("textarea").attr("disabled", true);
-			$j("span.obsToDisableAll").find("select").attr("disabled", true);
-			$j("span.obsToDisableAll").find("input").attr("disabled", true);
-		});
-	}
-	</script>
-</includeIf>
+      <script type="text/javascript">
+         if(jQuery){
+            $j(function() {
+               $j("span.obsToDisableAll").find("textarea").attr("readonly", true);
+               $j("span.obsToDisableAll").find("input[type=text]").attr("readonly", true);
+               $j("span.obsToDisableAll").find("input[type=checkbox]").click(function(){return false;});
+               $j("span.obsToDisableAll").find("input[type=radio]").click(function(){return false;});
+               $j("span.obsToDisableAll").find("input.hasDatepicker").attr("disabled", true);
+               $j("span.obsToDisableAll").find("select option").not(":selected").remove();
+               $j("fieldset.obsToDisableAll").find("input").click(function(){return false;});
+            });
+         }
+       </script>
+  </includeIf>
 
-<includeIf velocityTest="$user.getAllRoles().toString().contains('Especialista')">
-	<script type="text/javascript">
-	if(jQuery){
-		$j(function() {
-			$j("span.obsToDisableEsp").find("textarea").attr("disabled", true);
-			$j("span.obsToDisableEsp").find("select").attr("disabled", true);
-			$j("span.obsToDisableEsp").find("input").attr("disabled", true);
-		});
-	}
-	</script>
-</includeIf>
+  <includeIf velocityTest="$user.getAllRoles().toString().contains('Especialista')">
+      <script type="text/javascript">
+         if(jQuery){
+            $j(function() {
+               $j("span.obsToDisableEsp").find("textarea").attr("readonly", true);
+               $j("span.obsToDisableEsp").find("input[type=text]").attr("readonly", true);
+               $j("span.obsToDisableEsp").find("input[type=checkbox]").click(function(){return false;});
+               $j("span.obsToDisableEsp").find("input[type=radio]").click(function(){return false;});
+               $j("span.obsToDisableEsp").find("input.hasDatepicker").attr("disabled", true);
+               $j("span.obsToDisableEsp").find("select option").not(":selected").remove();
+               $j("fieldset.obsToDisableEsp").find("input").click(function(){return false;});
+            });
+         }
+       </script>
+  </includeIf>
 
 <span style="float:right">Paper Form ID: $paperFormId</span>
 <h2>Parto</h2>

@@ -874,9 +874,13 @@ beforeSubmit.push(function() {
       <script type="text/javascript">
          if(jQuery){
             $j(function() {
-               $j("span.obsToDisableAll").find("textarea").attr("disabled", true);
-               $j("span.obsToDisableAll").find("select").attr("disabled", true);
-               $j("span.obsToDisableAll").find("input").attr("disabled", true);
+               $j("span.obsToDisableAll").find("textarea").attr("readonly", true);
+               $j("span.obsToDisableAll").find("input[type=text]").attr("readonly", true);
+               $j("span.obsToDisableAll").find("input[type=checkbox]").click(function(){return false;});
+               $j("span.obsToDisableAll").find("input[type=radio]").click(function(){return false;});
+               $j("span.obsToDisableAll").find("input.hasDatepicker").attr("disabled", true);
+               $j("span.obsToDisableAll").find("select option").not(":selected").remove();
+               $j("fieldset.obsToDisableAll").find("input").click(function(){return false;});
             });
          }
        </script>
@@ -888,9 +892,13 @@ beforeSubmit.push(function() {
       <script type="text/javascript">
          if(jQuery){
             $j(function() {
-               $j("span.obsToDisableEsp").find("textarea").attr("disabled", true);
-               $j("span.obsToDisableEsp").find("select").attr("disabled", true);
-               $j("span.obsToDisableEsp").find("input").attr("disabled", true);
+               $j("span.obsToDisableEsp").find("textarea").attr("readonly", true);
+               $j("span.obsToDisableEsp").find("input[type=text]").attr("readonly", true);
+               $j("span.obsToDisableEsp").find("input[type=checkbox]").click(function(){return false;});
+               $j("span.obsToDisableEsp").find("input[type=radio]").click(function(){return false;});
+               $j("span.obsToDisableEsp").find("input.hasDatepicker").attr("disabled", true);
+               $j("span.obsToDisableEsp").find("select option").not(":selected").remove();
+               $j("fieldset.obsToDisableEsp").find("input").click(function(){return false;});
             });
          }
        </script>
@@ -1040,9 +1048,9 @@ beforeSubmit.push(function() {
                         <tr>  <td> <obs conceptId="44" labelText="Feto unico" style="checkbox" id="Feto1" class="obsToDisableEsp"/> </td> </tr>
                         <tr> <td> <obs conceptId="45" labelText="Feto gemelar" style="checkbox" id="Feto2" class="obsToDisableEsp"/> </td> </tr>
                         <tr>  <td> <obs conceptId="46" labelText= "Feto triple" style="checkbox" id="Feto3" class="obsToDisableEsp"/> </td> </tr>
-			<tr>  <td><fieldset> <legend> Subir Foto del(los) Feto(s) </legend><obs conceptId="156"  id="FotoFeto1" class="obsToDisableEsp"/> </fieldset></td> </tr>
+						<tr>  <td><fieldset class="obsToDisableEsp"> <legend> Subir Foto del(los) Feto(s) </legend><obs conceptId="156"  id="FotoFeto1" /> </fieldset></td> </tr>
                         
-    </table>
+				</table>
                 <tr>  
                         <td>      <obs conceptId="50" labelText=" Latido fetal: " answerConceptIds="48,49" answerLabels="Presente, Ausente" class="obsToDisableEsp"/>
                        </td>    
@@ -1062,8 +1070,10 @@ beforeSubmit.push(function() {
                         <tr>  <td> <obs conceptId="157" labelText="Primer trimestre" style="checkbox" id="Trimestre1" class="obsToDisableEsp"/> </td> </tr>
 
                   <table id="PrimerTrimestre">
-                        <tr> <td> <obs conceptId="57" labelText="CRL (mm)" style="number" id="CRL" class="obsToDisable1 obsToDisableEsp"/> </td> </tr> 
-                        <tr>  <td> <obs conceptId="58" labelText="Subir foto CRL" style="checkbox" id="FotoCRL" class="obsToDisable1 obsToDisableEsp"/> </td> </tr>
+                        <tr> 
+							<td> <obs conceptId="57" labelText="CRL (mm)" style="number" id="CRL" class="obsToDisable1 obsToDisableEsp"/> </td>  
+							<td> <fieldset class="obsToDisableEsp"> <legend> Subir foto CRL </legend><obs conceptId="58"  id="FotoCRL" class="obsToDisable1"/> </fieldset> </td> 
+						</tr>
                   </table>
                         <tr> <td> <br></br> </td></tr>
                         <tr>  <td> <obs conceptId="158" labelText= "Segundo Trimestre" style="checkbox" id="Trimestre2" class="obsToDisableEsp"/> 
@@ -1071,32 +1081,45 @@ beforeSubmit.push(function() {
                         <tr> <td> <br></br> </td></tr>
                  
                    <table id="RestoTrimestre">
-                        <tr>  <td> <obs conceptId="59" labelText="DBP (mm)" style="number" id="DBP" class="obsToDisable2 obsToDisableEsp"/> 
-                                          <obs conceptId="66" labelText= "Imagen DBP" style="checkbox" id="DBPimag"  class="obsToDisable2 obsToDisableEsp"/></td> </tr>
-                        <tr>  <td> <obs conceptId="60" labelText="CC (mm)" style="number" id="CC" class="obsToDisable2 obsToDisableEsp"/>
-                                          <obs conceptId="65" labelText= "Imagen CC" style="checkbox" id="CCimag"  class="obsToDisable2 obsToDisableEsp"/></td> </tr>
-                        <tr>  <td> <obs conceptId="61" labelText="CA (mm)" style="number" id="CA" class="obsToDisable2 obsToDisableEsp"/>
-                                          <obs conceptId="67" labelText= "Imagen CA" style="checkbox" id="CAimag"  class="obsToDisable2 obsToDisableEsp"/></td> </tr>
-                        <tr>  <td> <obs conceptId="62" labelText="LF (mm)" style="number" id="LF" class="obsToDisable2 obsToDisableEsp"/>
-                                          <obs conceptId="64" labelText= "Imagen LF" style="checkbox" id="LFimag"  class="obsToDisable2 obsToDisableEsp"/></td> </tr>
-                        <tr>  <td> Peso Estimado Feto: <obs conceptId="68" id="hadlock" class="obsToDisableEsp"/>lbs</td></tr>
-                        <tr>  <td> Tiempo Estimado de Vida: <obs conceptId="192" id="semanasVida" class="obsToDisableEsp"/>semanas</td></tr>
+                        <tr>  <td> <obs conceptId="59" labelText="DBP (mm)" style="number" id="DBP" class="obsToDisable2 obsToDisableEsp"/> </td>
+                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen DBP</legend><obs conceptId="66" id="DBPimag" class="obsToDisable2"/></fieldset> </td> 
+                        </tr>
+                        <tr>  <td> <obs conceptId="60" labelText="CC (mm)" style="number" id="CC" class="obsToDisable2 obsToDisableEsp"/> </td>
+                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen CC</legend><obs conceptId="65"  id="CCimag" class="obsToDisable2"/></fieldset> </td> 
+						</tr>
+                        <tr>  <td> <obs conceptId="61" labelText="CA (mm)" style="number" id="CA" class="obsToDisable2 obsToDisableEsp"/> </td>
+                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen CA</legend><obs conceptId="67"  id="CAimag" class="obsToDisable2"/></fieldset> </td> 
+                        </tr>
+                        <tr>  <td> <obs conceptId="62" labelText="LF (mm)" style="number" id="LF" class="obsToDisable2 obsToDisableEsp"/> </td>
+                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen LF</legend><obs conceptId="64"  id="LFimag" class="obsToDisable2"/></fieldset></td> 
+                        </tr>
+                        <tr> <td> <br></br> </td></tr>
+                        <tr>  
+							<td> Peso Estimado Feto: </td>
+							<td><obs conceptId="68" id="hadlock" class="obsToDisableEsp"/>lbs</td>
+						</tr>
+                        <tr>  
+							<td> Tiempo Estimado de Vida: </td>
+							<td><obs conceptId="192" id="semanasVida" class="obsToDisableEsp"/>semanas</td>
+						</tr>
                   </table>
 
        
                  <tr> <td> <br></br> </td></tr>
 
-                 <tr>  
-                        <td> <obs conceptId="74" labelText="Placenta" answerConceptIds="69,70,71,72,73" answerLabels="Fundica,Anterior, Posterior, Insercion Baja, Sospecha de Previa" class="obsToDisableEsp"/>
-                       </td>    
-                 </tr>
-                 <tr> <td><obs conceptId="75" labelText= "Imagen Placenta" class="obsToDisableEsp"/></td> </tr>
+				<table>
+					 <tr>  
+							<td> <obs conceptId="74" labelText="Placenta" answerConceptIds="69,70,71,72,73" answerLabels="Fundica,Anterior, Posterior, Insercion Baja, Sospecha de Previa" class="obsToDisableEsp"/>
+						   </td>    
+					 
+						   <td> <fieldset class="obsToDisableEsp"> <legend>Imagen Placenta</legend><obs conceptId="75"/></fieldset></td> 
+					 </tr>
 
-                 <tr> <td> <br></br> </td></tr>
-                 <tr>  
-                        <td> <obs conceptId="76" labelText="Indice Liquido Amniotico" class="obsToDisableEsp"/></td>  
-			<td> <obs conceptId="214" labelText= " Imagen medida liquido amniotico" class="obsToDisableEsp"/></td>  
-                 </tr>
+					 <tr>  
+						<td> <obs conceptId="76" labelText="Indice Liquido Amniotico" class="obsToDisableEsp"/></td>  
+						<td> <fieldset class="obsToDisableEsp"> <legend>Imagen medida liquido amniotico</legend><obs conceptId="214"/></fieldset></td>  
+					 </tr>
+                 </table>
                  <tr> <td> <br></br> </td></tr> 
                  <tr> <td> <br></br> </td></tr>
                  <tr>  <td>  Comentarios sobre la ecografia (Sospecha de Patologia): </td> </tr>
@@ -1127,7 +1150,7 @@ beforeSubmit.push(function() {
                         <tr>  <td> <obs conceptId="108" labelText="Nitritos:" answerConceptIds="106,107" answerLabels="Positivo,Negativo" id="nitritos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
                         <tr>  <td> <obs conceptId="113" labelText="Proteinas:" answerConceptIds="109,110,111,112" answerLabels="1+,2+,3+,Negativo" id="proteinas" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>    
                                              
-    </table>
+				</table>
                
 
 </table>
@@ -1148,6 +1171,7 @@ beforeSubmit.push(function() {
   , comentarios sobre el abordaje del caso (traslado, observacion, etc) :
  <obs conceptId="242" id="comentariopreec" rows="3" cols="40" class="obsToDisableEsp comentariopreeclampsia"/> </td> </tr>
 </table>
+<br></br>
 <table class="baseline-aligned">
 <tr> <td> Tratamiento: </td> </tr>
 <tr><td> <obs conceptId="122" labelText="Ninguno" style="checkbox" id="notreat" class="obsToDisableEsp"/></td></tr>
@@ -1155,6 +1179,7 @@ beforeSubmit.push(function() {
 <tr><td> <obs conceptId="124" labelText="Sulfato ferroso (hierro)" style="checkbox" id="Hierro" class="treatement obsToDisableEsp"/></td></tr>
 <tr><td> <obs conceptId="219" labelText="Acetaminofen" style="checkbox" id="Acitaminofen" class="treatement obsToDisableEsp"/></td></tr>
 <tr><td> <obs conceptId="193" labelText="Otro" style="checkbox" id="OtroTreat" class="treatement obsToDisableEsp"/></td></tr>
+<br></br>
 <tr> <td> Comentarios: </td> </tr>
 <tr> <td> <obs conceptId="120" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
 </table>
