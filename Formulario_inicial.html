@@ -120,30 +120,31 @@ if(jQuery){
 
 <script type="text/javascript">
 if(jQuery){
- $j(function() {
-getField('talla.value').change(function() {
-           var imcReal = (parseInt(getValue('peso.value'))/2.2046) / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
+	$j(function() {
+		getField('talla.value').change(function() {
+			var imcReal = (parseInt(getValue('peso.value'))/2.2046) / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
            
-       if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
-            setValue('imc.value', '0');
-       }
-       else{
-            var imcEntero= parseInt(imcReal);
-            setValue('imc.value', imcEntero);
-        }
-   });
-   getField('peso.value').change(function() {
-            var imcReal = (parseInt(getValue('peso.value'))/2.2046)  / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
+			if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
+				setValue('imc.value', '0');
+			}
+			else{
+				var imcEntero= parseInt(imcReal);
+				setValue('imc.value', imcEntero);
+			}
+		});
+		
+		getField('peso.value').change(function() {
+			var imcReal = (parseInt(getValue('peso.value'))/2.2046)  / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
            
-       if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
-            setValue('imc.value', '0');
-       }
-       else{
-            var imcEntero= parseInt(imcReal);
-            setValue('imc.value', imcEntero);
-       }
-   });
- });
+			if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
+				setValue('imc.value', '0');
+			}
+			else{
+				var imcEntero= parseInt(imcReal);
+				setValue('imc.value', imcEntero);
+			}
+		});
+	});
 }
 </script>
 
@@ -224,21 +225,22 @@ if(jQuery){
 	});
 }
 </script>
+
 <!--Codigo que se encarga de hacer check en anemia si la hemoglobina es menos que 11  -->
 <script type="text/javascript">
 if(jQuery){
- $j(function() {
+	$j(function() {
     
-	 getField('hemoglobina.value').change(function() {
-       var hemoglobina = parseInt(getValue('hemoglobina.value'));
-	if (parseInt(hemoglobina) &lt; 11){
-		setValue('anemia.value', true);
-	}
-	else {
-		setValue('anemia.value', false);	
-   }
-   });
- });
+		getField('hemoglobina.value').change(function() {
+			var hemoglobina = parseInt(getValue('hemoglobina.value'));
+			if (parseInt(hemoglobina) &lt; 11){
+				setValue('anemia.value', true);
+			}
+			else {
+				setValue('anemia.value', false);	
+			}	
+		});
+	});
 }
 </script>
 
@@ -319,16 +321,16 @@ if(jQuery){
 </script>
 <!-- Codigo que se encarga de deshabilitar los campos de antecedentes si la opcion ninguno está seleccionada. -->
 <script type="text/javascript">
-	if(jQuery){
-		$j(function() {
-			var checkedSalud= getField('salud.value').attr("checked");
-			if (checkedSalud == true) {
-				$j("span.antecedentes").find("input").attr("disabled", true);
-				$j("span.antecedentes").find("textarea").attr("disabled", true);
-				$j("span.antecedentes").fadeTo('slow', 0.2);
-			}
-		});
-	}
+if(jQuery){
+	$j(function() {
+		var checkedSalud= getField('salud.value').attr("checked");
+		if (checkedSalud == true) {
+			$j("span.antecedentes").find("input").attr("disabled", true);
+			$j("span.antecedentes").find("textarea").attr("disabled", true);
+			$j("span.antecedentes").fadeTo('slow', 0.2);
+		}
+	});
+}
 
 </script>
 
@@ -389,44 +391,43 @@ if(jQuery){
 
 <script type="text/javascript">
 beforeSubmit.push(function() {
-
-       if (getValue('abortos.value') &gt; getValue('gestacion.value')) {
-          window.alert('Abortos no puede ser mayor que Gestaciones');
-          return false;
-       }  
-       return true;
+	if (getValue('abortos.value') &gt; getValue('gestacion.value')) {
+		window.alert('Abortos no puede ser mayor que Gestaciones');
+		return false;
+	}  
+	return true;
 });
 </script>
 
 <!-- Comprueba que la suma de hijos nacidos vivos + hijos nacidos muertos = numero de partos. En caso contrario envia un mensaje de error hasta que coincidan los campos -->
 
 <script type="text/javascript">
-    beforeSubmit.push(function() {
-       var valHijosVivos = getValue('hijosNacidosVivos.value');
-       var valHijosMuertos = getValue('hijosNacidosMuertos.value');      
-       var valPartos = parseInt(valHijosVivos) + parseInt(valHijosMuertos);
-   
-       if (getValue('partos.value') == null || getValue('partos.value') == '') {
-          return true;
-       }
-       else{
-         var success = true;
-         if (valHijosVivos == null || valHijosVivos == '') {
-          getField('hijosNacidosVivos.error').html('Campo requerido').show();
-          success = false;
-         }
-         if (valHijosMuertos == null || valHijosMuertos == '') {
-          getField('hijosNacidosMuertos.error').html('Campo requerido').show();
-          success = false;
-         }
-         else if (valPartos != parseInt(getValue('partos.value'))) {
+beforeSubmit.push(function() {
+	var valHijosVivos = getValue('hijosNacidosVivos.value');
+	var valHijosMuertos = getValue('hijosNacidosMuertos.value');      
+	var valPartos = parseInt(valHijosVivos) + parseInt(valHijosMuertos);
 
-           window.alert('Numero de hijos nacidos vivos y muertos deberia ser igual a Partos');
-           success = false;
-         }
-         return success;
-       }
-       return true;
+	if (getValue('partos.value') == null || getValue('partos.value') == '') {
+		return true;
+	}
+	else{
+		var success = true;
+		if (valHijosVivos == null || valHijosVivos == '') {
+			getField('hijosNacidosVivos.error').html('Campo requerido').show();
+			success = false;
+		}
+
+		if (valHijosMuertos == null || valHijosMuertos == '') {
+			getField('hijosNacidosMuertos.error').html('Campo requerido').show();
+			success = false;
+		}
+		else if (valPartos != parseInt(getValue('partos.value'))) {
+			window.alert('Numero de hijos nacidos vivos y muertos deberia ser igual a Partos');
+			success = false;
+		}
+		return success;
+	}
+	return true;
 });
 </script>
 
@@ -836,351 +837,357 @@ beforeSubmit.push(function() {
 
 <!--Codigo que se encarga de deshabilitar todo el contenido al que no puede acceder el proveedor. -->
 
- <includeIf velocityTest="$user.getAllRoles().toString().contains('Provider')">
-      <script type="text/javascript">
-         if(jQuery){
-            $j(function() {
-               $j("span.obsToDisableAll").find("textarea").attr("readonly", true);
-               $j("span.obsToDisableAll").find("input[type=text]").attr("readonly", true);
-               $j("span.obsToDisableAll").find("input[type=checkbox]").click(function(){return false;});
-               $j("span.obsToDisableAll").find("input[type=radio]").click(function(){return false;});
-               $j("span.obsToDisableAll").find("input.hasDatepicker").attr("disabled", true);
-               $j("span.obsToDisableAll").find("select option").not(":selected").remove();
-               $j("fieldset.obsToDisableAll").find("input").click(function(){return false;});
-            });
-         }
-       </script>
-  </includeIf>
+<includeIf velocityTest="$user.getAllRoles().toString().contains('Provider')">
+	<script type="text/javascript">
+	if(jQuery){
+		$j(function() {
+			$j("span.obsToDisableAll").find("textarea").attr("readonly", true);
+			$j("span.obsToDisableAll").find("input[type=text]").attr("readonly", true);
+			$j("span.obsToDisableAll").find("input[type=checkbox]").click(function(){return false;});
+			$j("span.obsToDisableAll").find("input[type=radio]").click(function(){return false;});
+			$j("span.obsToDisableAll").find("input.hasDatepicker").attr("disabled", true);
+			$j("span.obsToDisableAll").find("select option").not(":selected").remove();
+			$j("fieldset.obsToDisableAll").find("input").click(function(){return false;});
+		});
+	}
+</script>
+</includeIf>
 
 <!--Codigo que se encarga de deshabilitar todo el contenido al que no puede acceder el especialista. -->
 
-  <includeIf velocityTest="$user.getAllRoles().toString().contains('Especialista')">
-      <script type="text/javascript">
-         if(jQuery){
-            $j(function() {
-               $j("span.obsToDisableEsp").find("textarea").attr("readonly", true);
-               $j("span.obsToDisableEsp").find("input[type=text]").attr("readonly", true);
-               $j("span.obsToDisableEsp").find("input[type=checkbox]").click(function(){return false;});
-               $j("span.obsToDisableEsp").find("input[type=radio]").click(function(){return false;});
-               $j("span.obsToDisableEsp").find("input.hasDatepicker").attr("disabled", true);
-               $j("span.obsToDisableEsp").find("select option").not(":selected").remove();
-               $j("fieldset.obsToDisableEsp").find("input").click(function(){return false;});
-            });
-         }
-       </script>
-  </includeIf>
+<includeIf velocityTest="$user.getAllRoles().toString().contains('Especialista')">
+	<script type="text/javascript">
+	if(jQuery){
+		$j(function() {
+			$j("span.obsToDisableEsp").find("textarea").attr("readonly", true);
+			$j("span.obsToDisableEsp").find("input[type=text]").attr("readonly", true);
+			$j("span.obsToDisableEsp").find("input[type=checkbox]").click(function(){return false;});
+			$j("span.obsToDisableEsp").find("input[type=radio]").click(function(){return false;});
+			$j("span.obsToDisableEsp").find("input.hasDatepicker").attr("disabled", true);
+			$j("span.obsToDisableEsp").find("select option").not(":selected").remove();
+			$j("fieldset.obsToDisableEsp").find("input").click(function(){return false;});
+		});
+	}
+	</script>
+</includeIf>
   
-  <!-- Autogenerated example form  (template from 01-Nov-2010 -->
-	<macros>
-		paperFormId = (Fill this in)
-		headerColor =#009d8e
-		fontOnHeaderColor = white
-	</macros>
+<!-- Autogenerated example form  (template from 01-Nov-2010 -->
+<macros>
+	paperFormId = (Fill this in)
+	headerColor =#009d8e
+	fontOnHeaderColor = white
+</macros>
 
-	<style>
-		.section {
-			border: 1px solid $headerColor;
-			padding: 2px;
-			text-align: left;
-			margin-bottom: 1em;
-		}
-		.sectionHeader {
-			background-color: $headerColor;
-			color: $fontOnHeaderColor;
-			display: block;
-			padding: 2px;
-			font-weight: bold;
-		}
-		table.baseline-aligned td {
-			vertical-align: baseline;
-		}
-                .hidden {
-                        visibility: hidden;
-                }
-	</style>
+<style>
+	.section {
+		border: 1px solid $headerColor;
+		padding: 2px;
+		text-align: left;
+		margin-bottom: 1em;
+	}
+	.sectionHeader {
+		background-color: $headerColor;
+		color: $fontOnHeaderColor;
+		display: block;
+		padding: 2px;
+		font-weight: bold;
+	}
+	table.baseline-aligned td {
+		vertical-align: baseline;
+	}
+			.hidden {
+					visibility: hidden;
+			}
+</style>
 
 
-	<span style="float:right">Paper Form ID: $paperFormId</span>
-	<h2>Formulario Inicial</h2>
-        <h4><obs conceptId="208" labelText="Estado de la Revision" id="Rev" style="dropdown" defaultValue="206"/></h4>
-        <obs conceptId="205" style="checkbox" class="hidden" id="RellConf"/>
-        <obs conceptId="206" style="checkbox" class="hidden" id="RellRevi" />
-        <obs conceptId="207" style="checkbox" class="hidden" id="RellReviUrg"/>
+<span style="float:right">Paper Form ID: $paperFormId</span>
+<h2>Formulario Inicial</h2>
+	<h4><obs conceptId="208" labelText="Estado de la Revision" id="Rev" style="dropdown" defaultValue="206"/></h4>
+	<obs conceptId="205" style="checkbox" class="hidden" id="RellConf"/>
+	<obs conceptId="206" style="checkbox" class="hidden" id="RellRevi" />
+	<obs conceptId="207" style="checkbox" class="hidden" id="RellReviUrg"/>
         
-        <section headerLabel="1. Detalles Encuentro">
-    <table class="baseline-aligned">
-      <tr>
-        <td>Dia:</td>
-        <td><encounterDate default="today"/></td>
-	<td>Codigo de Cribado: </td>
-	<td><lookup class="value" expression="personAttributes.get('cribado')"/></td>
-       <!-- <td> <obs conceptId="186" class="obsToDisableEsp"/></td> -->
-	<td class ="hidden"><encounterProvider default="currentUser"/></td>
-      </tr>
+<section headerLabel="1. Detalles Encuentro">
+	<table class="baseline-aligned">
+		<tr>
+			<td>Dia:</td>
+			<td><encounterDate default="today"/></td>
+			<td>Codigo de Cribado: </td>
+			<td><lookup class="value" expression="personAttributes.get('cribado')"/></td>
+			<!-- <td> <obs conceptId="186" class="obsToDisableEsp"/></td> -->
+			<td class ="hidden"><encounterProvider default="currentUser"/></td>
+		</tr>
 	
-	<ifMode mode="ENTER">
-		<td ><lookup complexExpression="#set( $location = $patient.patientIdentifier.location ) 
-			&lt;script type=&quot;text/javascript&quot;>
-			$j(function () {
-			  setValue('encounterloc.value','$location');
-			});
-			&lt;/script>"/>
-		</td>
-	</ifMode>
-<td class="hidden" ><encounterLocation  id="encounterloc" /></td>      
+		<ifMode mode="ENTER">
+			<td ><lookup complexExpression="#set( $location = $patient.patientIdentifier.location ) 
+				&lt;script type=&quot;text/javascript&quot;>
+				$j(function () {
+				  setValue('encounterloc.value','$location');
+				});
+				&lt;/script>"/>
+			</td>
+		</ifMode>
+		
+		<td class="hidden" ><encounterLocation  id="encounterloc" /></td>      
 
-<td>Departamento:</td>
-<td><lookup class="value" expression="patient.addresses.first().stateProvince"/></td>
+		<td>Departamento:</td>
+		<td><lookup class="value" expression="patient.addresses.first().stateProvince"/></td>
 
-<td>Municipio:</td>
-<td><lookup class="value" expression="patient.addresses.first().cityVillage"/></td>
+		<td>Municipio:</td>
+		<td><lookup class="value" expression="patient.addresses.first().cityVillage"/></td>
 
-<td>Distrito:</td>
-<td><lookup class="value" expression="patient.addresses.first().countyDistrict"/></td>
+		<td>Distrito:</td>
+		<td><lookup class="value" expression="patient.addresses.first().countyDistrict"/></td>
 
-<td>Jurisdicción:</td>
-<td><lookup class="value" expression="patient.addresses.first().address1"/></td>
+		<td>Jurisdicción:</td>
+		<td><lookup class="value" expression="patient.addresses.first().address1"/></td>
 
-<td>Comunidad:</td>
-<td><lookup class="value" expression="patient.addresses.first().address2"/></td>
+		<td>Comunidad:</td>
+		<td><lookup class="value" expression="patient.addresses.first().address2"/></td>
 
 	</table>
-	</section>
-       <section headerLabel="2. Antecedentes Medicos">
+</section>
 
-                 <table class="baseline-aligned">
-<tr><td>Enfermedades previas:</td></tr>
-<tr> <td> <obs conceptId="12" labelText="Diabetes" style="checkbox" id="diabetes" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="13" labelText="Hipertension Arterial (HTA)" style="checkbox" id="HTA" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr> <td> <obs conceptId="14" labelText="Asma" style="checkbox" id="asma" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="15" labelText="Fumadora" style="checkbox" id="fumadora" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr> <td> <obs conceptId="16" labelText="Epilepsia" style="checkbox" id="epilepsia" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="17" labelText="Hipotiroidismo" style="checkbox" id="hipotiroidismo" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr> <td> <obs conceptId="18" labelText="Hipertiroidismo" style="checkbox" id="hipertiroidismo" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="19" labelText="VIH" style="checkbox" id="VIH" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr> <td> <obs conceptId="20" labelText="Hepatitis B" style="checkbox" id="hepatitisB" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="21" labelText="Tuberculosis" style="checkbox" id="tuberculosis" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr> <td> <obs conceptId="22" labelText="Desnutricion" style="checkbox" id="desnutricion" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="23" labelText="Litiasis Renal" style="checkbox" id="litiasis" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr> <td> <obs conceptId="24" labelText="Cardiopatia" style="checkbox" id="cardiopatia" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="25" labelText="Cancer" style="checkbox" id="cancer" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr> <td> <obs conceptId="243" labelText="Anemia" style="checkbox" id="Anemia" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="244" labelText="Infección del Tracto Urinario" style="checkbox" id="AntITU" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr> <td> <obs conceptId="26" labelText="Cirugia Abdominal (No Cesarea)" style="checkbox" id="cirugia" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
-<td> <obs conceptId="245" labelText="Paludismo" style="checkbox" id="paludismo" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
-<tr>
-<td> <obs conceptId="11" labelText="Ninguna" id="salud" style="checkbox" class="obsToDisableEsp"/> </td> </tr>
-</table>
-<table class="baseline-aligned"> 
-<tr><td><br></br></td></tr>                
-                       <tr>
-				<td>Numero de Gestacion:</td>
-				<td><obs conceptId="27" id="gestacion" class="obsToDisableEsp"/></td>
-			</tr>
-                        <tr>
-				<td>Abortos:</td>
-				<td><obs conceptId="28" id="abortos" class="obsToDisableEsp"/></td>
-			</tr>
-                        <tr>
-				<td>Partos (Incluido Cesareas):</td>
-				<td><obs conceptId="78" id="partos" class="obsToDisableEsp"/></td>
-			</tr>
-                        <tr>
-				<td>Cesarea Previa:</td>
-				<td><obs conceptId="81" id="cesareaprevia" style="yes_no" class="obsToDisableEsp" /></td>
-			</tr>
-			<tr>
-				<td>Año cesarea Previa:</td>
-				<td><obs conceptId="209" id="annocesarea" class="obsToDisableEsp  obsToDisableCesarea" inputenabled="false" /></td>
-			</tr>
+<section headerLabel="2. Antecedentes Medicos">
+
+	<table class="baseline-aligned">
+		<tr><td>Enfermedades previas:</td></tr>
+		<tr> <td> <obs conceptId="12" labelText="Diabetes" style="checkbox" id="diabetes" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="13" labelText="Hipertension Arterial (HTA)" style="checkbox" id="HTA" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr> <td> <obs conceptId="14" labelText="Asma" style="checkbox" id="asma" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="15" labelText="Fumadora" style="checkbox" id="fumadora" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr> <td> <obs conceptId="16" labelText="Epilepsia" style="checkbox" id="epilepsia" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="17" labelText="Hipotiroidismo" style="checkbox" id="hipotiroidismo" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr> <td> <obs conceptId="18" labelText="Hipertiroidismo" style="checkbox" id="hipertiroidismo" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="19" labelText="VIH" style="checkbox" id="VIH" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr> <td> <obs conceptId="20" labelText="Hepatitis B" style="checkbox" id="hepatitisB" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="21" labelText="Tuberculosis" style="checkbox" id="tuberculosis" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr> <td> <obs conceptId="22" labelText="Desnutricion" style="checkbox" id="desnutricion" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="23" labelText="Litiasis Renal" style="checkbox" id="litiasis" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr> <td> <obs conceptId="24" labelText="Cardiopatia" style="checkbox" id="cardiopatia" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="25" labelText="Cancer" style="checkbox" id="cancer" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr> <td> <obs conceptId="243" labelText="Anemia" style="checkbox" id="Anemia" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="244" labelText="Infección del Tracto Urinario" style="checkbox" id="AntITU" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr> <td> <obs conceptId="26" labelText="Cirugia Abdominal (No Cesarea)" style="checkbox" id="cirugia" class="obsToDisable obsToDisableEsp antecedentes"/> </td>
+		<td> <obs conceptId="245" labelText="Paludismo" style="checkbox" id="paludismo" class="obsToDisable obsToDisableEsp antecedentes"/> </td> </tr>
+		<tr>
+		<td> <obs conceptId="11" labelText="Ninguna" id="salud" style="checkbox" class="obsToDisableEsp"/> </td> </tr>
+	</table>
+
+	<table class="baseline-aligned"> 
+		<tr><td><br></br></td></tr>                
+		<tr>
+			<td>Numero de Gestacion:</td>
+			<td><obs conceptId="27" id="gestacion" class="obsToDisableEsp"/></td>
+		</tr>
+		<tr>
+			<td>Abortos:</td>
+			<td><obs conceptId="28" id="abortos" class="obsToDisableEsp"/></td>
+		</tr>
+		<tr>
+			<td>Partos (Incluido Cesareas):</td>
+			<td><obs conceptId="78" id="partos" class="obsToDisableEsp"/></td>
+		</tr>
+		<tr>
+			<td>Cesarea Previa:</td>
+			<td><obs conceptId="81" id="cesareaprevia" style="yes_no" class="obsToDisableEsp" /></td>
+		</tr>
+		<tr>
+			<td>Año cesarea Previa:</td>
+			<td><obs conceptId="209" id="annocesarea" class="obsToDisableEsp  obsToDisableCesarea" inputenabled="false" /></td>
+		</tr>
 					
-                        <tr>
-				<td>Hijos Nacidos Vivos:</td>
-				<td><obs conceptId="79" id="hijosNacidosVivos" class="obsToDisableEsp"/></td>
-			</tr>
-                        <tr>
-				<td>Hijos Nacidos Muertos:</td>
-				<td><obs conceptId="80" id="hijosNacidosMuertos" class="obsToDisableEsp"/></td>
-			</tr>
-                        <tr>
-				<td>Fecha de Ultima Regla:</td>
-				<td><obs conceptId="82" id="FUR" class="obsToDisableEsp"/></td>
-			</tr>
-                        <tr>
-				<td>Fecha Probable de Parto:</td>
-				<td><obs conceptId="83" id="FPP" allowFutureDates ="true" class="obsToDisableEsp"/></td>
+		<tr>
+			<td>Hijos Nacidos Vivos:</td>
+			<td><obs conceptId="79" id="hijosNacidosVivos" class="obsToDisableEsp"/></td>
+		</tr>
+		<tr>
+			<td>Hijos Nacidos Muertos:</td>
+			<td><obs conceptId="80" id="hijosNacidosMuertos" class="obsToDisableEsp"/></td>
+		</tr>
+		<tr>
+			<td>Fecha de Ultima Regla:</td>
+			<td><obs conceptId="82" id="FUR" class="obsToDisableEsp"/></td>
+		</tr>
+		<tr>
+			<td>Fecha Probable de Parto:</td>
+			<td><obs conceptId="83" id="FPP" allowFutureDates ="true" class="obsToDisableEsp"/></td>
+		</tr>
+	</table>
+</section>
+
+<section headerLabel="3. Datos Basicos Paciente">
+	<table class="baseline-aligned">
+		<tr>  
+			<td> <obs conceptId="217" id="sistolica" labelText="Presion arterial sistolica:" class="obsToDisableEsp"/>
+			</td>    
+		</tr>
+		<tr>  
+			<td> <obs conceptId="218" id="diastolica" labelText="Presion arterial diastolica:" class="obsToDisableEsp"/>
+			</td>
+		</tr>
+		<tr>  <td> <br></br> </td></tr>
+		<tr>
+			<td> Peso:<obs conceptId="41" id="peso" class="obsToDisableEsp"/>Libras</td>
+		</tr>
+		<tr>
+			<td> Talla: <obs conceptId="42" id="talla" class="obsToDisableEsp"/>cm</td>
+		</tr>
+		<tr>
+			<td> IMC: <obs conceptId="43" id="imc" class="obsToDisableEsp"/></td>
+		</tr>
+	</table>
+</section>
+
+<section headerLabel="4. Ecografia">
+	<table class="baseline-aligned">
+		<tr> <td> <b>Numero de fetos: </b></td> </tr>
+                
+		<table id="NumFetos">
+			<tr>  <td> <obs conceptId="44" labelText="Feto unico" style="checkbox" id="Feto1" class="obsToDisableEsp"/> </td> </tr>
+			<tr> <td> <obs conceptId="45" labelText="Feto gemelar" style="checkbox" id="Feto2" class="obsToDisableEsp"/> </td> </tr>
+			<tr>  <td> <obs conceptId="46" labelText= "Feto triple" style="checkbox" id="Feto3" class="obsToDisableEsp"/> </td> </tr>
+			<tr>  <td><fieldset class="obsToDisableEsp"> <legend> Subir Foto del(los) Feto(s) </legend><obs conceptId="156"  id="FotoFeto1" /> </fieldset></td> </tr>
+					
+		</table>
+		
+		<tr>  
+			<td>      <obs conceptId="50" labelText=" Latido fetal: " answerConceptIds="48,49" answerLabels="Presente, Ausente" class="obsToDisableEsp"/>
+			</td>    
+		</tr>
+		<tr>  
+			<td>      <obs conceptId="55" labelText=" Posicion del feto: " answerConceptIds="51,52,53,54" answerLabels="Presentacion cefalica, Presentacion podalica, Situacion transversa, No aplica" class="obsToDisableEsp"/>
+			</td>    
+		</tr> 
+		<tr>
+			<td> <obs conceptId="166" labelText=" Intrauterino:" answerConceptIds="164,165" answerLabels="Si,No" class="obsToDisableEsp" defaultValue="164" /> 
+			</td> 
+		</tr>
+		<tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
+			  
+		<tr><td> <b>Biometria fetal:</b></td></tr>
+		<tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
+		<tr>  <td> <obs conceptId="157" labelText="Primer trimestre" style="checkbox" id="Trimestre1" class="obsToDisableEsp"/> </td> </tr>
+
+		<table id="PrimerTrimestre">
+			<tr> 
+				<td> <obs conceptId="57" labelText="CRL (mm)" style="number" id="CRL" class="obsToDisable1 obsToDisableEsp"/> </td>  
+				<td> <fieldset class="obsToDisableEsp"> <legend> Subir foto CRL </legend><obs conceptId="58"  id="FotoCRL" class="obsToDisable1"/> </fieldset> </td> 
 			</tr>
 		</table>
-	</section>
+		
+		<tr> <td> <br></br> </td></tr>
+		<tr>  <td> <obs conceptId="158" labelText= "Segundo Trimestre" style="checkbox" id="Trimestre2" class="obsToDisableEsp"/> 
+					<obs conceptId="159" labelText= "Tercer Trimestre" style="checkbox" id="Trimestre3" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <br></br> </td></tr>
+			 
+		<table id="RestoTrimestre">
+			<tr>  <td> <obs conceptId="59" labelText="DBP (mm)" style="number" id="DBP" class="obsToDisable2 obsToDisableEsp"/> </td>
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen DBP</legend><obs conceptId="66" id="DBPimag" class="obsToDisable2"/></fieldset> </td> 
+			</tr>
+			<tr>  <td> <obs conceptId="60" labelText="CC (mm)" style="number" id="CC" class="obsToDisable2 obsToDisableEsp"/> </td>
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen CC</legend><obs conceptId="65"  id="CCimag" class="obsToDisable2"/></fieldset> </td> 
+			</tr>
+			<tr>  <td> <obs conceptId="61" labelText="CA (mm)" style="number" id="CA" class="obsToDisable2 obsToDisableEsp"/> </td>
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen CA</legend><obs conceptId="67"  id="CAimag" class="obsToDisable2"/></fieldset> </td> 
+			</tr>
+			<tr>  <td> <obs conceptId="62" labelText="LF (mm)" style="number" id="LF" class="obsToDisable2 obsToDisableEsp"/> </td>
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen LF</legend><obs conceptId="64"  id="LFimag" class="obsToDisable2"/></fieldset></td> 
+			</tr>
+			<tr> <td> <br></br> </td></tr>
+			<tr>  
+				<td> Peso Estimado Feto: </td>
+				<td><obs conceptId="68" id="hadlock" class="obsToDisableEsp"/>lbs</td>
+			</tr>
+			<tr>  
+				<td> Tiempo Estimado de Vida: </td>
+				<td><obs conceptId="192" id="semanasVida" class="obsToDisableEsp"/>semanas</td>
+			</tr>
+		</table>
 
- <section headerLabel="3. Datos Basicos Paciente">
-    <table class="baseline-aligned">
-                 <tr>  
-                        <td>      <obs conceptId="217" id="sistolica" labelText="Presion arterial sistolica:" class="obsToDisableEsp"/>
-                       </td>    
-                 </tr>
-                 <tr>  
-                      <td>      <obs conceptId="218" id="diastolica" labelText="Presion arterial diastolica:" class="obsToDisableEsp"/>
-                      </td>
-                 </tr>
-                 <tr>  <td> <br></br> </td></tr>
-                 <tr>
-                     <td> Peso:<obs conceptId="41" id="peso" class="obsToDisableEsp"/>Libras</td>
-                 </tr>
-                 <tr>
-                     <td> Talla: <obs conceptId="42" id="talla" class="obsToDisableEsp"/>cm</td>
-                </tr>
-                 <tr>
-                     <td> IMC: <obs conceptId="43" id="imc" class="obsToDisableEsp"/></td>
-                </tr>
-    </table>
- </section>
- <section headerLabel="4. Ecografia">
-    <table class="baseline-aligned">
-                 <tr> <td> <b>Numero de fetos: </b></td> </tr>
-                
-                <table id="NumFetos">
+		<tr> <td> <br></br> </td></tr>
 
-                        <tr>  <td> <obs conceptId="44" labelText="Feto unico" style="checkbox" id="Feto1" class="obsToDisableEsp"/> </td> </tr>
-                        <tr> <td> <obs conceptId="45" labelText="Feto gemelar" style="checkbox" id="Feto2" class="obsToDisableEsp"/> </td> </tr>
-                        <tr>  <td> <obs conceptId="46" labelText= "Feto triple" style="checkbox" id="Feto3" class="obsToDisableEsp"/> </td> </tr>
-						<tr>  <td><fieldset class="obsToDisableEsp"> <legend> Subir Foto del(los) Feto(s) </legend><obs conceptId="156"  id="FotoFeto1" /> </fieldset></td> </tr>
-                        
-				</table>
-                <tr>  
-                        <td>      <obs conceptId="50" labelText=" Latido fetal: " answerConceptIds="48,49" answerLabels="Presente, Ausente" class="obsToDisableEsp"/>
-                       </td>    
-                </tr>
-                <tr>  
-                        <td>      <obs conceptId="55" labelText=" Posicion del feto: " answerConceptIds="51,52,53,54" answerLabels="Presentacion cefalica, Presentacion podalica, Situacion transversa, No aplica" class="obsToDisableEsp"/>
-                       </td>    
-                </tr> 
-                <tr>
-                      <td> <obs conceptId="166" labelText=" Intrauterino:" answerConceptIds="164,165" answerLabels="Si,No" class="obsToDisableEsp" defaultValue="164" /> 
-                      </td> 
-                </tr>
-                        <tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
-                  
-                        <tr><td> <b>Biometria fetal:</b></td></tr>
-                        <tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
-                        <tr>  <td> <obs conceptId="157" labelText="Primer trimestre" style="checkbox" id="Trimestre1" class="obsToDisableEsp"/> </td> </tr>
+		<table>
+			<tr>  
+				<td> <obs conceptId="74" labelText="Placenta" answerConceptIds="69,70,71,72,73" answerLabels="Fundica,Anterior, Posterior, Insercion Baja, Sospecha de Previa" class="obsToDisableEsp"/>
+				</td>    
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen Placenta</legend><obs conceptId="75"/></fieldset></td> 
+			</tr>
 
-                  <table id="PrimerTrimestre">
-                        <tr> 
-							<td> <obs conceptId="57" labelText="CRL (mm)" style="number" id="CRL" class="obsToDisable1 obsToDisableEsp"/> </td>  
-							<td> <fieldset class="obsToDisableEsp"> <legend> Subir foto CRL </legend><obs conceptId="58"  id="FotoCRL" class="obsToDisable1"/> </fieldset> </td> 
-						</tr>
-                  </table>
-                        <tr> <td> <br></br> </td></tr>
-                        <tr>  <td> <obs conceptId="158" labelText= "Segundo Trimestre" style="checkbox" id="Trimestre2" class="obsToDisableEsp"/> 
-                              <obs conceptId="159" labelText= "Tercer Trimestre" style="checkbox" id="Trimestre3" class="obsToDisableEsp"/> </td> </tr>
-                        <tr> <td> <br></br> </td></tr>
-                 
-                   <table id="RestoTrimestre">
-                        <tr>  <td> <obs conceptId="59" labelText="DBP (mm)" style="number" id="DBP" class="obsToDisable2 obsToDisableEsp"/> </td>
-                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen DBP</legend><obs conceptId="66" id="DBPimag" class="obsToDisable2"/></fieldset> </td> 
-                        </tr>
-                        <tr>  <td> <obs conceptId="60" labelText="CC (mm)" style="number" id="CC" class="obsToDisable2 obsToDisableEsp"/> </td>
-                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen CC</legend><obs conceptId="65"  id="CCimag" class="obsToDisable2"/></fieldset> </td> 
-						</tr>
-                        <tr>  <td> <obs conceptId="61" labelText="CA (mm)" style="number" id="CA" class="obsToDisable2 obsToDisableEsp"/> </td>
-                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen CA</legend><obs conceptId="67"  id="CAimag" class="obsToDisable2"/></fieldset> </td> 
-                        </tr>
-                        <tr>  <td> <obs conceptId="62" labelText="LF (mm)" style="number" id="LF" class="obsToDisable2 obsToDisableEsp"/> </td>
-                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen LF</legend><obs conceptId="64"  id="LFimag" class="obsToDisable2"/></fieldset></td> 
-                        </tr>
-                        <tr> <td> <br></br> </td></tr>
-                        <tr>  
-							<td> Peso Estimado Feto: </td>
-							<td><obs conceptId="68" id="hadlock" class="obsToDisableEsp"/>lbs</td>
-						</tr>
-                        <tr>  
-							<td> Tiempo Estimado de Vida: </td>
-							<td><obs conceptId="192" id="semanasVida" class="obsToDisableEsp"/>semanas</td>
-						</tr>
-                  </table>
-
-       
-                 <tr> <td> <br></br> </td></tr>
-
-				<table>
-					 <tr>  
-							<td> <obs conceptId="74" labelText="Placenta" answerConceptIds="69,70,71,72,73" answerLabels="Fundica,Anterior, Posterior, Insercion Baja, Sospecha de Previa" class="obsToDisableEsp"/>
-						   </td>    
-					 
-						   <td> <fieldset class="obsToDisableEsp"> <legend>Imagen Placenta</legend><obs conceptId="75"/></fieldset></td> 
-					 </tr>
-
-					 <tr>  
-						<td> <obs conceptId="76" labelText="Indice Liquido Amniotico" class="obsToDisableEsp"/></td>  
-						<td> <fieldset class="obsToDisableEsp"> <legend>Imagen medida liquido amniotico</legend><obs conceptId="214"/></fieldset></td>  
-					 </tr>
-                 </table>
-                 <tr> <td> <br></br> </td></tr> 
-                 <tr> <td> <br></br> </td></tr>
-                 <tr>  <td>  Comentarios sobre la ecografia (Sospecha de Patologia): </td> </tr>
-                 <tr> <td> <br></br> </td></tr>
-                 <tr>
-                        <td> <obs conceptId="77" rows="5" cols="50" class="obsToDisableEsp"/>  </td>    
-                 </tr>
+			<tr>  
+				<td> <obs conceptId="76" labelText="Indice Liquido Amniotico" class="obsToDisableEsp"/></td>  
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen medida liquido amniotico</legend><obs conceptId="214"/></fieldset></td>  
+			</tr>
+		</table>
+		
+		<tr> <td> <br></br> </td></tr> 
+		<tr> <td> <br></br> </td></tr>
+		<tr>  <td>  Comentarios sobre la ecografia (Sospecha de Patologia): </td> </tr>
+		<tr> <td> <br></br> </td></tr>
+		<tr>
+			<td> <obs conceptId="77" rows="5" cols="50" class="obsToDisableEsp"/>  </td>    
+		</tr>
 		<tr><br></br>  <td>  Comentarios del especialista sobre las ecografias: </td> </tr>
-             <tr> <br></br> <td> <obs conceptId="220" rows="5" cols="50" class="obsToDisableAll"/>  </td> </tr>     
-                 <tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
-     </table>
-   </section>
-  <section headerLabel="5. Pruebas en Sangre">
-    <table class="baseline-aligned">
-                <tr> <td> <obs conceptId="88" labelText="VHB" answerConceptIds="84,85,87" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/></td>  </tr>         
-                <tr> <td> <obs conceptId="93" labelText="Sifilis" answerConceptIds="89,90,92" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td>  </tr>                 
-                <tr> <td> <obs conceptId="98" labelText="VIH" answerConceptIds="94,95,97" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td> </tr>
-                <tr> <td> <obs id="hemoglobina" conceptId="99" labelText="Hemoglobina: " class="obsToDisableEsp"/></td></tr>    
-                <tr> <td> <obs conceptId="100" labelText="Glucosa: " class="obsToDisableEsp"/> </td> </tr>  
-                <tr> <td> <br></br> </td></tr>  
-                <tr><td> Muestra simple de orina:</td></tr>
-                <tr>  <td> <obs conceptId="101" labelText="No se hizo" style="checkbox" id="OrinaNo" class="obsToDisableEsp"/> </td> </tr>
-                <tr> <td> <obs conceptId="102" labelText="Negativo" style="checkbox" id="OrinaNeg" class="obsToDisableEsp"/> </td> </tr>
-
-                <table id="orina">
-
-                        <tr>  <td> <obs conceptId="105" labelText="Leucocitos:"  answerConceptIds="104,103,167" answerLabels="*,**,***" id="leucocitos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
-                        <tr>  <td> <obs conceptId="108" labelText="Nitritos:" answerConceptIds="106,107" answerLabels="Positivo,Negativo" id="nitritos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
-                        <tr>  <td> <obs conceptId="113" labelText="Proteinas:" answerConceptIds="109,110,111,112" answerLabels="1+,2+,3+,Negativo" id="proteinas" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>    
-                                             
-				</table>
-               
-
-</table>
+		<tr> <br></br> <td> <obs conceptId="220" rows="5" cols="50" class="obsToDisableAll"/>  </td> </tr>     
+		<tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
+	</table>
 </section>
+
+<section headerLabel="5. Pruebas en Sangre">
+	<table class="baseline-aligned">
+		<tr> <td> <obs conceptId="88" labelText="VHB" answerConceptIds="84,85,87" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/></td>  </tr>         
+		<tr> <td> <obs conceptId="93" labelText="Sifilis" answerConceptIds="89,90,92" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td>  </tr>                 
+		<tr> <td> <obs conceptId="98" labelText="VIH" answerConceptIds="94,95,97" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs id="hemoglobina" conceptId="99" labelText="Hemoglobina: " class="obsToDisableEsp"/></td></tr>    
+		<tr> <td> <obs conceptId="100" labelText="Glucosa: " class="obsToDisableEsp"/> </td> </tr>  
+		<tr> <td> <br></br> </td></tr>  
+		<tr><td> Muestra simple de orina:</td></tr>
+		<tr>  <td> <obs conceptId="101" labelText="No se hizo" style="checkbox" id="OrinaNo" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="102" labelText="Negativo" style="checkbox" id="OrinaNeg" class="obsToDisableEsp"/> </td> </tr>
+
+		<table id="orina">
+			<tr>  <td> <obs conceptId="105" labelText="Leucocitos:"  answerConceptIds="104,103,167" answerLabels="*,**,***" id="leucocitos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
+			<tr>  <td> <obs conceptId="108" labelText="Nitritos:" answerConceptIds="106,107" answerLabels="Positivo,Negativo" id="nitritos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
+			<tr>  <td> <obs conceptId="113" labelText="Proteinas:" answerConceptIds="109,110,111,112" answerLabels="1+,2+,3+,Negativo" id="proteinas" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>                                             
+		</table>    
+
+	</table>
+</section>
+
 <section headerLabel="6. Diagnostico">
 <table class="baseline-aligned">
-<tr> <td> Impresion Clinica: </td> </tr>
-<tr> <td> <obs conceptId="184" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="115" labelText="Dentro de la normalidad" style="checkbox" id="DiagNorm" class="obsToDisableEsp"/> </td> </tr>
-<table id="Diagnostico">
-<tr> <td> <obs conceptId="117" labelText="Cribado reactivo que necesita confirmacion" style="checkbox" id="PostivoConfirm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="116" labelText="Hallazgo ecografico anormal" style="checkbox" id="EcoAnorm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="118" labelText="Infección del Tracto Urinario" style="checkbox" id="ITU" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="216" labelText="Anemia" style="checkbox" id="anemia" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="241" labelText="Diabetes gestacional" style="checkbox" id="diabetesges" class="obsToDisable4 obsToDisableEsp"/> </td></tr>
-<tr> <td>
- <obs conceptId="160" labelText="Sospecha de Preeclampsia" style="checkbox" id="preeclampsia" class="obsToDisable4 obsToDisableEsp"/>
-  , comentarios sobre el abordaje del caso (traslado, observacion, etc) :
- <obs conceptId="242" id="comentariopreec" rows="3" cols="40" class="obsToDisableEsp comentariopreeclampsia"/> </td> </tr>
-</table>
-<br></br>
-<table class="baseline-aligned">
-<tr> <td> Tratamiento: </td> </tr>
-<tr><td> <obs conceptId="122" labelText="Ninguno" style="checkbox" id="notreat" class="obsToDisableEsp"/></td></tr>
-<tr><td> <obs conceptId="123" labelText="Amoxicilina" style="checkbox" id="Amoxicilina" class="treatement obsToDisableEsp"/></td></tr>
-<tr><td> <obs conceptId="124" labelText="Sulfato ferroso (hierro)" style="checkbox" id="Hierro" class="treatement obsToDisableEsp"/></td></tr>
-<tr><td> <obs conceptId="219" labelText="Acetaminofen" style="checkbox" id="Acitaminofen" class="treatement obsToDisableEsp"/></td></tr>
-<tr><td> <obs conceptId="193" labelText="Otro" style="checkbox" id="OtroTreat" class="treatement obsToDisableEsp"/></td></tr>
-<br></br>
-<tr> <td> Comentarios: </td> </tr>
-<tr> <td> <obs conceptId="120" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
-</table>
-<tr> <br></br> <td> Comentarios del especialista sobre resultados y diagnostico: </td> </tr>
-<tr> <br></br> <td> <obs conceptId="221" rows="5" cols="50" class="obsToDisableAll"/> </td> </tr>
+	<tr> <td> Impresion Clinica: </td> </tr>
+	<tr> <td> <obs conceptId="184" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
+	<tr> <td> <obs conceptId="115" labelText="Dentro de la normalidad" style="checkbox" id="DiagNorm" class="obsToDisableEsp"/> </td> </tr>
+	
+	<table id="Diagnostico">
+		<tr> <td> <obs conceptId="117" labelText="Cribado reactivo que necesita confirmacion" style="checkbox" id="PostivoConfirm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="116" labelText="Hallazgo ecografico anormal" style="checkbox" id="EcoAnorm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="118" labelText="Infección del Tracto Urinario" style="checkbox" id="ITU" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="216" labelText="Anemia" style="checkbox" id="anemia" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="241" labelText="Diabetes gestacional" style="checkbox" id="diabetesges" class="obsToDisable4 obsToDisableEsp"/> </td></tr>
+		<tr> <td>
+			<obs conceptId="160" labelText="Sospecha de Preeclampsia" style="checkbox" id="preeclampsia" class="obsToDisable4 obsToDisableEsp"/>	  , comentarios sobre el abordaje del caso (traslado, observacion, etc) :
+		<obs conceptId="242" id="comentariopreec" rows="3" cols="40" class="obsToDisableEsp comentariopreeclampsia"/> </td> </tr>
+	</table>
+	
+	<br></br>
+
+	<table class="baseline-aligned">
+		<tr> <td> Tratamiento: </td> </tr>
+		<tr><td> <obs conceptId="122" labelText="Ninguno" style="checkbox" id="notreat" class="obsToDisableEsp"/></td></tr>
+		<tr><td> <obs conceptId="123" labelText="Amoxicilina" style="checkbox" id="Amoxicilina" class="treatement obsToDisableEsp"/></td></tr>
+		<tr><td> <obs conceptId="124" labelText="Sulfato ferroso (hierro)" style="checkbox" id="Hierro" class="treatement obsToDisableEsp"/></td></tr>
+		<tr><td> <obs conceptId="219" labelText="Acetaminofen" style="checkbox" id="Acitaminofen" class="treatement obsToDisableEsp"/></td></tr>
+		<tr><td> <obs conceptId="193" labelText="Otro" style="checkbox" id="OtroTreat" class="treatement obsToDisableEsp"/></td></tr>
+		<br></br>
+		<tr> <td> Comentarios: </td> </tr>
+		<tr> <td> <obs conceptId="120" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
+	</table>
+
+	<tr> <br></br> <td> Comentarios del especialista sobre resultados y diagnostico: </td> </tr>
+	<tr> <br></br> <td> <obs conceptId="221" rows="5" cols="50" class="obsToDisableAll"/> </td> </tr>
 </table>
 </section>
   

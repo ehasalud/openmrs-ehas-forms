@@ -1,7 +1,6 @@
 <htmlform>
 
 <!-- Codigo para marcar el checkbox oculto para que asi Alertas de Encuentro reconozca el dropdown-->
-
 <script type="text/javascript">
 beforeSubmit.push(function() {
 
@@ -32,384 +31,128 @@ beforeSubmit.push(function() {
 <script type="text/javascript">
 
 if(jQuery){
- $j(function() {
-   getField('LF.value').change(function() {
-       var CA = parseInt(getValue('CA.value'));
-       var LF = parseInt(getValue('LF.value'));
-       if((getValue('CA.value') == null)|| (getValue('CA.value') == '') || (getValue('CA.value')== '0') || (getValue('LF.value') == null)|| (getValue('LF.value') == '') || (getValue('LF.value')== '0')){
-        setValue('hadlock.value', '0');
-       }
-else{
-        var n = 2.0150655 + 0.00202644*CA + 0.01153867*LF;
-        var hadlockReal = Math.pow(10, n);
-	var hadlockRealLibras = 0.0022046*hadlockReal
-        var hadlockEntero= parseInt(hadlockRealLibras);
-        setValue('hadlock.value', hadlockEntero);
-}
-   });
-   getField('CA.value').change(function() {
-       var CA = parseInt(getValue('CA.value'));
-       var LF = parseInt(getValue('LF.value'));
-       if((getValue('LF.value') == null)|| (getValue('LF.value') == '') || (getValue('LF.value')== '0') || (getValue('CA.value') == null)|| (getValue('CA.value') == '') || (getValue('CA.value')== '0')){
-        setValue('hadlock.value', '0');
-       }
-else{
-
-        var n = 2.0150655 + 0.00202644*CA + 0.01153867*LF;
-        var hadlockReal = Math.pow(10, n);
-	var hadlockRealLibras = 0.0022046*hadlockReal
-        var hadlockEntero= parseInt(hadlockRealLibras);
-        setValue('hadlock.value', hadlockEntero);
-}
-   });
- });
+	$j(function() {
+		getField('LF.value').change(function() {
+    		var CA = parseInt(getValue('CA.value'));
+       		var LF = parseInt(getValue('LF.value'));
+       		if((getValue('CA.value') == null)|| (getValue('CA.value') == '') || (getValue('CA.value')== '0') || (getValue('LF.value') == null)|| (getValue('LF.value') == '') || (getValue('LF.value')== '0')){
+        		setValue('hadlock.value', '0');
+       		}
+			else{
+        		var n = 2.0150655 + 0.00202644*CA + 0.01153867*LF;
+        		var hadlockReal = Math.pow(10, n);
+				var hadlockRealLibras = 0.0022046*hadlockReal
+        		var hadlockEntero= parseInt(hadlockRealLibras);
+        		setValue('hadlock.value', hadlockEntero);
+			}
+  		});
+   	
+		getField('CA.value').change(function() {
+	     	var CA = parseInt(getValue('CA.value'));
+	       	var LF = parseInt(getValue('LF.value'));
+	       	if((getValue('LF.value') == null)|| (getValue('LF.value') == '') || (getValue('LF.value')== '0') || (getValue('CA.value') == null)|| (getValue('CA.value') == '') || (getValue('CA.value')== '0')){
+	        	setValue('hadlock.value', '0');
+	       	}
+			else{
+		        var n = 2.0150655 + 0.00202644*CA + 0.01153867*LF;
+	        	var hadlockReal = Math.pow(10, n);
+				var hadlockRealLibras = 0.0022046*hadlockReal
+	        	var hadlockEntero= parseInt(hadlockRealLibras);
+	        	setValue('hadlock.value', hadlockEntero);
+			}
+	   	});
+	});
 }
 </script>
+
 <!--Codigo que se encarga de deshabilitar y poner a cero los campos en el caso de que no haya ninguna referencia. -->
 
 <script  type="text/javascript">
 if(jQuery){
-
-   $j(function() {
-              var checkedNoReferencia = getField('NoReferencia.value').attr("checked");
-
-              if (checkedNoReferencia == true) {
-                  $j("span.obsToDisable5").find("input").attr("disabled", true);
-                  $j("span.obsToDisable5").find("select").attr("disabled", true);
-                  $j('#Referencia').fadeTo('slow', 0.2);
-                  setValue('CentroSalud.value', false);
-                  setValue('HospDistrit.value', false);
-                  setValue('HospReg.value', false);
-                  setValue('HospNacion.value', false);
-              }
-
-      getField('NoReferencia.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);
-         }
-         else{
-               $j("span.obsToDisable5").find("input").attr("disabled", false);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 1); 
-         }
-     });
-
-	getField('CentroSalud.value').change(function() {
-		    var checked = $j(this).attr("checked");
-		 if(checked == true){
-			setValue('NoTrasladoUrg.value', true);
-			$j("span.obsToDisable6").find("input").attr("disabled", true);
-		       $j("span.obsToDisable6").find("input").attr("checked", false);
-		       $j('#TrasladoUrg').fadeTo('slow', 0.2); 
-		       setValue('CS.value', false);
-		       setValue('HD.value', false);
-		       setValue('HR.value', false);
-		       setValue('HN.value', false);
-			}
-	      
-		});
-	getField('HospDistrit.value').change(function() {
-		    var checked = $j(this).attr("checked");
-		 if(checked == true){
-			setValue('NoTrasladoUrg.value', true);
-			$j("span.obsToDisable6").find("input").attr("disabled", true);
-		       $j("span.obsToDisable6").find("input").attr("checked", false);
-		       $j('#TrasladoUrg').fadeTo('slow', 0.2); 
-		       setValue('CS.value', false);
-		       setValue('HD.value', false);
-		       setValue('HR.value', false);
-		       setValue('HN.value', false);
-			}
-	      
-		});
-	getField('HospReg.value').change(function() {
-		    var checked = $j(this).attr("checked");
-		 if(checked == true){
-			setValue('NoTrasladoUrg.value', true);
-			$j("span.obsToDisable6").find("input").attr("disabled", true);
-		       $j("span.obsToDisable6").find("input").attr("checked", false);
-		       $j('#TrasladoUrg').fadeTo('slow', 0.2); 
-		       setValue('CS.value', false);
-		       setValue('HD.value', false);
-		       setValue('HR.value', false);
-		       setValue('HN.value', false);
-			}
-	      
-		});
-	getField('HospNacion.value').change(function() {
-		    var checked = $j(this).attr("checked");
-		 if(checked == true){
-			setValue('NoTrasladoUrg.value', true);
-			$j("span.obsToDisable6").find("input").attr("disabled", true);
-		       $j("span.obsToDisable6").find("input").attr("checked", false);
-		       $j('#TrasladoUrg').fadeTo('slow', 0.2); 
-		       setValue('CS.value', false);
-		       setValue('HD.value', false);
-		       setValue('HR.value', false);
-		       setValue('HN.value', false);
-			}
-	      
-		});
- });
+	$j(function() {
+    	var checkedNoReferencia = getField('NoReferencia.value').attr("checked");
+		if (checkedNoReferencia == true) {
+        	$j("span.obsToDisable5").find("input").attr("disabled", true);
+           	$j("span.obsToDisable5").find("select").attr("disabled", true);
+            $j('#Referencia').fadeTo('slow', 0.2);
+            setValue('CentroSalud.value', false);
+            setValue('HospDistrit.value', false);
+            setValue('HospReg.value', false);
+            setValue('HospNacion.value', false);
+     	}
+ 	});
 }
 </script>
 
-
-
-<!--Codigo que se encarga de deshabilitar los campos de traslado si no ha habido un traslado urgente. -->
-
+<!--Codigo que se encarga de deshabilitar y pone a cero los campos de la orina en el caso de ser negativa. -->
 <script  type="text/javascript">
 if(jQuery){
-   $j(function() {
-
-         var checkedTraslado= getField('NoTrasladoUrg.value').attr("checked");
-
-              if (checkedTraslado == true) {
-                  $j("span.obsToDisable6").find("input").attr("disabled", true);
-                  $j('#TrasladoUrg').fadeTo('slow', 0.2); 
-                  setValue('CS.value', false);
-                  setValue('HD.value', false);
-                  setValue('HR.value', false);
-                  setValue('HN.value', false);
-              }
-      getField('NoTrasladoUrg.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable6").find("input").attr("disabled", true);
-               $j("span.obsToDisable6").find("input").attr("checked", false);
-               $j('#TrasladoUrg').fadeTo('slow', 0.2); 
-               setValue('CS.value', false);
-               setValue('HD.value', false);
-               setValue('HR.value', false);
-               setValue('HN.value', false);
-         }
-         else{
-               $j("span.obsToDisable6").find("input").attr("disabled", false);
-               $j("span.obsToDisable6").find("input").attr("checked", false);
-               $j('#TrasladoUrg').fadeTo('slow', 1); 
-         }
-       });
-	getField('CS.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-		setValue('NoReferencia.value', true);
-		$j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);
-		}
-      
-	});
-
-	getField('HD.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-		setValue('NoReferencia.value', true);
-		$j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);}
-      
-	});
-	getField('HR.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-		setValue('NoReferencia.value', true);
-		$j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);}
-      
-	});
-	getField('HN.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-		setValue('NoReferencia.value', true);
-		$j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.2); 
-               setValue('CentroSalud.value', false);
-               setValue('HospDistrit.value', false);
-               setValue('HospReg.value', false);
-               setValue('HospNacion.value', false);}
-      
-	});
-    
-  });
-}
-</script>
-
-<script  type="text/javascript">
-
-if(jQuery){
-
-   $j(function() {
-              var checkedNoReferencia = getField('NoReferencia.value').attr("checked");
-
-              if (checkedNoReferencia == true) {
-                  $j("span.obsToDisable5").find("input").attr("disabled", true);
-                  $j('#Referencia').fadeTo('slow', 0.5); 
-              }
-
-      getField('NoReferencia.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable5").find("input").attr("disabled", true);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 0.5); 
-
-         }
-         else{
-               $j("span.obsToDisable5").find("input").attr("disabled", false);
-               $j("span.obsToDisable5").find("input").attr("checked", false);
-               $j('#Referencia').fadeTo('slow', 1); 
-}
-     });
- });
-}
-
-</script>
-
-<script  type="text/javascript">
-
-if(jQuery){
-   $j(function() {
-        var checkedNoOrina = getField('OrinaNo.value').attr("checked");
+   	$j(function() {
+    	var checkedNoOrina = getField('OrinaNo.value').attr("checked");
         var checkedNeg = getField('OrinaNeg.value').attr("checked");
 
-              if ((checkedNeg == true) || (checkedNoOrina == true)) {
-                  $j("span.obsToDisable3").find("input").attr("disabled", true);
-                  $j("span.obsToDisable3").find("select").attr("disabled", true);
-                  $j('#orina').fadeTo('slow', 0.5); 
-             }   
-
-      getField('OrinaNo.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable3").find("input").attr("disabled", true);
-               $j("span.obsToDisable3").find("select").attr("disabled", true);
-               setValue('OrinaNeg.value', false);
-               $j('#orina').fadeTo('slow', 0.5);
-          }
-         else{
-             $j('#orina').fadeTo('slow', 1);
-             $j("span.obsToDisable3").find("input").attr("disabled", false);  
-               $j("span.obsToDisable3").find("select").attr("disabled", false);
-
-         }
-         
-     });
-     getField('OrinaNeg.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable3").find("input").attr("disabled", true);
-               $j("span.obsToDisable3").find("select").attr("disabled", true);
-               setValue('OrinaNo.value', false);
-               $j('#orina').fadeTo('slow', 0.5);
-         }
-         else{
-               $j('#orina').fadeTo('slow', 1);
-               $j("span.obsToDisable3").find("input").attr("disabled", false);  
-               $j("span.obsToDisable3").find("select").attr("disabled", false);
-
-
-         }
-     }); 
-  });
+        if ((checkedNeg == true) || (checkedNoOrina == true)) {
+        	$j("span.obsToDisable3").find("input").attr("disabled", true);
+            $j("span.obsToDisable3").find("select").attr("disabled", true);
+            $j('#orina').fadeTo('slow', 0.2); 
+      	}    
+  	});
 }
 </script>
+
+
 <!--  Deshabilita la seleccion de otros tratamientos si la opcion es ninguno -->
 <script type="text/javascript">
-if(jQuery){
- $j(function() {
-	var checkedNoTreat = getField('notreat.value').attr("checked");
- 	if (checkedNoTreat == true) {
-                  $j("span.treatement").find("input").attr("disabled", true);
-                  $j("span.treatement").find("select").attr("disabled", true);
-		  $j('#Amoxicilina').fadeTo('slow', 0.2);
-		  $j('#Hierro').fadeTo('slow', 0.2);
-		  $j('#Acitaminofen').fadeTo('slow', 0.2);
-		  $j('#OtroTreat').fadeTo('slow', 0.2);
-             }   
-    
-	getField('notreat.value').change(function() {
-            var checkedNoTreat = getField('notreat.value').attr("checked");
-	 if(checkedNoTreat == true){
-               $j("span.treatement").find("input").attr("disabled", true);
-               $j("span.treatement").find("select").attr("disabled", true);	
-		setValue('Amoxicilina.value', false);
-		setValue('Hierro.value', false);
-		setValue('Acitaminofen.value', false);
-		setValue('OtroTreat.value', false);
-		  $j('#Amoxicilina').fadeTo('slow', 0.2);
-		  $j('#Hierro').fadeTo('slow', 0.2);
-		  $j('#Acitaminofen').fadeTo('slow', 0.2);
-		  $j('#OtroTreat').fadeTo('slow', 0.2);
-         }
-         else{
-               $j("span.treatement").find("input").attr("disabled", false);
-               $j("span.treatement").find("select").attr("disabled", false);
-		  $j('#Amoxicilina').fadeTo('slow', 1);
-		  $j('#Hierro').fadeTo('slow', 1);
-		  $j('#Acitaminofen').fadeTo('slow', 1);
-		  $j('#OtroTreat').fadeTo('slow', 1);
-         }
-
-	}); 
-   });
-}
-</script> 
+	if(jQuery){
+		$j(function() {
+			var checkedNoTreat = getField('notreat.value').attr("checked");
+			if (checkedNoTreat == true) {
+				$j("span.treatement").find("input").attr("disabled", true);
+				$j("span.treatement").find("select").attr("disabled", true);
+				$j('#Amoxicilina').fadeTo('slow', 0.2);
+				$j('#Hierro').fadeTo('slow', 0.2);
+				$j('#Acitaminofen').fadeTo('slow', 0.2);
+				$j('#OtroTreat').fadeTo('slow', 0.2);
+			}   
+		});
+	}
+</script>
 
 <!-- Calculo IMC -->
 
 <script type="text/javascript">
-
 if(jQuery){
- $j(function() {
-getField('talla.value').change(function() {
-           var imcReal = (parseInt(getValue('peso.value'))/2.2046) / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
+	$j(function() {
+		getField('talla.value').change(function() {
+			var imcReal = (parseInt(getValue('peso.value'))/2.2046) / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
            
-       if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
-            setValue('imc.value', '0');
-       }
-       else{
-            var imcEntero= parseInt(imcReal);
-            setValue('imc.value', imcEntero);
-        }
-   });
-   getField('peso.value').change(function() {
-            var imcReal = (parseInt(getValue('peso.value'))/2.2046)  / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
+			if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
+				setValue('imc.value', '0');
+			}
+			else{
+				var imcEntero= parseInt(imcReal);
+				setValue('imc.value', imcEntero);
+			}
+		});
+		
+		getField('peso.value').change(function() {
+			var imcReal = (parseInt(getValue('peso.value'))/2.2046)  / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
            
-       if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
-            setValue('imc.value', '0');
-       }
-       else{
-            var imcEntero= parseInt(imcReal);
-            setValue('imc.value', imcEntero);
-       }
-   });
- });
+			if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
+				setValue('imc.value', '0');
+			}
+			else{
+				var imcEntero= parseInt(imcReal);
+				setValue('imc.value', imcEntero);
+			}
+		});
+	});
 }
 </script>
 
-<script  type="text/javascript">
+<!--Codigo que se encarga de deshabilitar todo el contenido dependiendo del trimestre que seleccionamos. -->
 
+<script  type="text/javascript">
 if(jQuery){
    $j(function() {
 
@@ -419,79 +162,17 @@ if(jQuery){
 
      if (checkedTrimestre1 == true) {
 
-          $j('#RestoTrimestre').fadeTo('slow', 0.5);
+          $j('#RestoTrimestre').fadeTo('slow', 0.2);
           $j("span.obsToDisable2").find("input").attr("disabled", true);
       }
      else  if(checkedTrimestre2 == true || checkedTrimestre3 == true){
 
           $j("span.obsToDisable1").find("input").attr("disabled", true);
-          $j('#PrimerTrimestre').fadeTo('slow', 0.5);
+          $j('#PrimerTrimestre').fadeTo('slow', 0.2);
          
       }
-
-      getField('Trimestre1.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable2").find("input").attr("disabled", true);
-               $j("span.obsToDisable1").find("input").attr("disabled", false);
-               setValue('Trimestre2.value', false);
-               setValue('Trimestre3.value', false);
-               $j('#PrimerTrimestre').fadeTo('slow', 1);
-               setValue('DBP.value', '0' );
-               setValue('CC.value', '0' );
-               setValue('CA.value', '0' );
-               setValue('LF.value', '0' );
-               $j('#RestoTrimestre').fadeTo('slow', 0.5);
-         }
-         else{
-         $j('#PrimerTrimestre').fadeTo('slow', 0.5);
-         setValue('CRL.value', '0' );
-         $j("span.obsToDisable1").find("input").attr("disabled", true);
-         }
-     });
-     getField('Trimestre2.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable1").find("input").attr("disabled", true);
-               $j("span.obsToDisable2").find("input").attr("disabled", false);
-               setValue('Trimestre1.value', false);
-               setValue('Trimestre3.value', false);
-               setValue('CRL.value', '0' );
-               $j('#RestoTrimestre').fadeTo('slow', 1);
-               $j('#PrimerTrimestre').fadeTo('slow', 0.5);
-         }
-         else{
-         $j('#RestoTrimestre').fadeTo('slow', 0.5);
-         setValue('DBP.value', '0' );
-         setValue('CC.value', '0' );
-         setValue('CA.value', '0' );
-         setValue('LF.value', '0' );
-         $j("span.obsToDisable2").find("input").attr("disabled", true);
-         }
-     });
-     getField('Trimestre3.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               setValue('Trimestre1.value', false);
-               setValue('Trimestre2.value', false);
-               $j("span.obsToDisable1").find("input").attr("disabled", true);
-               $j("span.obsToDisable2").find("input").attr("disabled", false);
-               $j('#RestoTrimestre').fadeTo('slow', 1);
-               $j('#PrimerTrimestre').fadeTo('slow', 0.5);
-               setValue('CRL.value', '0' );
-         }
-         else{
-                $j('#RestoTrimestre').fadeTo('slow', 0.5);
-                setValue('DBP.value', '0' );
-                setValue('CC.value', '0' );
-                setValue('CA.value', '0' );
-                setValue('LF.value', '0' );
-                $j("span.obsToDisable2").find("input").attr("disabled", true);
-         }
-     });
   });
 }
-
 </script>
 
 <!--Codigo que se encarga de deshabilitar la subida de fotos si es un solo feto. -->
@@ -542,533 +223,824 @@ if(jQuery){
 			$j('#FotoFeto2').fadeTo('slow', 0.2);
 			$j('#FotoFeto3').fadeTo('slow', 0.2);
 		}
-		
-		getField('Feto1.value').change(function() {
-			var checked = $j(this).attr("checked");
-			if(checked == true){
-				setValue('Feto2.value', false);
-				setValue('Feto3.value', false);
-				$j("span.obsToDisableFoto").find("input").attr("disabled", true);
-				$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
-				$j("span.obsToDisableFoto").find("select").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-				$j('#FotoFeto2').fadeTo('slow', 0.2);
-				$j('#FotoFeto3').fadeTo('slow', 0.2);
+	});
+}
+</script>
+
+<!--Codigo que se encarga de hacer check en anemia si la hemoglobina es menos que 11  -->
+<script type="text/javascript">
+if(jQuery){
+	$j(function() {
+    
+		getField('hemoglobina.value').change(function() {
+			var hemoglobina = parseInt(getValue('hemoglobina.value'));
+			if (parseInt(hemoglobina) &lt; 11){
+				setValue('anemia.value', true);
+			}
+			else {
+				setValue('anemia.value', false);	
+			}	
+		});
+	});
+}
+</script>
+
+<!--Marcar el diagnostico de sospecha de preeclamsia si los niveles de tension arterial sistolica son >= de 140 o la distolica >=90.  -->
+<script type="text/javascript">
+if(jQuery){
+	$j(function() {
+
+		getField('sistolica.value').change(function() {
+			var sistolica = parseInt(getValue('sistolica.value'));
+			var diastolica = parseInt(getValue('diastolica.value'));
+			if ((parseInt(sistolica) &gt; 140) || (parseInt(sistolica) == 140) || (parseInt(diastolica) &gt; 90) || (parseInt(diastolica) == 90)){
+				setValue('preeclampsia.value', true);
+			}
+			else {
+				setValue('preeclampsia.value', false);	
 			}
 		});
 		
-		getField('Feto2.value').change(function() {
-			var checked = $j(this).attr("checked");
-			if(checked == true){
-				setValue('Feto1.value', false);
-				setValue('Feto3.value', false);
-				$j("span.obsToDisableFoto").find("input").attr("disabled", false);
-				$j("span.obsToDisableFoto").find("textarea").attr("disabled", false);
-				$j("span.obsToDisableFoto").find("select").attr("disabled", false);
-				$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-				$j('#FotoFeto2').fadeTo('slow', 1);
-				$j('#FotoFeto3').fadeTo('slow', 0.2);
+		getField('diastolica.value').change(function() {
+			var sistolica = parseInt(getValue('sistolica.value'));
+			var diastolica = parseInt(getValue('diastolica.value'));
+			if ((parseInt(sistolica) &gt; 140) || (parseInt(sistolica) == 140) || (parseInt(diastolica) &gt; 90) || (parseInt(diastolica) == 90)){
+				setValue('preeclampsia.value', true);
 			}
-			else{
-				$j("span.obsToDisableFoto").find("input").attr("disabled", true);
-				$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
-				$j("span.obsToDisableFoto").find("select").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-				$j('#FotoFeto2').fadeTo('slow', 0.2);
-				$j('#FotoFeto3').fadeTo('slow', 0.2);
-			}
-		});
-		
-		getField('Feto3.value').change(function() {
-			var checked = $j(this).attr("checked");
-			if(checked == true){
-				setValue('Feto1.value', false);
-				setValue('Feto2.value', false);
-				$j("span.obsToDisableFoto").find("input").attr("disabled", false);
-				$j("span.obsToDisableFoto").find("textarea").attr("disabled", false);
-				$j("span.obsToDisableFoto").find("select").attr("disabled", false);
-				$j("span.obsToDisableFoto2").find("input").attr("disabled", false);
-				$j("span.obsToDisableFoto2").find("textarea").attr("disabled", false);
-				$j("span.obsToDisableFoto2").find("select").attr("disabled", false);
-				$j('#FotoFeto2').fadeTo('slow', 1);
-				$j('#FotoFeto3').fadeTo('slow', 1);
-			}
-			else{
-				$j("span.obsToDisableFoto").find("input").attr("disabled", true);
-				$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
-				$j("span.obsToDisableFoto").find("select").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-				$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-				$j('#FotoFeto2').fadeTo('slow', 0.2);
-				$j('#FotoFeto3').fadeTo('slow', 0.2);
+			else {
+				setValue('preeclampsia.value', false);	
 			}
 		});
 	});
 }
 </script>
-<!--Codigo que se encarga de hacer check en anemia si la hemoglobina es menos que 11  -->
+
+<!--Habilitar el cuadro de texto solamente si preeclampsia esta seleccionado  -->
 <script type="text/javascript">
 if(jQuery){
- $j(function() {
-
-   getField('hemoglobina.value').change(function() {
-       var hemoglobina = parseInt(getValue('hemoglobina.value'));
-	if (parseInt(hemoglobina) &lt; 11){
-		setValue('anemia.value', true);
-	}
-	else {
-		setValue('anemia.value', false);	
-   }
-   });
- });
-}
-</script>
-
-<!--Marcar el diagnóstico de sospecha de preeclamsia si los niveles de tensión arterial sistólica son >= de 140 o la distólica >=90.  -->
-<script type="text/javascript">
-if(jQuery){
- $j(function() {
-
-   getField('sistolica.value').change(function() {
-       var sistolica = parseInt(getValue('sistolica.value'));
-       var diastolica = parseInt(getValue('diastolica.value'));
-	if ((parseInt(sistolica) &gt; 140) || (parseInt(sistolica) == 140) || (parseInt(diastolica) &gt; 90) || (parseInt(diastolica) == 90)){
-		setValue('preeclampsia.value', true);
-	}
-	else {
-		setValue('preeclampsia.value', false);	
-       }
-   });
-   getField('diastolica.value').change(function() {
-       var sistolica = parseInt(getValue('sistolica.value'));
-       var diastolica = parseInt(getValue('diastolica.value'));
-	if ((parseInt(sistolica) &gt; 140) || (parseInt(sistolica) == 140) || (parseInt(diastolica) &gt; 90) || (parseInt(diastolica) == 90)){
-		setValue('preeclampsia.value', true);
-	}
-	else {
-		setValue('preeclampsia.value', false);	
-   }
-   });
- });
+	$j(function() {
+		var preeclampsia= getField('preeclampsia.value').attr("checked");
+		if (preeclampsia == true) {
+			$j("span.comentariopreeclampsia").find("textarea").attr("disabled", false);
+		}
+		else {
+			$j("span.comentariopreeclampsia").find("textarea").attr("disabled", true);
+		}
+	});
+	
 }
 </script>
 
 <!--Codigo que se encarga de deshabilitar los campos de diagnostico si no hay ninguno. -->
-
 <script  type="text/javascript">
-
 if(jQuery){
-   $j(function() {
-          var checkedDiagnostico= getField('DiagNorm.value').attr("checked");
-
-              if (checkedDiagnostico == true) {
-                  $j("span.obsToDisable4").find("input").attr("disabled", true);
-                  $j("span.obsToDisable4").find("textarea").attr("disabled", true);
-                  $j('#Diagnostico').fadeTo('slow', 0.5); 
-              }
-          
-      getField('DiagNorm.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable4").find("input").attr("disabled", true);
-               $j("span.obsToDisable4").find("textarea").attr("disabled", true);
-               $j("span.obsToDisable4").find("input").attr("checked", false);
-               $j('#Diagnostico').fadeTo('slow', 0.5);
-         }
-         else{
-           $j("span.obsToDisable4").find("input").attr("disabled", false);
-           $j("span.obsToDisable4").find("textarea").attr("disabled", false);
-           $j("span.obsToDisable4").find("input").attr("checked", false);
-           $j('#Diagnostico').fadeTo('slow', 1);
-         }
-     });
-  });
+	$j(function() {
+		var checkedDiagnostico= getField('DiagNorm.value').attr("checked");
+		if (checkedDiagnostico == true) {
+			$j("span.obsToDisable4").find("input").attr("disabled", true);
+			$j("span.obsToDisable4").find("textarea").attr("disabled", true);
+			$j('#Diagnostico').fadeTo('slow', 0.2); 
+		}
+	});
 }
-
 </script>
 
+<!--Codigo que se encarga de deshabilitar los campos de traslado si no ha habido un traslado urgente. -->
+
 <script  type="text/javascript">
-
 if(jQuery){
-   $j(function() {
+	$j(function() {
 
-         var checkedTraslado= getField('NoTrasladoUrg.value').attr("checked");
+		var checkedTraslado= getField('NoTrasladoUrg.value').attr("checked");
 
-              if (checkedTraslado == true) {
-                  $j("span.obsToDisable6").find("input").attr("disabled", true);
-                  $j('#TrasladoUrg').fadeTo('slow', 0.5); 
-              }
-      getField('NoTrasladoUrg.value').change(function() {
-            var checked = $j(this).attr("checked");
-         if(checked == true){
-               $j("span.obsToDisable6").find("input").attr("disabled", true);
-               $j("span.obsToDisable6").find("input").attr("checked", false);
-               $j('#TrasladoUrg').fadeTo('slow', 0.5); 
-
-         }
-         else{
-               $j("span.obsToDisable6").find("input").attr("disabled", false);
-               $j("span.obsToDisable6").find("input").attr("checked", false);
-               $j('#TrasladoUrg').fadeTo('slow', 1); 
+		if (checkedTraslado == true) {
+			$j("span.obsToDisable6").find("input").attr("disabled", true);
+			$j('#TrasladoUrg').fadeTo('slow', 0.2); 
+			setValue('CS.value', false);
+			setValue('HD.value', false);
+			setValue('HR.value', false);
+			setValue('HN.value', false);
+		}    
+	});
 }
-     });
-  });
-}
-
 </script>
 
-
-<!-- Autogenerated example form  (template from 01-Nov-2010 -->
-  <macros>
-    paperFormId = (Fill this in)
-    headerColor =#009d8e
-    fontOnHeaderColor = white
-  </macros>
-
-  <style>
-    .section {
-      border: 1px solid $headerColor;
-      padding: 2px;
-      text-align: left;
-      margin-bottom: 1em;
-    }
-    .sectionHeader {
-      background-color: $headerColor;
-      color: $fontOnHeaderColor;
-      display: block;
-      padding: 2px;
-      font-weight: bold;
-    }
-    table.baseline-aligned td {
-      vertical-align: baseline;
-    }
-    .hidden {
-      visibility: hidden;
-    }
-  </style>
-
- <includeIf velocityTest="$user.getAllRoles().toString().contains('Provider')">
-      <script type="text/javascript">
-         if(jQuery){
+	<!-- Excluye todos los checkbox listeners para los especialistas -->
+<excludeIf velocityTest="$user.getAllRoles().toString().contains('Especialista')">
+	<script type="text/javascript">
+		if(jQuery){
             $j(function() {
-               $j("span.obsToDisableAll").find("textarea").attr("readonly", true);
-               $j("span.obsToDisableAll").find("input[type=text]").attr("readonly", true);
-               $j("span.obsToDisableAll").find("input[type=checkbox]").click(function(){return false;});
-               $j("span.obsToDisableAll").find("input[type=radio]").click(function(){return false;});
-               $j("span.obsToDisableAll").find("input.hasDatepicker").attr("disabled", true);
-               $j("span.obsToDisableAll").find("select option").not(":selected").remove();
-               $j("fieldset.obsToDisableAll").find("input").click(function(){return false;});
-            });
-         }
-       </script>
-  </includeIf>
+								
+				<!-- Relativo a cantidad de fetos -->
+				getField('Feto1.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('Feto2.value', false);
+						setValue('Feto3.value', false);
+						$j("span.obsToDisableFoto").find("input").attr("disabled", true);
+						$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
+						$j("span.obsToDisableFoto").find("select").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
+						$j('#FotoFeto2').fadeTo('slow', 0.2);
+						$j('#FotoFeto3').fadeTo('slow', 0.2);
+					}
+				});
+				
+				getField('Feto2.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('Feto1.value', false);
+						setValue('Feto3.value', false);
+						$j("span.obsToDisableFoto").find("input").attr("disabled", false);
+						$j("span.obsToDisableFoto").find("textarea").attr("disabled", false);
+						$j("span.obsToDisableFoto").find("select").attr("disabled", false);
+						$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
+						$j('#FotoFeto2').fadeTo('slow', 1);
+						$j('#FotoFeto3').fadeTo('slow', 0.2);
+					}
+					else{
+						$j("span.obsToDisableFoto").find("input").attr("disabled", true);
+						$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
+						$j("span.obsToDisableFoto").find("select").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
+						$j('#FotoFeto2').fadeTo('slow', 0.2);
+						$j('#FotoFeto3').fadeTo('slow', 0.2);
+					}
+				});
+				
+				getField('Feto3.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('Feto1.value', false);
+						setValue('Feto2.value', false);
+						$j("span.obsToDisableFoto").find("input").attr("disabled", false);
+						$j("span.obsToDisableFoto").find("textarea").attr("disabled", false);
+						$j("span.obsToDisableFoto").find("select").attr("disabled", false);
+						$j("span.obsToDisableFoto2").find("input").attr("disabled", false);
+						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", false);
+						$j("span.obsToDisableFoto2").find("select").attr("disabled", false);
+						$j('#FotoFeto2').fadeTo('slow', 1);
+						$j('#FotoFeto3').fadeTo('slow', 1);
+					}
+						else{
+						$j("span.obsToDisableFoto").find("input").attr("disabled", true);
+						$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
+						$j("span.obsToDisableFoto").find("select").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
+						$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
+						$j('#FotoFeto2').fadeTo('slow', 0.2);
+						$j('#FotoFeto3').fadeTo('slow', 0.2);
+					}
+				});
+				
+				<!-- Relativo a trimestre de biometria fetal -->
+				getField('Trimestre1.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						$j("span.obsToDisable2").find("input").attr("disabled", true);
+						$j("span.obsToDisable1").find("input").attr("disabled", false);
+						setValue('Trimestre2.value', false);
+						setValue('Trimestre3.value', false);
+						$j('#PrimerTrimestre').fadeTo('slow', 1);
+						setValue('DBP.value', '0' );
+						setValue('CC.value', '0' );
+						setValue('CA.value', '0' );
+						setValue('LF.value', '0' );
+						$j('#RestoTrimestre').fadeTo('slow', 0.2);
+					}
+					else{
+						$j('#PrimerTrimestre').fadeTo('slow', 0.2);
+						setValue('CRL.value', '0' );
+						$j("span.obsToDisable1").find("input").attr("disabled", true);
+					}
+				});
+
+				getField('Trimestre2.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						$j("span.obsToDisable1").find("input").attr("disabled", true);
+						$j("span.obsToDisable2").find("input").attr("disabled", false);
+						setValue('Trimestre1.value', false);
+						setValue('Trimestre3.value', false);
+						setValue('CRL.value', '0' );
+						$j('#RestoTrimestre').fadeTo('slow', 1);
+						$j('#PrimerTrimestre').fadeTo('slow', 0.2);
+					}
+					else{
+						$j('#RestoTrimestre').fadeTo('slow', 0.2);
+						setValue('DBP.value', '0' );
+						setValue('CC.value', '0' );
+						setValue('CA.value', '0' );
+						setValue('LF.value', '0' );
+						$j("span.obsToDisable2").find("input").attr("disabled", true);
+					}
+				});
+
+				getField('Trimestre3.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('Trimestre1.value', false);
+						setValue('Trimestre2.value', false);
+						$j("span.obsToDisable1").find("input").attr("disabled", true);
+						$j("span.obsToDisable2").find("input").attr("disabled", false);
+						$j('#RestoTrimestre').fadeTo('slow', 1);
+						$j('#PrimerTrimestre').fadeTo('slow', 0.2);
+						setValue('CRL.value', '0' );
+					}
+					else{
+						$j('#RestoTrimestre').fadeTo('slow', 0.2);
+						setValue('DBP.value', '0' );
+						setValue('CC.value', '0' );
+						setValue('CA.value', '0' );
+						setValue('LF.value', '0' );
+						$j("span.obsToDisable2").find("input").attr("disabled", true);
+					}
+				});
+				
+				<!-- Relativo a muestra de orina -->
+				getField('OrinaNo.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						$j("span.obsToDisable3").find("input").attr("disabled", true);
+						$j("span.obsToDisable3").find("select").attr("disabled", true);
+						setValue('OrinaNeg.value', false);
+						$j('#orina').fadeTo('slow', 0.2);
+					}
+					else{
+						$j('#orina').fadeTo('slow', 1);
+						$j("span.obsToDisable3").find("input").attr("disabled", false);  
+						$j("span.obsToDisable3").find("select").attr("disabled", false);
+					}      
+				});
+			 
+				getField('OrinaNeg.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						$j("span.obsToDisable3").find("input").attr("disabled", true);
+						$j("span.obsToDisable3").find("select").attr("disabled", true);
+						setValue('OrinaNo.value', false);
+						$j('#orina').fadeTo('slow', 0.2);
+					}
+					else{
+						$j('#orina').fadeTo('slow', 1);
+						$j("span.obsToDisable3").find("input").attr("disabled", false);  
+						$j("span.obsToDisable3").find("select").attr("disabled", false);
+					}
+				});
+				
+				<!-- Relativo a impresion clinica -->
+				getField('DiagNorm.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						$j("span.obsToDisable4").find("input").attr("disabled", true);
+						$j("span.obsToDisable4").find("textarea").attr("disabled", true);
+						$j("span.obsToDisable4").find("input").attr("checked", false);
+						$j('#Diagnostico').fadeTo('slow', 0.2);
+					}
+					else{
+						$j("span.obsToDisable4").find("input").attr("disabled", false);
+						$j("span.obsToDisable4").find("textarea").attr("disabled", false);
+						$j("span.obsToDisable4").find("input").attr("checked", false);
+						$j('#Diagnostico').fadeTo('slow', 1);
+					}
+				});
+				
+				<!-- Relativo a preeclampsia-->
+				getField('preeclampsia.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						$j("span.comentariopreeclampsia").find("textarea").attr("disabled", false);
+					}
+					else {
+						$j("span.comentariopreeclampsia").find("textarea").attr("disabled", true);
+					}
+				});
+				
+				<!-- Relativo a tratamiento -->
+				getField('notreat.value').change(function() {
+					var checkedNoTreat = getField('notreat.value').attr("checked");
+					if(checkedNoTreat == true){
+						$j("span.treatement").find("input").attr("disabled", true);
+						$j("span.treatement").find("select").attr("disabled", true);	
+						setValue('Amoxicilina.value', false);
+						setValue('Hierro.value', false);
+						setValue('Acitaminofen.value', false);
+						setValue('OtroTreat.value', false);
+						$j('#Amoxicilina').fadeTo('slow', 0.2);
+						$j('#Hierro').fadeTo('slow', 0.2);
+						$j('#Acitaminofen').fadeTo('slow', 0.2);
+						$j('#OtroTreat').fadeTo('slow', 0.2);
+					}
+					else{
+						$j("span.treatement").find("input").attr("disabled", false);
+						$j("span.treatement").find("select").attr("disabled", false);
+						$j('#Amoxicilina').fadeTo('slow', 1);
+						$j('#Hierro').fadeTo('slow', 1);
+						$j('#Acitaminofen').fadeTo('slow', 1);
+						$j('#OtroTreat').fadeTo('slow', 1);
+					}
+				}); 
+				
+				<!-- Relativo a transferencia -->
+				getField('NoReferencia.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						$j("span.obsToDisable5").find("input").attr("disabled", true);
+						$j("span.obsToDisable5").find("input").attr("checked", false);
+						$j('#Referencia').fadeTo('slow', 0.2); 
+						setValue('CentroSalud.value', false);
+						setValue('HospDistrit.value', false);
+						setValue('HospReg.value', false);
+						setValue('HospNacion.value', false);
+					}
+					else{
+						$j("span.obsToDisable5").find("input").attr("disabled", false);
+						$j("span.obsToDisable5").find("input").attr("checked", false);
+						$j('#Referencia').fadeTo('slow', 1); 
+					}	
+				});
+
+				getField('CentroSalud.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('NoTrasladoUrg.value', true);
+						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input").attr("checked", false);
+						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
+						setValue('CS.value', false);
+						setValue('HD.value', false);
+						setValue('HR.value', false);
+						setValue('HN.value', false);
+					}
+				  
+				});
+			
+				getField('HospDistrit.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('NoTrasladoUrg.value', true);
+						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input").attr("checked", false);
+						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
+						setValue('CS.value', false);
+						setValue('HD.value', false);
+						setValue('HR.value', false);
+						setValue('HN.value', false);
+					}
+				});
+			
+				getField('HospReg.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('NoTrasladoUrg.value', true);
+						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input").attr("checked", false);
+						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
+						setValue('CS.value', false);
+						setValue('HD.value', false);
+						setValue('HR.value', false);
+						setValue('HN.value', false);
+					}
+				});
+			
+				getField('HospNacion.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('NoTrasladoUrg.value', true);
+						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input").attr("checked", false);
+						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
+						 setValue('CS.value', false);
+						 setValue('HD.value', false);
+						 setValue('HR.value', false);
+						 setValue('HN.value', false);
+					}
+				});
+				
+				<!-- Relativo a translado urgente -->
+				getField('NoTrasladoUrg.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input").attr("checked", false);
+						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
+						setValue('CS.value', false);
+						setValue('HD.value', false);
+						setValue('HR.value', false);
+						setValue('HN.value', false);
+					}
+					else{
+						$j("span.obsToDisable6").find("input").attr("disabled", false);
+						$j("span.obsToDisable6").find("input").attr("checked", false);
+						$j('#TrasladoUrg').fadeTo('slow', 1); 
+					}
+				});
+				getField('CS.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+						setValue('NoReferencia.value', true);
+						$j("span.obsToDisable5").find("input").attr("disabled", true);
+						$j("span.obsToDisable5").find("input").attr("checked", false);
+						$j('#Referencia').fadeTo('slow', 0.2); 
+						setValue('CentroSalud.value', false);
+						setValue('HospDistrit.value', false);
+						setValue('HospReg.value', false);
+						setValue('HospNacion.value', false);
+					}
+				});
+
+				getField('HD.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+					setValue('NoReferencia.value', true);
+					$j("span.obsToDisable5").find("input").attr("disabled", true);
+					$j("span.obsToDisable5").find("input").attr("checked", false);
+					$j('#Referencia').fadeTo('slow', 0.2); 
+					setValue('CentroSalud.value', false);
+					setValue('HospDistrit.value', false);
+					setValue('HospReg.value', false);
+					setValue('HospNacion.value', false);}
+				});
+				
+				getField('HR.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+					setValue('NoReferencia.value', true);
+					$j("span.obsToDisable5").find("input").attr("disabled", true);
+					$j("span.obsToDisable5").find("input").attr("checked", false);
+					$j('#Referencia').fadeTo('slow', 0.2); 
+					setValue('CentroSalud.value', false);
+					setValue('HospDistrit.value', false);
+					setValue('HospReg.value', false);
+					setValue('HospNacion.value', false);}
+				});
+				
+				getField('HN.value').change(function() {
+					var checked = $j(this).attr("checked");
+					if(checked == true){
+					setValue('NoReferencia.value', true);
+					$j("span.obsToDisable5").find("input").attr("disabled", true);
+					$j("span.obsToDisable5").find("input").attr("checked", false);
+					$j('#Referencia').fadeTo('slow', 0.2); 
+					setValue('CentroSalud.value', false);
+					setValue('HospDistrit.value', false);
+					setValue('HospReg.value', false);
+					setValue('HospNacion.value', false);}
+				});				
+			});
+		}
+	</script>	
+</excludeIf>
+
+<!--Codigo que se encarga de deshabilitar todo el contenido al que no puede acceder el proveedor. -->
+
+<includeIf velocityTest="$user.getAllRoles().toString().contains('Provider')">
+	<script type="text/javascript">
+	if(jQuery){
+		$j(function() {
+			$j("span.obsToDisableAll").find("textarea").attr("readonly", true);
+			$j("span.obsToDisableAll").find("input[type=text]").attr("readonly", true);
+			$j("span.obsToDisableAll").find("input[type=checkbox]").click(function(){return false;});
+			$j("span.obsToDisableAll").find("input[type=radio]").click(function(){return false;});
+			$j("span.obsToDisableAll").find("input.hasDatepicker").attr("disabled", true);
+			$j("span.obsToDisableAll").find("select option").not(":selected").remove();
+			$j("fieldset.obsToDisableAll").find("input").click(function(){return false;});
+		});
+	}
+</script>
+</includeIf>
+
+<!--Codigo que se encarga de deshabilitar todo el contenido al que no puede acceder el especialista. -->
 
 <includeIf velocityTest="$user.getAllRoles().toString().contains('Especialista')">
-      <script type="text/javascript">
-         if(jQuery){
-            $j(function() {
-               $j("span.obsToDisableEsp").find("textarea").attr("readonly", true);
-               $j("span.obsToDisableEsp").find("input[type=text]").attr("readonly", true);
-               $j("span.obsToDisableEsp").find("input[type=checkbox]").click(function(){return false;});
-               $j("span.obsToDisableEsp").find("input[type=radio]").click(function(){return false;});
-               $j("span.obsToDisableEsp").find("input.hasDatepicker").attr("disabled", true);
-               $j("span.obsToDisableEsp").find("select option").not(":selected").remove();
-               $j("fieldset.obsToDisableEsp").find("input").click(function(){return false;});
-            });
-         }
-       </script>
-  </includeIf>
+	<script type="text/javascript">
+	if(jQuery){
+		$j(function() {
+			$j("span.obsToDisableEsp").find("textarea").attr("readonly", true);
+			$j("span.obsToDisableEsp").find("input[type=text]").attr("readonly", true);
+			$j("span.obsToDisableEsp").find("input[type=checkbox]").click(function(){return false;});
+			$j("span.obsToDisableEsp").find("input[type=radio]").click(function(){return false;});
+			$j("span.obsToDisableEsp").find("input.hasDatepicker").attr("disabled", true);
+			$j("span.obsToDisableEsp").find("select option").not(":selected").remove();
+			$j("fieldset.obsToDisableEsp").find("input").click(function(){return false;});
+		});
+	}
+	</script>
+</includeIf>
+  
+<!-- Autogenerated example form  (template from 01-Nov-2010 -->
+<macros>
+	paperFormId = (Fill this in)
+	headerColor =#009d8e
+	fontOnHeaderColor = white
+</macros>
 
-  <span style="float:right">Paper Form ID: $paperFormId</span>
-  <h2>SEGUIMIENTO</h2>
-        <h4><obs conceptId="208" labelText="Estado de la Revision" id="Rev" style="dropdown" defaultValue="206"/></h4>
-        <obs conceptId="205" style="checkbox" class="hidden" id="RellConf"/>
-        <obs conceptId="206" style="checkbox" class="hidden" id="RellRevi"/>
-        <obs conceptId="207" style="checkbox" class="hidden" id="RellReviUrg"/>
+<style>
+	.section {
+		border: 1px solid $headerColor;
+		padding: 2px;
+		text-align: left;
+		margin-bottom: 1em;
+	}
+	.sectionHeader {
+		background-color: $headerColor;
+		color: $fontOnHeaderColor;
+		display: block;
+		padding: 2px;
+		font-weight: bold;
+	}
+	table.baseline-aligned td {
+		vertical-align: baseline;
+	}
+			.hidden {
+					visibility: hidden;
+			}
+</style>
 
-
+<span style="float:right">Paper Form ID: $paperFormId</span>
+<h2>SEGUIMIENTO</h2>
+	<h4><obs conceptId="208" labelText="Estado de la Revision" id="Rev" style="dropdown" defaultValue="206"/></h4>
+	<obs conceptId="205" style="checkbox" class="hidden" id="RellConf"/>
+	<obs conceptId="206" style="checkbox" class="hidden" id="RellRevi" />
+	<obs conceptId="207" style="checkbox" class="hidden" id="RellReviUrg"/>
         
-        <section headerLabel="1. Detalles Encuentro">
-    <table class="baseline-aligned">
-      <tr>
-        <td>Dia:</td>
-        <td><encounterDate default="today"/></td>
-	<td>Codigo de Cribado: </td>
-        <td><lookup class="value" expression="personAttributes.get('cribado')"/></td>
-       <!-- <td> <obs conceptId="186" class="obsToDisableEsp"/></td> -->
-</tr>
-<tr>	
-	<td class ="hidden"><encounterProvider default="currentUser"/></td>
-	<ifMode mode="ENTER">
-		<td ><lookup complexExpression="#set( $location = $patient.patientIdentifier.location ) 
-			&lt;script type=&quot;text/javascript&quot;>
-			$j(function () {
-			  setValue('encounterloc.value','$location');
-			});
-			&lt;/script>"/>
-		</td>
-	</ifMode>
-<td class="hidden" ><encounterLocation  id="encounterloc" /></td>
-
-<td>Departamento:</td>
-<td><lookup class="value" expression="patient.addresses.first().stateProvince"/></td>
-
-<td>Municipio:</td>
-<td><lookup class="value" expression="patient.addresses.first().cityVillage"/></td>
-
-<td>Distrito:</td>
-<td><lookup class="value" expression="patient.addresses.first().countyDistrict"/></td>
-
-<td>Jurisdicción:</td>
-<td><lookup class="value" expression="patient.addresses.first().address1"/></td>
-
-<td>Comunidad:</td>
-<td><lookup class="value" expression="patient.addresses.first().address2"/></td>
-      </tr>
- 
-    </table>
-  </section>
-
-  <section headerLabel="2. Datos Basicos Paciente">
-    <table class="baseline-aligned">
-                 <tr>  
-                        <td>      <obs conceptId="217" id="sistolica" labelText="Presion arterial sistolica:" class="obsToDisableEsp"/>
-                       </td>    
-                 </tr>
-                 <tr>  
-                      <td>      <obs conceptId="218" id="diastolica" labelText="Presion arterial diastolica:" class="obsToDisableEsp"/>
-                      </td>
-                 </tr>
-                 <tr>  <td> <br></br> </td></tr>
-                 <tr>
-                     <td> Peso:<obs conceptId="41" id="peso" class="obsToDisableEsp"/>Libras</td>
-                 </tr>
-                 <!-- Code that looks for 'talla' in last encounter -->
-                 <ifMode mode="ENTER">
-					<lookup complexExpression="#set( $talla = $fn.latestObs('42').valueNumeric) 
-						&lt;script type=&quot;text/javascript&quot;>
-						$j(function () {
-			  				setValue('talla.value',parseInt($talla));
-						});
-					&lt;/script>"/>
+<section headerLabel="1. Detalles Encuentro">
+	<table class="baseline-aligned">
+		<tr>
+			<td>Dia:</td>
+			<td><encounterDate default="today"/></td>
+			<td>Codigo de Cribado: </td>
+			<td><lookup class="value" expression="personAttributes.get('cribado')"/></td>
+			<!-- <td> <obs conceptId="186" class="obsToDisableEsp"/></td> -->
+			<td class ="hidden"><encounterProvider default="currentUser"/></td>
+		</tr>
+	
+		<ifMode mode="ENTER">
+			<td ><lookup complexExpression="#set( $location = $patient.patientIdentifier.location ) 
+				&lt;script type=&quot;text/javascript&quot;>
+				$j(function () {
+				  setValue('encounterloc.value','$location');
+				});
+				&lt;/script>"/>
+			</td>
+		</ifMode>
 		
-				</ifMode>
-                 <tr>
-                     <td> Talla: <obs conceptId="42" id="talla" class="obsToDisableEsp"/>cm</td>
-                 </tr>
-                 <tr>
-                     <td> IMC: <obs conceptId="43" id="imc" class="obsToDisableEsp"/></td>
-                 </tr>
-    </table>
- </section>
- <section headerLabel="3. Ecografia">
-    <table class="baseline-aligned">
-                <tr> <td> <b>Numero de fetos: </b></td> </tr>
+		<td class="hidden" ><encounterLocation  id="encounterloc" /></td>      
+
+		<td>Departamento:</td>
+		<td><lookup class="value" expression="patient.addresses.first().stateProvince"/></td>
+
+		<td>Municipio:</td>
+		<td><lookup class="value" expression="patient.addresses.first().cityVillage"/></td>
+
+		<td>Distrito:</td>
+		<td><lookup class="value" expression="patient.addresses.first().countyDistrict"/></td>
+
+		<td>Jurisdicción:</td>
+		<td><lookup class="value" expression="patient.addresses.first().address1"/></td>
+
+		<td>Comunidad:</td>
+		<td><lookup class="value" expression="patient.addresses.first().address2"/></td>
+
+	</table>
+</section>
+ 
+<section headerLabel="2. Datos Basicos Paciente">
+	<table class="baseline-aligned">
+		<tr>  
+			<td> <obs conceptId="217" id="sistolica" labelText="Presion arterial sistolica:" class="obsToDisableEsp"/>
+			</td>    
+		</tr>
+		<tr>  
+			<td> <obs conceptId="218" id="diastolica" labelText="Presion arterial diastolica:" class="obsToDisableEsp"/>
+			</td>
+		</tr>
+		<tr>  <td> <br></br> </td></tr>
+		<tr>
+			<td> Peso:<obs conceptId="41" id="peso" class="obsToDisableEsp"/>Libras</td>
+		</tr>
+		<ifMode mode="ENTER">
+			<lookup complexExpression="#set( $talla = $fn.latestObs('42').valueNumeric) 
+				&lt;script type=&quot;text/javascript&quot;>
+					$j(function () {
+						setValue('talla.value',parseInt($talla));
+					});
+				&lt;/script>"/>		
+		</ifMode>
+		<tr>
+			<td> Talla: <obs conceptId="42" id="talla" class="obsToDisableEsp"/>cm</td>
+		</tr>
+		<tr>
+			<td> IMC: <obs conceptId="43" id="imc" class="obsToDisableEsp"/></td>
+		</tr>
+	</table>
+</section>
+ 
+<section headerLabel="3. Ecografia">
+	<table class="baseline-aligned">
+		<tr> <td> <b>Numero de fetos: </b></td> </tr>
                 
-                <table id="NumFetos">
+		<table id="NumFetos">
+			<tr>  <td> <obs conceptId="44" labelText="Feto unico" style="checkbox" id="Feto1" class="obsToDisableEsp"/> </td> </tr>
+			<tr> <td> <obs conceptId="45" labelText="Feto gemelar" style="checkbox" id="Feto2" class="obsToDisableEsp"/> </td> </tr>
+			<tr>  <td> <obs conceptId="46" labelText= "Feto triple" style="checkbox" id="Feto3" class="obsToDisableEsp"/> </td> </tr>
+			<tr>  <td><fieldset class="obsToDisableEsp"> <legend> Subir Foto del(los) Feto(s) </legend><obs conceptId="156"  id="FotoFeto1" /> </fieldset></td> </tr>
+					
+		</table>
+		
+		<tr>  
+			<td>      <obs conceptId="50" labelText=" Latido fetal: " answerConceptIds="48,49" answerLabels="Presente, Ausente" class="obsToDisableEsp"/>
+			</td>    
+		</tr>
+		<tr>  
+			<td>      <obs conceptId="55" labelText=" Posicion del feto: " answerConceptIds="51,52,53,54" answerLabels="Presentacion cefalica, Presentacion podalica, Situacion transversa, No aplica" class="obsToDisableEsp"/>
+			</td>    
+		</tr> 
+		<tr>
+			<td> <obs conceptId="166" labelText=" Intrauterino:" answerConceptIds="164,165" answerLabels="Si,No" class="obsToDisableEsp" defaultValue="164" /> 
+			</td> 
+		</tr>
+		<tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
+			  
+		<tr><td> <b>Biometria fetal:</b></td></tr>
+		<tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
+		<tr>  <td> <obs conceptId="157" labelText="Primer trimestre" style="checkbox" id="Trimestre1" class="obsToDisableEsp"/> </td> </tr>
 
-                       <tr>  <td> <obs conceptId="44" labelText="Feto unico" style="checkbox" id="Feto1" class="obsToDisableEsp"/> </td> </tr>
-                        <tr> <td> <obs conceptId="45" labelText="Feto gemelar" style="checkbox" id="Feto2" class="obsToDisableEsp"/> </td> </tr>
-                        <tr>  <td> <obs conceptId="46" labelText= "Feto triple" style="checkbox" id="Feto3" class="obsToDisableEsp"/> </td> </tr>
-						<tr>  <td><fieldset class="obsToDisableEsp"> <legend> Subir Foto del(los) Feto(s) </legend><obs conceptId="156"  id="FotoFeto1" /> </fieldset></td> </tr>
-                        
-                </table>
+		<table id="PrimerTrimestre">
+			<tr> 
+				<td> <obs conceptId="57" labelText="CRL (mm)" style="number" id="CRL" class="obsToDisable1 obsToDisableEsp"/> </td>  
+				<td> <fieldset class="obsToDisableEsp"> <legend> Subir foto CRL </legend><obs conceptId="58"  id="FotoCRL" class="obsToDisable1"/> </fieldset> </td> 
+			</tr>
+		</table>
+		
+		<tr> <td> <br></br> </td></tr>
+		<tr>  <td> <obs conceptId="158" labelText= "Segundo Trimestre" style="checkbox" id="Trimestre2" class="obsToDisableEsp"/> 
+					<obs conceptId="159" labelText= "Tercer Trimestre" style="checkbox" id="Trimestre3" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <br></br> </td></tr>
+			 
+		<table id="RestoTrimestre">
+			<tr>  <td> <obs conceptId="59" labelText="DBP (mm)" style="number" id="DBP" class="obsToDisable2 obsToDisableEsp"/> </td>
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen DBP</legend><obs conceptId="66" id="DBPimag" class="obsToDisable2"/></fieldset> </td> 
+			</tr>
+			<tr>  <td> <obs conceptId="60" labelText="CC (mm)" style="number" id="CC" class="obsToDisable2 obsToDisableEsp"/> </td>
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen CC</legend><obs conceptId="65"  id="CCimag" class="obsToDisable2"/></fieldset> </td> 
+			</tr>
+			<tr>  <td> <obs conceptId="61" labelText="CA (mm)" style="number" id="CA" class="obsToDisable2 obsToDisableEsp"/> </td>
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen CA</legend><obs conceptId="67"  id="CAimag" class="obsToDisable2"/></fieldset> </td> 
+			</tr>
+			<tr>  <td> <obs conceptId="62" labelText="LF (mm)" style="number" id="LF" class="obsToDisable2 obsToDisableEsp"/> </td>
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen LF</legend><obs conceptId="64"  id="LFimag" class="obsToDisable2"/></fieldset></td> 
+			</tr>
+			<tr> <td> <br></br> </td></tr>
+			<tr>  
+				<td> Peso Estimado Feto: </td>
+				<td><obs conceptId="68" id="hadlock" class="obsToDisableEsp"/>lbs</td>
+			</tr>
+			<tr>  
+				<td> Tiempo Estimado de Vida: </td>
+				<td><obs conceptId="192" id="semanasVida" class="obsToDisableEsp"/>semanas</td>
+			</tr>
+		</table>
 
-                <tr>  
-                        <td>      <obs conceptId="50" labelText=" Latido fetal: " answerConceptIds="48,49" answerLabels="Presente, Ausente" class="obsToDisableEsp"/>
-                       </td>    
-                </tr>
-                <tr>  
-                        <td>      <obs conceptId="55" labelText=" Posicion del feto: " answerConceptIds="51,52,53,54" answerLabels="Presentacion cefalica, Presentacion podalica, Situacion transversa, No aplica" class="obsToDisableEsp"/>
-                       </td>    
-                </tr>
-                <tr>
-                      <td> <obs conceptId="166" labelText=" Intrauterino:" answerConceptIds="164,165" answerLabels="Si,No" class="obsToDisableEsp" defaultValue="164" /> 
-                      </td> 
-                </tr>
-                        <tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
-                  
-                        <tr><td> <b>Biometria fetal:</b></td></tr>
-                        <tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
-                        <tr>  <td> <obs conceptId="157" labelText="Primer trimestre" style="checkbox" id="Trimestre1" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <br></br> </td></tr>
 
-                  <table id="PrimerTrimestre">
-                        <tr> 
-							<td> <obs conceptId="57" labelText="CRL (mm)" style="number" id="CRL" class="obsToDisable1 obsToDisableEsp"/> </td>  
-							<td> <fieldset class="obsToDisableEsp"> <legend> Subir foto CRL </legend><obs conceptId="58"  id="FotoCRL" class="obsToDisable1"/> </fieldset> </td> 
-						</tr>
-                  </table>
-                        <tr> <td> <br></br> </td></tr>
-                        <tr>  <td> <obs conceptId="158" labelText= "Segundo Trimestre" style="checkbox" id="Trimestre2" class="obsToDisableEsp"/> 
-                                        <obs conceptId="159" labelText= "Tercer Trimestre" style="checkbox" id="Trimestre3" class="obsToDisableEsp"/> </td> </tr>
-                        <tr> <td> <br></br> </td></tr>
-                 
-                   <table id="RestoTrimestre">
-                        <tr>  <td> <obs conceptId="59" labelText="DBP (mm)" style="number" id="DBP" class="obsToDisable2 obsToDisableEsp"/> </td>
-                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen DBP</legend><obs conceptId="66" id="DBPimag" class="obsToDisable2"/></fieldset> </td> 
-                        </tr>
-                        <tr>  <td> <obs conceptId="60" labelText="CC (mm)" style="number" id="CC" class="obsToDisable2 obsToDisableEsp"/> </td>
-                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen CC</legend><obs conceptId="65"  id="CCimag" class="obsToDisable2"/></fieldset> </td> 
-						</tr>
-                        <tr>  <td> <obs conceptId="61" labelText="CA (mm)" style="number" id="CA" class="obsToDisable2 obsToDisableEsp"/> </td>
-                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen CA</legend><obs conceptId="67"  id="CAimag" class="obsToDisable2"/></fieldset> </td> 
-                        </tr>
-                        <tr>  <td> <obs conceptId="62" labelText="LF (mm)" style="number" id="LF" class="obsToDisable2 obsToDisableEsp"/> </td>
-                              <td> <fieldset class="obsToDisableEsp"> <legend>Imagen LF</legend><obs conceptId="64"  id="LFimag" class="obsToDisable2"/></fieldset></td> 
-                        </tr>
-                        <tr> <td> <br></br> </td></tr>
-                        <tr>  
-							<td> Peso Estimado Feto: </td>
-							<td><obs conceptId="68" id="hadlock" class="obsToDisableEsp"/>lbs</td>
-						</tr>
-                        <tr>  
-							<td> Tiempo Estimado de Vida: </td>
-							<td><obs conceptId="192" id="semanasVida" class="obsToDisableEsp"/>semanas</td>
-						</tr>
-                  </table>
+		<table>
+			<tr>  
+				<td> <obs conceptId="74" labelText="Placenta" answerConceptIds="69,70,71,72,73" answerLabels="Fundica,Anterior, Posterior, Insercion Baja, Sospecha de Previa" class="obsToDisableEsp"/>
+				</td>    
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen Placenta</legend><obs conceptId="75"/></fieldset></td> 
+			</tr>
 
-       
-                 <tr> <td> <br></br> </td></tr>
-
-                 <table>
-					 <tr>
-						<td> <obs conceptId="74" labelText="Placenta" answerConceptIds="69,70,71,72,73" answerLabels="Fundica,Anterior, Posterior, Insercion Baja, Sospecha de Previa" class="obsToDisableEsp"/>
-						</td>    
-					 
-						<td> <fieldset class="obsToDisableEsp"> <legend>Imagen Placenta</legend><obs conceptId="75"/></fieldset></td> 
-					 </tr>
-
-					 <tr>  
-						<td> <obs conceptId="76" labelText="Indice Liquido Amniotico" class="obsToDisableEsp"/></td>  
-						<td> <fieldset class="obsToDisableEsp"> <legend>Imagen medida liquido amniotico</legend><obs conceptId="214"/></fieldset></td>  
-					 </tr>
-                 </table>
-                 <tr> <td> <br></br> </td></tr> 
-                 <tr> <td> <br></br> </td></tr>
-                 <tr>  <td>  Comentarios sobre la ecografia (Sospecha de Patologia): </td> </tr>
-                 <tr> <td> <br></br> </td></tr>
-                 <tr>
-                        <td> <obs conceptId="77" rows="5" cols="50" class="obsToDisableEsp"/>  </td>    
-                 </tr>
-		<tr><br></br>  <td>  Comentarios del especialista sobre las ecografías: </td> </tr>
-             <tr> <br></br> <td> <obs conceptId="220" rows="5" cols="50" class="obsToDisableAll"/>  </td> </tr>     
-                 <tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
-     </table>
-   </section>
-  <section headerLabel="4. Pruebas en Sangre">
-    <table class="baseline-aligned">
+			<tr>  
+				<td> <obs conceptId="76" labelText="Indice Liquido Amniotico" class="obsToDisableEsp"/></td>  
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen medida liquido amniotico</legend><obs conceptId="214"/></fieldset></td>  
+			</tr>
+		</table>
+		
 		<tr> <td> <br></br> </td></tr> 
-              <!--  <tr> <td> <obs conceptId="88" labelText="VHB" answerConceptIds="84,85,87" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/></td>  </tr>         
-                <tr> <td> <obs conceptId="93" labelText="Sifilis" answerConceptIds="89,90,92" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td>  </tr>                 
-                <tr> <td> <obs conceptId="98" labelText="VIH" answerConceptIds="94,95,97" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td> </tr> -->
-                <tr> <td> <obs id="hemoglobina" conceptId="99" labelText="Hemoglobina: " class="obsToDisableEsp"/></td></tr>     
-                <tr> <td> <obs conceptId="100" labelText="Glucosa: " class="obsToDisableEsp"/> </td> </tr>  
-                <tr> <td> <br></br> </td></tr>  
-                <tr><td> Muestra simple de orina:</td></tr>
-                <tr>  <td> <obs conceptId="101" labelText="No se hizo" style="checkbox" id="OrinaNo" class="obsToDisableEsp"/> </td> </tr>
-                <tr> <td> <obs conceptId="102" labelText="Negativo" style="checkbox" id="OrinaNeg" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <br></br> </td></tr>
+		<tr>  <td>  Comentarios sobre la ecografia (Sospecha de Patologia): </td> </tr>
+		<tr> <td> <br></br> </td></tr>
+		<tr>
+			<td> <obs conceptId="77" rows="5" cols="50" class="obsToDisableEsp"/>  </td>    
+		</tr>
+		<tr><br></br>  <td>  Comentarios del especialista sobre las ecografias: </td> </tr>
+		<tr> <br></br> <td> <obs conceptId="220" rows="5" cols="50" class="obsToDisableAll"/>  </td> </tr>     
+		<tr> <td> <br></br> </td></tr><tr> <td> <br></br> </td></tr>
+	</table>
+</section>
 
-      <table id="orina">
+<section headerLabel="4. Pruebas en Sangre">
+	<table class="baseline-aligned">
+		<tr> <td> <obs conceptId="88" labelText="VHB" answerConceptIds="84,85,87" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/></td>  </tr>         
+		<tr> <td> <obs conceptId="93" labelText="Sifilis" answerConceptIds="89,90,92" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td>  </tr>                 
+		<tr> <td> <obs conceptId="98" labelText="VIH" answerConceptIds="94,95,97" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs id="hemoglobina" conceptId="99" labelText="Hemoglobina: " class="obsToDisableEsp"/></td></tr>    
+		<tr> <td> <obs conceptId="100" labelText="Glucosa: " class="obsToDisableEsp"/> </td> </tr>  
+		<tr> <td> <br></br> </td></tr>  
+		<tr><td> Muestra simple de orina:</td></tr>
+		<tr>  <td> <obs conceptId="101" labelText="No se hizo" style="checkbox" id="OrinaNo" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="102" labelText="Negativo" style="checkbox" id="OrinaNeg" class="obsToDisableEsp"/> </td> </tr>
 
-                        <tr>  <td> <obs conceptId="105" labelText="Leucocitos:"  answerConceptIds="104,103,167" answerLabels="*,**,***" id="leucocitos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
-                        <tr>  <td> <obs conceptId="108" labelText="Nitritos:" answerConceptIds="106,107" answerLabels="Positivo,Negativo" id="nitritos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
-                        <tr>  <td> <obs conceptId="113" labelText="Proteinas:" answerConceptIds="109,110,111,112" answerLabels="1+,2+,3+,Negativo" id="proteinas" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>    
-                                             
-    </table>
-               
+		<table id="orina">
+			<tr>  <td> <obs conceptId="105" labelText="Leucocitos:"  answerConceptIds="104,103,167" answerLabels="*,**,***" id="leucocitos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
+			<tr>  <td> <obs conceptId="108" labelText="Nitritos:" answerConceptIds="106,107" answerLabels="Positivo,Negativo" id="nitritos" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>
+			<tr>  <td> <obs conceptId="113" labelText="Proteinas:" answerConceptIds="109,110,111,112" answerLabels="1+,2+,3+,Negativo" id="proteinas" class="obsToDisable3 obsToDisableEsp"/> </td> </tr>                                             
+		</table>    
 
+	</table>
+</section>
+
+<section headerLabel="5. Diagnostico">
+<table class="baseline-aligned">
+	<tr> <td> Impresion Clinica: </td> </tr>
+	<tr> <td> <obs conceptId="184" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
+	<tr> <td> <obs conceptId="115" labelText="Dentro de la normalidad" style="checkbox" id="DiagNorm" class="obsToDisableEsp"/> </td> </tr>
+	
+	<table id="Diagnostico">
+		<tr> <td> <obs conceptId="117" labelText="Cribado reactivo que necesita confirmacion" style="checkbox" id="PostivoConfirm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="116" labelText="Hallazgo ecografico anormal" style="checkbox" id="EcoAnorm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="118" labelText="Infección del Tracto Urinario" style="checkbox" id="ITU" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="216" labelText="Anemia" style="checkbox" id="anemia" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="241" labelText="Diabetes gestacional" style="checkbox" id="diabetesges" class="obsToDisable4 obsToDisableEsp"/> </td></tr>
+		<tr> <td>
+			<obs conceptId="160" labelText="Sospecha de Preeclampsia" style="checkbox" id="preeclampsia" class="obsToDisable4 obsToDisableEsp"/>	  , comentarios sobre el abordaje del caso (traslado, observacion, etc) :
+		<obs conceptId="242" id="comentariopreec" rows="3" cols="40" class="obsToDisableEsp comentariopreeclampsia"/> </td> </tr>
+	</table>
+	
+	<br></br>
+
+	<table class="baseline-aligned">
+		<tr> <td> Tratamiento: </td> </tr>
+		<tr><td> <obs conceptId="122" labelText="Ninguno" style="checkbox" id="notreat" class="obsToDisableEsp"/></td></tr>
+		<tr><td> <obs conceptId="123" labelText="Amoxicilina" style="checkbox" id="Amoxicilina" class="treatement obsToDisableEsp"/></td></tr>
+		<tr><td> <obs conceptId="124" labelText="Sulfato ferroso (hierro)" style="checkbox" id="Hierro" class="treatement obsToDisableEsp"/></td></tr>
+		<tr><td> <obs conceptId="219" labelText="Acetaminofen" style="checkbox" id="Acitaminofen" class="treatement obsToDisableEsp"/></td></tr>
+		<tr><td> <obs conceptId="193" labelText="Otro" style="checkbox" id="OtroTreat" class="treatement obsToDisableEsp"/></td></tr>
+		<br></br>
+		<tr> <td> Comentarios: </td> </tr>
+		<tr> <td> <obs conceptId="120" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
+	</table>
+
+	<tr> <br></br> <td> Comentarios del especialista sobre resultados y diagnostico: </td> </tr>
+	<tr> <br></br> <td> <obs conceptId="221" rows="5" cols="50" class="obsToDisableAll"/> </td> </tr>
 </table>
 </section>
-  <section headerLabel="5. Diagnostico">
-<table class="baseline-aligned">
-<tr> <td> Impresion Clinica: </td> </tr>
-<tr> <td> <obs conceptId="184" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="115" labelText="Dentro de la normalidad" style="checkbox" id="DiagNorm" class="obsToDisableEsp"/> </td> </tr>
-<table id="Diagnostico">
-<tr> <td> <obs conceptId="117" labelText="Cribado reactivo que necesita confirmacion" style="checkbox" id="PostivoConfirm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="116" labelText="Hallazgo ecografico anormal" style="checkbox" id="EcoAnorm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="118" labelText="Infección del Tracto Urinario" style="checkbox" id="ITU" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="216" labelText="Anemia" style="checkbox" id="anemia" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
-<tr> <td> <obs conceptId="241" labelText="Diabetes gestacional" style="checkbox" id="diabetesges" class="obsToDisable4 obsToDisableEsp"/> </td></tr>
-<tr> <td>
- <obs conceptId="160" labelText="Sospecha de Preeclampsia" style="checkbox" id="preeclampsia" class="obsToDisable4 obsToDisableEsp"/>
-  , comentarios sobre el abordaje del caso (traslado, observacion, etc) :
- <obs conceptId="242" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
-</table>
-<table class="baseline-aligned">
-<br></br>
-<tr> <td> Tratamiento: </td> </tr>
-<tr><td> <obs conceptId="122" labelText="Ninguno" style="checkbox" id="notreat" class="obsToDisableEsp"/></td></tr>
-<tr><td> <obs conceptId="123" labelText="Amoxicilina" style="checkbox" id="Amoxicilina" class="treatement obsToDisableEsp"/></td></tr>
-<tr><td> <obs conceptId="124" labelText="Sulfato ferroso (hierro)" style="checkbox" id="Hierro" class="treatement obsToDisableEsp"/></td></tr>
-<tr><td> <obs conceptId="219" labelText="Acetaminofen" style="checkbox" id="Acitaminofen" class="treatement obsToDisableEsp"/></td></tr>
-<tr><td> <obs conceptId="193" labelText="Otro" style="checkbox" id="OtroTreat" class="treatement obsToDisableEsp"/></td></tr>
-<br></br>
-<tr> <td> Comentarios: </td> </tr>
-<tr> <td> <obs conceptId="120" rows="3" cols="40" class="obsToDisableEsp"/> </td> </tr>
-</table>
-<tr> <br></br> <td> Comentarios del especialista sobre resultados y diagnostico: </td> </tr>
-<tr> <br></br> <td> <obs conceptId="221" rows="5" cols="50" class="obsToDisableAll"/> </td> </tr>
-</table>
-</section>
-  <section headerLabel="6. Referencia">
-    <table class="baseline-aligned">
+
+<section headerLabel="6. Referencia">
+	<table class="baseline-aligned">
                             
-                <tr>  <td> <obs conceptId="126" labelText="No" id="NoReferencia" style="checkbox" class="obsToDisableEsp"/> </td></tr>
+		<tr>  <td> <obs conceptId="126" labelText="No" id="NoReferencia" style="checkbox" class="obsToDisableEsp"/> </td></tr>
 
-                <table id="Referencia">
+		<table id="Referencia">
 
-                        <tr>  <td> <obs conceptId="127" labelText="Centro de Salud" style="checkbox" id="CentroSalud" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
-                        <tr>  <td> <obs conceptId="129" labelText="Hospital Distrital" style="checkbox" id="HospDistrit" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
-                        <tr>  <td> <obs conceptId="168" labelText="Hospital Regional" style="checkbox" id="HospReg" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
-                        <tr>  <td> <obs conceptId="130" labelText="Hospital de Referencia Nacional" style="checkbox" id="HospNacion" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="127" labelText="Centro de Salud" style="checkbox" id="CentroSalud" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="129" labelText="Hospital Distrital" style="checkbox" id="HospDistrit" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="168" labelText="Hospital Regional" style="checkbox" id="HospReg" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="130" labelText="Hospital de Referencia Nacional" style="checkbox" id="HospNacion" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
 
-                </table>   
-      </table>
-  </section>
-  <section headerLabel="7. Traslado Urgente">
-    <table class="baseline-aligned">
+		</table>     
+	</table>
+</section>
+
+<section headerLabel="7. Traslado Urgente">
+	<table class="baseline-aligned">
                                              
-                <tr>  <td> <obs conceptId="133" labelText="No" id="NoTrasladoUrg" style="checkbox" class="obsToDisableEsp"/> </td></tr>
+		<tr>  <td> <obs conceptId="133" labelText="No" id="NoTrasladoUrg" style="checkbox" class="obsToDisableEsp"/> </td></tr>
                 
-              <table id="TrasladoUrg">
+		<table id="TrasladoUrg">
 
-                        <tr>  <td> <obs conceptId="134" labelText="Centro de Salud" style="checkbox" id="CS" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
-                        <tr>  <td> <obs conceptId="135" labelText="Hospital Distrital" style="checkbox" id="HD" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
-                        <tr>  <td> <obs conceptId="177" labelText="Hospital Regional" style="checkbox" id="HR" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
-                        <tr>  <td> <obs conceptId="136" labelText="Hospital de Referencia Nacional" style="checkbox" id="HN" class="obsToDisable6 obsToDisableEsp"/> </td></tr> 
+			<tr>  <td> <obs conceptId="134" labelText="Centro de Salud" style="checkbox" id="CS" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="135" labelText="Hospital Distrital" style="checkbox" id="HD" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="177" labelText="Hospital Regional" style="checkbox" id="HR" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="136" labelText="Hospital de Referencia Nacional" style="checkbox" id="HN" class="obsToDisable6 obsToDisableEsp"/> </td></tr> 
 
-             </table>
-</table>
-  </section>
-  <section headerLabel="8. Rellenar por el especialista">
-<table class="baseline-aligned" id="enfermera">
-<tr> <td> Correcciones en el formulario: </td> </tr>
-<tr> <td> <obs conceptId="161" rows="5" cols="50" class="obsToDisableAll"/> </td> </tr>
-<!--
-<tr> <td> <obs conceptId="162" labelText="VIH Corregido por Especialista" answerConceptIds="96,163" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td>
-<td> <obs conceptId="171" labelText="Hepatitis B Corregido por Especialista" answerConceptIds="169,170" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td> </tr>
-<tr> <td> <obs conceptId="174" labelText="Sifilis Corregido por Especialista" answerConceptIds="172,173" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td>
-<td> <obs conceptId="178" labelText="Hemoglobina Corregido por Especialista" answerConceptIds="175,176" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td> </tr>
-<tr> <td> <obs conceptId="181" labelText="Glucosa Corregido por Especialista" answerConceptIds="179,180" answerLabels="Positivo confirmado, Positivo no confirmado" class="obsToDisableAll"/> </td> </tr>
--->
-<table>
-<tr><td>Calidad de la ecografia: <obs conceptId="226" class="obsToDisableAll"/></td></tr>
-<tr><td> <obs conceptId="238" labelText="Anemia manejada incorrectamente" style="checkbox" class="obsToDisableAll"/></td></tr>
-<tr><td> <obs conceptId="239" labelText="Glicemia manejada incorrectamente" style="checkbox" class="obsToDisableAll"/></td></tr>
-<tr><td> <obs conceptId="240" labelText="Infeccion del Tracto Urinario manejada incorrectamente" style="checkbox" class="obsToDisableAll"/></td></tr>
-<tr><td>Pertinencia de la referencia: <obs conceptId="232" class="obsToDisableAll"/></td></tr>
-<tr><td>Pertinencia de la transferencia: <obs conceptId="237" class="obsToDisableAll"/></td></tr>
-</table>
-</table>             
-  </section>
+		</table>
+	</table>
+</section>
+
+<section headerLabel="8. Rellenar por el especialista">
+	<table class="baseline-aligned" id="enfermera">
+		<tr> <td> Correcciones en el formulario: </td> </tr>
+		<tr> <td> <obs conceptId="161" rows="5" cols="50" class="obsToDisableAll"/> </td> </tr>
+
+		<table>
+			<tr><td>Calidad de la ecografia: <obs conceptId="226" class="obsToDisableAll"/></td></tr>
+			<tr><td> <obs conceptId="238" labelText="Anemia manejada incorrectamente" style="checkbox" class="obsToDisableAll"/></td></tr>
+			<tr><td> <obs conceptId="239" labelText="Glicemia manejada incorrectamente" style="checkbox" class="obsToDisableAll"/></td></tr>
+			<tr><td> <obs conceptId="240" labelText="Infeccion del Tracto Urinario manejada incorrectamente" style="checkbox" class="obsToDisableAll"/></td></tr>
+			<tr><td>Pertinencia de la referencia: <obs conceptId="232" class="obsToDisableAll"/></td></tr>
+			<tr><td>Pertinencia de la transferencia: <obs conceptId="237" class="obsToDisableAll"/></td></tr>
+		</table>
+	</table>
+</section>
+
 <submit/>
-
 </htmlform>
