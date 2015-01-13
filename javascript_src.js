@@ -151,39 +151,45 @@ function populateList(element_id_list, filter_reg, current_value){
 		$j("#" + element_id_list).append("<option value='" + tempOptions[i].value + "'>" + tempOptions[i].text + "</option>");
 		
 		if(tempOptions[i].value.split(code_delimiter)[0] == current_value.split(code_delimiter)[0]){
-			$j("#" + element_id_list).val(tempOptions[i].text);
+			$j("#" + element_id_list).val(tempOptions[i].value);
 		}
 	}
+}
+
+function createFilterRegExp(filter_code, total_length){
+	
+	var digit_number = total_length - filter_code.length;
+	
+	if( digit_number >= 0 ){
+		return new RegExp("^" + filter_code + "[0-9]{" + digit_number + "} ");
+	} else {
+		return new RegExp("^[0-9]{" + total_length + "} ");
+	}
+	
 }
 
 function update_province(filter_code){
     
 	$j("#" + province_id_list).find("option").remove();
 		
-	var filter_reg;
-	if(filter_code.length > 0){
-		filter_reg = new RegExp("^" + filter_code + "[0-9]" + " ");
-	}
-	else {
-		filter_reg = new RegExp("^[0-9][0-9] ");
-	}
+	var filter_reg = createFilterRegExp(filter_code, 2);
 	
 	populateList(province_id_list, filter_reg, province);
-	process_province();	
+	process_province(filter_code);	
  }
 
 $j("#" + province_id_list).change(function () {
-	process_province();
+	process_province("");
 });
 
-function process_province(){
+function process_province(filter_code){
 	var selected_opt = $j("#" + province_id_list + " option:selected");
 	if(selected_opt.length == 1){
 		update_village(selected_opt[0].value.split(code_delimiter)[0]);
 		$j("#" + province_id).val(selected_opt[0].value);
 	}
 	else {
-		update_village("");
+		update_village(filter_code);
 	}
 	update_personal_code();
 }
@@ -192,30 +198,24 @@ function update_village(filter_code){
 	
 	$j("#" + village_id_list).find("option").remove();
 	
-	var filter_reg;
-	if(filter_code.length > 0){
-		filter_reg = new RegExp("^" + filter_code + "[0-9][0-9]" + " ");
-	}
-	else {
-		filter_reg = new RegExp("^[0-9][0-9][0-9][0-9] ");
-	}
+	var filter_reg = createFilterRegExp(filter_code, 4);
 	
 	populateList(village_id_list, filter_reg, village);
-	process_village();
+	process_village(filter_code);
  }
 
 $j("#" + village_id_list).change(function () {
-	process_village();
+	process_village("");
 });
 
-function process_village(){
+function process_village(filter_code){
 	var selected_opt = $j("#" + village_id_list + " option:selected");
-	if(selected_opt.length == 1){
+	if(selected_opt.length == 1 && selected_opt[0].value.length > 0){
 		update_district(selected_opt[0].value.split(code_delimiter)[0]);
 		$j("#" + village_id).val(selected_opt[0].value);
 	}
 	else {
-		update_district("");
+		update_district(filter_code);
 	}
 	update_personal_code();
 }
@@ -224,30 +224,24 @@ function update_district(filter_code){
 	
 	$j("#" + district_id_list).find("option").remove();
 	
-	var filter_reg;
-	if(filter_code.length > 0){
-		filter_reg = new RegExp("^" + filter_code + "[0-9]" + " ");	
-	}	
-	else {
-		filter_reg = new RegExp("^[0-9][0-9][0-9][0-9][0-9] ");
-	}
+	var filter_reg = createFilterRegExp(filter_code, 5);
 	
 	populateList(district_id_list, filter_reg, district);
-	process_district();
+	process_district(filter_code);
 }
 
 $j("#" + district_id_list).change(function () {
-	process_district();
+	process_district("");
 });
 
-function process_district(){
+function process_district(filter_code){
 	var selected_opt = $j("#" + district_id_list + " option:selected");
-	if(selected_opt.length == 1){
+	if(selected_opt.length == 1 && selected_opt[0].value.length > 0){
 		update_subdistrict(selected_opt[0].value.split(code_delimiter)[0]);
 		$j("#" + district_id).val(selected_opt[0].value);
 	}
 	else {
-		update_subdistrict("");
+		update_subdistrict(filter_code);
 	}
 }
 	
@@ -255,30 +249,24 @@ function update_subdistrict(filter_code){
 	
 	$j("#" + subdistrict_id_list).find("option").remove();
 		
-	var filter_reg;
-	if(filter_code.length > 0){
-		filter_reg = new RegExp("^" + filter_code + "[0-9]" + " ");	
-	}	
-	else {
-		filter_reg = new RegExp("^[0-9][0-9][0-9][0-9][0-9][0-9] ");
-	}
+	var filter_reg = createFilterRegExp( filter_code, 6);
 
 	populateList(subdistrict_id_list, filter_reg, subdistrict);
-	process_subdistrict();
+	process_subdistrict(filter_code);
 }
 
 $j("#" + subdistrict_id_list).change(function () {
-	process_subdistrict();
+	process_subdistrict("");
 });
 
-function process_subdistrict(){
+function process_subdistrict(filter_code){
 	var selected_opt = $j("#" + subdistrict_id_list + " option:selected");
-	if(selected_opt.length == 1){
+	if(selected_opt.length == 1 && selected_opt[0].value.length > 0){
 		update_community(selected_opt[0].value.split(code_delimiter)[0]);
 		$j("#" + subdistrict_id).val(selected_opt[0].value);
 	}
 	else {
-		update_community("");
+		update_community(filter_code);
 	}
 }
 
@@ -286,13 +274,7 @@ function update_community(filter_code){
 	
 	$j("#" + community_id_list).find("option").remove();
 		
-	var filter_reg;
-	if(filter_code.length > 0){
-		filter_reg = new RegExp("^" + filter_code + "[0-9][0-9]" + " ");	
-	}	
-	else {
-		filter_reg = new RegExp("^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9] ");
-	}
+	var filter_reg = createFilterRegExp( filter_code, 8);
 
 	populateList(community_id_list, filter_reg, community);
 	process_community();
@@ -304,7 +286,7 @@ $j("#" + community_id_list).change(function () {
 
 function process_community(){
 	var selected_opt = $j("#" + community_id_list + " option:selected");
-	if(selected_opt.length == 1){
+	if(selected_opt.length == 1 && selected_opt[0].value.length > 0){
 		$j("#" + community_id).val(selected_opt[0].value);
 		select_location(selected_opt[0].value);
 	}
@@ -342,12 +324,12 @@ function generate_personal_code(){
 		birth_date = "" + day + month + year;
 	}
 		
-	var country_code = $j("#" + country_id).val().split(code_delimiter)[0];
+	var country_code = $j("#" + country_id_list).val().split(code_delimiter)[0];
 	if(country_code.length != 1){
 		return "";
 	}
 	
-	var village_code = $j("#" + village_id).val().split(code_delimiter)[0];
+	var village_code = $j("#" + village_id_list).val().split(code_delimiter)[0];
 	if(village_code.length != 4) {
 		return "";
 	}
@@ -409,18 +391,25 @@ $j("#" + patient_id_type_id).change(function () {
 	
 	var selected_opt = $j("#" + patient_id_type_id + " option:selected");
 	if(selected_opt.length == 1){
+		var old_use_personal_code_as_identifier = use_personal_code_as_identifier;
 		check_if_secundary_patient_id_type(selected_opt);
+		
+		if( use_personal_code_as_identifier ){
+			update_personal_code();
+		} 
+		/* If use_personal_code_as_identifier changes from true to false, clean the value */
+		else if( old_use_personal_code_as_identifier && !use_personal_code_as_identifier ){
+			$j("#" + patient_id_id).val('');			
+		}
 	}
 });
 
 function check_if_secundary_patient_id_type(selected_opt){
 	if (selected_opt.first().text().toLowerCase().indexOf(secundary_patient_id_type.toLowerCase()) > -1){
 		use_personal_code_as_identifier = true;
-		update_personal_code();
 	}
 	else {
 		use_personal_code_as_identifier = false;
-		$j("#" + patient_id_id).val('');
 	}
 }
 
