@@ -31,63 +31,47 @@ beforeSubmit.push(function() {
 <script type="text/javascript">
 
 if(jQuery){
+	
+	<!-- Formula de hadlock: Peso estimado=10^(2.0150655 + 0.00202644*CA + 0.01153867*LF ) -->
+	<!--Modificado: 9/10/2014 por jc.rodriguez@ehas.org : cambio de gramos a libras-->
 	$j(function() {
 		getField('LF.value').change(function() {
-    		var CA = parseInt(getValue('CA.value'));
-       		var LF = parseInt(getValue('LF.value'));
-       		if((getValue('CA.value') == null)|| (getValue('CA.value') == '') || (getValue('CA.value')== '0') || (getValue('LF.value') == null)|| (getValue('LF.value') == '') || (getValue('LF.value')== '0')){
-        		setValue('hadlock.value', '0');
-       		}
-			else{
-        		var n = 2.0150655 + 0.00202644*CA + 0.01153867*LF;
-        		var hadlockReal = Math.pow(10, n);
-				var hadlockRealLibras = 0.0022046*hadlockReal
-        		var hadlockEntero= parseInt(hadlockRealLibras);
-        		setValue('hadlock.value', hadlockEntero);
-			}
+    		evaluateHadlock();
   		});
    	
 		getField('CA.value').change(function() {
-	     	var CA = parseInt(getValue('CA.value'));
-	       	var LF = parseInt(getValue('LF.value'));
-	       	if((getValue('LF.value') == null)|| (getValue('LF.value') == '') || (getValue('LF.value')== '0') || (getValue('CA.value') == null)|| (getValue('CA.value') == '') || (getValue('CA.value')== '0')){
-	        	setValue('hadlock.value', '0');
-	       	}
-			else{
-		        var n = 2.0150655 + 0.00202644*CA + 0.01153867*LF;
-	        	var hadlockReal = Math.pow(10, n);
-				var hadlockRealLibras = 0.0022046*hadlockReal
-	        	var hadlockEntero= parseInt(hadlockRealLibras);
-	        	setValue('hadlock.value', hadlockEntero);
-			}
+	     	evaluateHadlock();
 	   	});
 	});
-}
-</script>
-
-<!--Codigo que se encarga de deshabilitar y poner a cero los campos en el caso de que no haya ninguna referencia. -->
-
-<script  type="text/javascript">
-if(jQuery){
+	
+	var evaluateHadlock = function () {
+		var CA = parseInt(getValue('CA.value'));
+		var LF = parseInt(getValue('LF.value'));
+		if((getValue('LF.value') == null)|| (getValue('LF.value') == '') || (getValue('LF.value')== '0') || (getValue('CA.value') == null)|| (getValue('CA.value') == '') || (getValue('CA.value')== '0')){
+			setValue('hadlock.value', '0');
+		}
+		else{
+			var n = 2.0150655 + 0.00202644*CA + 0.01153867*LF;
+			var hadlockReal = Math.pow(10, n);
+			var hadlockRealLibras = 0.0022046*hadlockReal
+			var hadlockEntero= parseInt(hadlockRealLibras);
+			setValue('hadlock.value', hadlockEntero);
+		}
+	}
+	
+	<!--Codigo que se encarga de deshabilitar los campos en el caso de que no haya ninguna referencia. -->
 	$j(function() {
     	var checkedNoReferencia = getField('NoReferencia.value').attr("checked");
+
 		if (checkedNoReferencia == true) {
         	$j("span.obsToDisable5").find("input").attr("disabled", true);
            	$j("span.obsToDisable5").find("select").attr("disabled", true);
             $j('#Referencia').fadeTo('slow', 0.2);
-            setValue('CentroSalud.value', false);
-            setValue('HospDistrit.value', false);
-            setValue('HospReg.value', false);
-            setValue('HospNacion.value', false);
      	}
  	});
-}
-</script>
-
-<!--Codigo que se encarga de deshabilitar y pone a cero los campos de la orina en el caso de ser negativa. -->
-<script  type="text/javascript">
-if(jQuery){
-   	$j(function() {
+ 	
+ 	<!--Codigo que se encarga de deshabilitar los campos de la orina en el caso de ser negativa. -->
+ 	$j(function() {
     	var checkedNoOrina = getField('OrinaNo.value').attr("checked");
         var checkedNeg = getField('OrinaNeg.value').attr("checked");
 
@@ -97,139 +81,58 @@ if(jQuery){
             $j('#orina').fadeTo('slow', 0.2); 
       	}    
   	});
-}
-</script>
+  	
+  	<!--  Deshabilita la seleccion de otros tratamientos si la opcion es ninguno -->
+	$j(function() {
+		var checkedNoTreat = getField('notreat.value').attr("checked");
 
-
-<!--  Deshabilita la seleccion de otros tratamientos si la opcion es ninguno -->
-<script type="text/javascript">
-	if(jQuery){
-		$j(function() {
-			var checkedNoTreat = getField('notreat.value').attr("checked");
-			if (checkedNoTreat == true) {
-				$j("span.treatement").find("input").attr("disabled", true);
-				$j("span.treatement").find("select").attr("disabled", true);
-				$j('#Amoxicilina').fadeTo('slow', 0.2);
-				$j('#Hierro').fadeTo('slow', 0.2);
-				$j('#Acitaminofen').fadeTo('slow', 0.2);
-				$j('#OtroTreat').fadeTo('slow', 0.2);
-			}   
-		});
-	}
-</script>
-
-<!-- Calculo IMC -->
-
-<script type="text/javascript">
-if(jQuery){
+		if (checkedNoTreat == true) {
+			$j("span.treatement").find("input").attr("disabled", true);
+			$j("span.treatement").find("select").attr("disabled", true);
+			$j("span.treatement").fadeTo('slow', 0.2);
+		}   
+	});
+	
+	<!-- Calculo IMC -->
 	$j(function() {
 		getField('talla.value').change(function() {
-			var imcReal = (parseInt(getValue('peso.value'))/2.2046) / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
-           
-			if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
-				setValue('imc.value', '0');
-			}
-			else{
-				var imcEntero= parseInt(imcReal);
-				setValue('imc.value', imcEntero);
-			}
+			evaluateIMC();
 		});
 		
 		getField('peso.value').change(function() {
-			var imcReal = (parseInt(getValue('peso.value'))/2.2046)  / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
-           
-			if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
-				setValue('imc.value', '0');
-			}
-			else{
-				var imcEntero= parseInt(imcReal);
-				setValue('imc.value', imcEntero);
-			}
+			evaluateIMC();
 		});
 	});
-}
-</script>
-
-<!--Codigo que se encarga de deshabilitar todo el contenido dependiendo del trimestre que seleccionamos. -->
-
-<script  type="text/javascript">
-if(jQuery){
-   $j(function() {
-
-      var checkedTrimestre1 = getField('Trimestre1.value').attr("checked");
-      var checkedTrimestre2 = getField('Trimestre2.value').attr("checked");
-      var checkedTrimestre3 = getField('Trimestre3.value').attr("checked");
-
-     if (checkedTrimestre1 == true) {
-
-          $j('#RestoTrimestre').fadeTo('slow', 0.2);
-          $j("span.obsToDisable2").find("input").attr("disabled", true);
-      }
-     else  if(checkedTrimestre2 == true || checkedTrimestre3 == true){
-
-          $j("span.obsToDisable1").find("input").attr("disabled", true);
-          $j('#PrimerTrimestre').fadeTo('slow', 0.2);
-         
-      }
-  });
-}
-</script>
-
-<!--Codigo que se encarga de deshabilitar la subida de fotos si es un solo feto. -->
-<!--Modificado: 9/10/2014 por jc.rodriguez@ehas.org : añadir controles para dos fotos mas, si es gemelar o triple-->
-<script type="text/javascript">
-if(jQuery){
+	
+	var evaluateIMC = function(){
+		var imcReal = (parseInt(getValue('peso.value'))/2.2046)  / ((parseInt(getValue('talla.value'))*parseInt(getValue('talla.value')))/10000);
+           
+		if((getValue('talla.value') == null)|| (getValue('talla.value') == '') || (getValue('talla.value')== '0') || (getValue('peso.value') == null)|| (getValue('peso.value') == '') || (getValue('peso.value')== '0')){
+			setValue('imc.value', '0');
+		}
+		else{
+			var imcEntero= parseInt(imcReal);
+			setValue('imc.value', imcEntero);
+		}
+	}
+	
+	<!--Codigo que se encarga de deshabilitar todo el contenido dependiendo del trimestre que seleccionamos. -->
 	$j(function() {
-		var checkedFeto1= getField('Feto1.value').attr("checked");
-		var checkedFeto2= getField('Feto2.value').attr("checked");
-		var checkedFeto3= getField('Feto3.value').attr("checked");
-		if (checkedFeto1 == true) {
-			$j("span.obsToDisableFoto").find("input").attr("disabled", true);
-			$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
-			$j("span.obsToDisableFoto").find("select").attr("disabled", true);
-			$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-			$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-			$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-			$j('#FotoFeto2').fadeTo('slow', 0.2);
-			$j('#FotoFeto3').fadeTo('slow', 0.2);
+		var checkedTrimestre1 = getField('Trimestre1.value').attr("checked");
+		var checkedTrimestre2 = getField('Trimestre2.value').attr("checked");
+		var checkedTrimestre3 = getField('Trimestre3.value').attr("checked");
+
+		if (checkedTrimestre1 == true) {
+			$j('#RestoTrimestre').fadeTo('slow', 0.2);
+			$j("span.obsToDisable2").find("input").attr("disabled", true);
 		}
-		else if((checkedFeto2 == true) || (checkedFeto3 == true)){
-			$j("span.obsToDisableFoto").find("input").attr("disabled", false);
-			$j("span.obsToDisableFoto").find("textarea").attr("disabled", false);
-			$j("span.obsToDisableFoto").find("select").attr("disabled", false);
-			$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-			$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-			$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-			$j('#FotoFeto2').fadeTo('slow', 1);
-			$j('#FotoFeto3').fadeTo('slow', 0.2);
-		}
-		else if (checkedFeto3 == true) {
-			$j("span.obsToDisableFoto").find("input").attr("disabled", false);
-			$j("span.obsToDisableFoto").find("textarea").attr("disabled", false);
-			$j("span.obsToDisableFoto").find("select").attr("disabled", false);
-			$j("span.obsToDisableFoto2").find("input").attr("disabled", false);
-			$j("span.obsToDisableFoto2").find("textarea").attr("disabled", false);
-			$j("span.obsToDisableFoto2").find("select").attr("disabled", false);
-			$j('#FotoFeto2').fadeTo('slow', 1);
-			$j('#FotoFeto3').fadeTo('slow', 1);
-		}
-		else {
-			$j("span.obsToDisableFoto").find("input").attr("disabled", true);
-			$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
-			$j("span.obsToDisableFoto").find("select").attr("disabled", true);
-			$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-			$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-			$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-			$j('#FotoFeto2').fadeTo('slow', 0.2);
-			$j('#FotoFeto3').fadeTo('slow', 0.2);
+		else  if(checkedTrimestre2 == true || checkedTrimestre3 == true){
+			$j('#PrimerTrimestre').fadeTo('slow', 0.2);
+			$j("span.obsToDisable1").find("input").attr("disabled", true);
 		}
 	});
-}
-</script>
-
-<!--Codigo que se encarga de hacer check en anemia si la hemoglobina es menos que 11  -->
-<script type="text/javascript">
-if(jQuery){
+	
+	<!--Codigo que se encarga de hacer check en anemia si la hemoglobina es menos que 11  -->
 	$j(function() {
     
 		getField('hemoglobina.value').change(function() {
@@ -242,42 +145,31 @@ if(jQuery){
 			}	
 		});
 	});
-}
-</script>
-
-<!--Marcar el diagnostico de sospecha de preeclamsia si los niveles de tension arterial sistolica son >= de 140 o la distolica >=90.  -->
-<script type="text/javascript">
-if(jQuery){
+	
+	<!--Marcar el diagnostico de sospecha de preeclamsia si los niveles de tension arterial sistolica son >= de 140 o la distolica >=90.  -->
 	$j(function() {
 
 		getField('sistolica.value').change(function() {
-			var sistolica = parseInt(getValue('sistolica.value'));
-			var diastolica = parseInt(getValue('diastolica.value'));
-			if ((parseInt(sistolica) &gt; 140) || (parseInt(sistolica) == 140) || (parseInt(diastolica) &gt; 90) || (parseInt(diastolica) == 90)){
-				setValue('preeclampsia.value', true);
-			}
-			else {
-				setValue('preeclampsia.value', false);	
-			}
+			evaluatePreeclampsia();
 		});
 		
 		getField('diastolica.value').change(function() {
-			var sistolica = parseInt(getValue('sistolica.value'));
-			var diastolica = parseInt(getValue('diastolica.value'));
-			if ((parseInt(sistolica) &gt; 140) || (parseInt(sistolica) == 140) || (parseInt(diastolica) &gt; 90) || (parseInt(diastolica) == 90)){
-				setValue('preeclampsia.value', true);
-			}
-			else {
-				setValue('preeclampsia.value', false);	
-			}
+			evaluatePreeclampsia();
 		});
 	});
-}
-</script>
-
-<!--Habilitar el cuadro de texto solamente si preeclampsia esta seleccionado  -->
-<script type="text/javascript">
-if(jQuery){
+	
+	var evaluatePreeclampsia = function(){
+		var sistolica = parseInt(getValue('sistolica.value'));
+		var diastolica = parseInt(getValue('diastolica.value'));
+		if ((parseInt(sistolica) &gt; 140) || (parseInt(sistolica) == 140) || (parseInt(diastolica) &gt; 90) || (parseInt(diastolica) == 90)){
+			setValue('preeclampsia.value', true);
+		}
+		else {
+			setValue('preeclampsia.value', false);	
+		}
+	}
+	
+	<!--Habilitar el cuadro de texto solamente si preeclampsia esta seleccionado  -->
 	$j(function() {
 		var preeclampsia= getField('preeclampsia.value').attr("checked");
 		if (preeclampsia == true) {
@@ -288,12 +180,7 @@ if(jQuery){
 		}
 	});
 	
-}
-</script>
-
-<!--Codigo que se encarga de deshabilitar los campos de diagnostico si no hay ninguno. -->
-<script  type="text/javascript">
-if(jQuery){
+	<!--Codigo que se encarga de deshabilitar los campos de diagnostico si no hay ninguno. -->
 	$j(function() {
 		var checkedDiagnostico= getField('DiagNorm.value').attr("checked");
 		if (checkedDiagnostico == true) {
@@ -302,28 +189,19 @@ if(jQuery){
 			$j('#Diagnostico').fadeTo('slow', 0.2); 
 		}
 	});
-}
-</script>
-
-<!--Codigo que se encarga de deshabilitar los campos de traslado si no ha habido un traslado urgente. -->
-
-<script  type="text/javascript">
-if(jQuery){
+	
+	<!--Codigo que se encarga de deshabilitar los campos de traslado si no ha habido un traslado urgente. -->
 	$j(function() {
-
 		var checkedTraslado= getField('NoTrasladoUrg.value').attr("checked");
 
 		if (checkedTraslado == true) {
 			$j("span.obsToDisable6").find("input").attr("disabled", true);
 			$j('#TrasladoUrg').fadeTo('slow', 0.2); 
-			setValue('CS.value', false);
-			setValue('HD.value', false);
-			setValue('HR.value', false);
-			setValue('HN.value', false);
 		}    
 	});
 }
 </script>
+
 
 	<!-- Excluye todos los checkbox listeners para los especialistas -->
 <excludeIf velocityTest="$user.getAllRoles().toString().contains('Especialista')">
@@ -337,14 +215,6 @@ if(jQuery){
 					if(checked == true){
 						setValue('Feto2.value', false);
 						setValue('Feto3.value', false);
-						$j("span.obsToDisableFoto").find("input").attr("disabled", true);
-						$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
-						$j("span.obsToDisableFoto").find("select").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-						$j('#FotoFeto2').fadeTo('slow', 0.2);
-						$j('#FotoFeto3').fadeTo('slow', 0.2);
 					}
 				});
 				
@@ -353,24 +223,6 @@ if(jQuery){
 					if(checked == true){
 						setValue('Feto1.value', false);
 						setValue('Feto3.value', false);
-						$j("span.obsToDisableFoto").find("input").attr("disabled", false);
-						$j("span.obsToDisableFoto").find("textarea").attr("disabled", false);
-						$j("span.obsToDisableFoto").find("select").attr("disabled", false);
-						$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-						$j('#FotoFeto2').fadeTo('slow', 1);
-						$j('#FotoFeto3').fadeTo('slow', 0.2);
-					}
-					else{
-						$j("span.obsToDisableFoto").find("input").attr("disabled", true);
-						$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
-						$j("span.obsToDisableFoto").find("select").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-						$j('#FotoFeto2').fadeTo('slow', 0.2);
-						$j('#FotoFeto3').fadeTo('slow', 0.2);
 					}
 				});
 				
@@ -379,24 +231,6 @@ if(jQuery){
 					if(checked == true){
 						setValue('Feto1.value', false);
 						setValue('Feto2.value', false);
-						$j("span.obsToDisableFoto").find("input").attr("disabled", false);
-						$j("span.obsToDisableFoto").find("textarea").attr("disabled", false);
-						$j("span.obsToDisableFoto").find("select").attr("disabled", false);
-						$j("span.obsToDisableFoto2").find("input").attr("disabled", false);
-						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", false);
-						$j("span.obsToDisableFoto2").find("select").attr("disabled", false);
-						$j('#FotoFeto2').fadeTo('slow', 1);
-						$j('#FotoFeto3').fadeTo('slow', 1);
-					}
-						else{
-						$j("span.obsToDisableFoto").find("input").attr("disabled", true);
-						$j("span.obsToDisableFoto").find("textarea").attr("disabled", true);
-						$j("span.obsToDisableFoto").find("select").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("input").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("textarea").attr("disabled", true);
-						$j("span.obsToDisableFoto2").find("select").attr("disabled", true);
-						$j('#FotoFeto2').fadeTo('slow', 0.2);
-						$j('#FotoFeto3').fadeTo('slow', 0.2);
 					}
 				});
 				
@@ -528,23 +362,12 @@ if(jQuery){
 					var checkedNoTreat = getField('notreat.value').attr("checked");
 					if(checkedNoTreat == true){
 						$j("span.treatement").find("input").attr("disabled", true);
-						$j("span.treatement").find("select").attr("disabled", true);	
-						setValue('Amoxicilina.value', false);
-						setValue('Hierro.value', false);
-						setValue('Acitaminofen.value', false);
-						setValue('OtroTreat.value', false);
-						$j('#Amoxicilina').fadeTo('slow', 0.2);
-						$j('#Hierro').fadeTo('slow', 0.2);
-						$j('#Acitaminofen').fadeTo('slow', 0.2);
-						$j('#OtroTreat').fadeTo('slow', 0.2);
+						$j("span.treatement").find("input").attr("checked", false);
+						$j("span.treatement").fadeTo('slow', 0.2);
 					}
 					else{
 						$j("span.treatement").find("input").attr("disabled", false);
-						$j("span.treatement").find("select").attr("disabled", false);
-						$j('#Amoxicilina').fadeTo('slow', 1);
-						$j('#Hierro').fadeTo('slow', 1);
-						$j('#Acitaminofen').fadeTo('slow', 1);
-						$j('#OtroTreat').fadeTo('slow', 1);
+						$j("span.treatement").fadeTo('slow', 1);
 					}
 				}); 
 				
@@ -555,10 +378,6 @@ if(jQuery){
 						$j("span.obsToDisable5").find("input").attr("disabled", true);
 						$j("span.obsToDisable5").find("input").attr("checked", false);
 						$j('#Referencia').fadeTo('slow', 0.2); 
-						setValue('CentroSalud.value', false);
-						setValue('HospDistrit.value', false);
-						setValue('HospReg.value', false);
-						setValue('HospNacion.value', false);
 					}
 					else{
 						$j("span.obsToDisable5").find("input").attr("disabled", false);
@@ -566,62 +385,16 @@ if(jQuery){
 						$j('#Referencia').fadeTo('slow', 1); 
 					}	
 				});
-
-				getField('CentroSalud.value').change(function() {
+				
+				$j("span.obsToDisable5").find("input").change(function() {
 					var checked = $j(this).attr("checked");
 					if(checked == true){
 						setValue('NoTrasladoUrg.value', true);
 						$j("span.obsToDisable6").find("input").attr("disabled", true);
 						$j("span.obsToDisable6").find("input").attr("checked", false);
 						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
-						setValue('CS.value', false);
-						setValue('HD.value', false);
-						setValue('HR.value', false);
-						setValue('HN.value', false);
 					}
 				  
-				});
-			
-				getField('HospDistrit.value').change(function() {
-					var checked = $j(this).attr("checked");
-					if(checked == true){
-						setValue('NoTrasladoUrg.value', true);
-						$j("span.obsToDisable6").find("input").attr("disabled", true);
-						$j("span.obsToDisable6").find("input").attr("checked", false);
-						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
-						setValue('CS.value', false);
-						setValue('HD.value', false);
-						setValue('HR.value', false);
-						setValue('HN.value', false);
-					}
-				});
-			
-				getField('HospReg.value').change(function() {
-					var checked = $j(this).attr("checked");
-					if(checked == true){
-						setValue('NoTrasladoUrg.value', true);
-						$j("span.obsToDisable6").find("input").attr("disabled", true);
-						$j("span.obsToDisable6").find("input").attr("checked", false);
-						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
-						setValue('CS.value', false);
-						setValue('HD.value', false);
-						setValue('HR.value', false);
-						setValue('HN.value', false);
-					}
-				});
-			
-				getField('HospNacion.value').change(function() {
-					var checked = $j(this).attr("checked");
-					if(checked == true){
-						setValue('NoTrasladoUrg.value', true);
-						$j("span.obsToDisable6").find("input").attr("disabled", true);
-						$j("span.obsToDisable6").find("input").attr("checked", false);
-						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
-						 setValue('CS.value', false);
-						 setValue('HD.value', false);
-						 setValue('HR.value', false);
-						 setValue('HN.value', false);
-					}
 				});
 				
 				<!-- Relativo a translado urgente -->
@@ -631,10 +404,6 @@ if(jQuery){
 						$j("span.obsToDisable6").find("input").attr("disabled", true);
 						$j("span.obsToDisable6").find("input").attr("checked", false);
 						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
-						setValue('CS.value', false);
-						setValue('HD.value', false);
-						setValue('HR.value', false);
-						setValue('HN.value', false);
 					}
 					else{
 						$j("span.obsToDisable6").find("input").attr("disabled", false);
@@ -642,58 +411,16 @@ if(jQuery){
 						$j('#TrasladoUrg').fadeTo('slow', 1); 
 					}
 				});
-				getField('CS.value').change(function() {
+				
+				$j("span.obsToDisable6").find("input").change(function() {
 					var checked = $j(this).attr("checked");
 					if(checked == true){
 						setValue('NoReferencia.value', true);
 						$j("span.obsToDisable5").find("input").attr("disabled", true);
 						$j("span.obsToDisable5").find("input").attr("checked", false);
 						$j('#Referencia').fadeTo('slow', 0.2); 
-						setValue('CentroSalud.value', false);
-						setValue('HospDistrit.value', false);
-						setValue('HospReg.value', false);
-						setValue('HospNacion.value', false);
 					}
 				});
-
-				getField('HD.value').change(function() {
-					var checked = $j(this).attr("checked");
-					if(checked == true){
-					setValue('NoReferencia.value', true);
-					$j("span.obsToDisable5").find("input").attr("disabled", true);
-					$j("span.obsToDisable5").find("input").attr("checked", false);
-					$j('#Referencia').fadeTo('slow', 0.2); 
-					setValue('CentroSalud.value', false);
-					setValue('HospDistrit.value', false);
-					setValue('HospReg.value', false);
-					setValue('HospNacion.value', false);}
-				});
-				
-				getField('HR.value').change(function() {
-					var checked = $j(this).attr("checked");
-					if(checked == true){
-					setValue('NoReferencia.value', true);
-					$j("span.obsToDisable5").find("input").attr("disabled", true);
-					$j("span.obsToDisable5").find("input").attr("checked", false);
-					$j('#Referencia').fadeTo('slow', 0.2); 
-					setValue('CentroSalud.value', false);
-					setValue('HospDistrit.value', false);
-					setValue('HospReg.value', false);
-					setValue('HospNacion.value', false);}
-				});
-				
-				getField('HN.value').change(function() {
-					var checked = $j(this).attr("checked");
-					if(checked == true){
-					setValue('NoReferencia.value', true);
-					$j("span.obsToDisable5").find("input").attr("disabled", true);
-					$j("span.obsToDisable5").find("input").attr("checked", false);
-					$j('#Referencia').fadeTo('slow', 0.2); 
-					setValue('CentroSalud.value', false);
-					setValue('HospDistrit.value', false);
-					setValue('HospReg.value', false);
-					setValue('HospNacion.value', false);}
-				});				
 			});
 		}
 	</script>	
@@ -791,24 +518,32 @@ if(jQuery){
 				&lt;/script>"/>
 			</td>
 		</ifMode>
-		
-		<td class="hidden" ><encounterLocation  id="encounterloc" /></td>      
-
-		<td>Departamento:</td>
-		<td><lookup class="value" expression="patient.addresses.first().stateProvince"/></td>
-
-		<td>Municipio:</td>
-		<td><lookup class="value" expression="patient.addresses.first().cityVillage"/></td>
-
-		<td>Distrito:</td>
-		<td><lookup class="value" expression="patient.addresses.first().countyDistrict"/></td>
-
-		<td>Jurisdicción:</td>
-		<td><lookup class="value" expression="patient.addresses.first().address1"/></td>
-
-		<td>Comunidad:</td>
-		<td><lookup class="value" expression="patient.addresses.first().address2"/></td>
-
+	</table>
+	
+	<table class="baseline-aligned">
+		<tr>		
+			<td class="hidden" ><encounterLocation  id="encounterloc" /></td>      
+		</tr>
+		<tr>
+			<td>Departamento:</td>
+			<td><lookup class="value" expression="patient.addresses.first().stateProvince"/></td>
+		</tr>
+		<tr>
+			<td>Municipio:</td>
+			<td style='margin-left: 5px'><lookup class="value" expression="patient.addresses.first().cityVillage"/></td>
+		</tr>
+		<tr>
+			<td>Distrito:</td>
+			<td style='margin-left: 10px'><lookup class="value" expression="patient.addresses.first().countyDistrict"/></td>
+		</tr>
+		<tr>
+			<td>Jurisdicción:</td>
+			<td style='margin-left: 15px'><lookup class="value" expression="patient.addresses.first().address1"/></td>
+		</tr>
+		<tr>
+			<td>Comunidad:</td>
+			<td style='margin-left: 20px'><lookup class="value" expression="patient.addresses.first().address2"/></td>
+		</tr>
 	</table>
 </section>
  

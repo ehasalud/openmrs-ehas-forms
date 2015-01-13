@@ -116,51 +116,56 @@ table.baseline-aligned td {
 				&lt;/script>"/>
 			</td>
 		</ifMode>
-		
-		<td class="hidden" ><encounterLocation  id="encounterloc" /></td>      
-
-		<td>Departamento:</td>
-		<td><lookup class="value" expression="patient.addresses.first().stateProvince"/></td>
-
-		<td>Municipio:</td>
-		<td><lookup class="value" expression="patient.addresses.first().cityVillage"/></td>
-
-		<td>Distrito:</td>
-		<td><lookup class="value" expression="patient.addresses.first().countyDistrict"/></td>
-
-		<td>Jurisdicción:</td>
-		<td><lookup class="value" expression="patient.addresses.first().address1"/></td>
-
-		<td>Comunidad:</td>
-		<td><lookup class="value" expression="patient.addresses.first().address2"/></td>
-
+	</table>
+	
+	<table class="baseline-aligned">
+		<tr>		
+			<td class="hidden" ><encounterLocation  id="encounterloc" /></td>      
+		</tr>
+		<tr>
+			<td>Departamento:</td>
+			<td><lookup class="value" expression="patient.addresses.first().stateProvince"/></td>
+		</tr>
+		<tr>
+			<td>Municipio:</td>
+			<td style='margin-left: 5px'><lookup class="value" expression="patient.addresses.first().cityVillage"/></td>
+		</tr>
+		<tr>
+			<td>Distrito:</td>
+			<td style='margin-left: 10px'><lookup class="value" expression="patient.addresses.first().countyDistrict"/></td>
+		</tr>
+		<tr>
+			<td>Jurisdicción:</td>
+			<td style='margin-left: 15px'><lookup class="value" expression="patient.addresses.first().address1"/></td>
+		</tr>
+		<tr>
+			<td>Comunidad:</td>
+			<td style='margin-left: 20px'><lookup class="value" expression="patient.addresses.first().address2"/></td>
+		</tr>
 	</table>
 </section>
 
 <section headerLabel="2. Parto">
 	<table class="baseline-aligned">
 		<tr>
-			<td>Via de Parto:
-				<obs conceptId="140" class="obsToDisableEsp"/>
-			</td>
+			<td>Via de Parto:</td>
+			<td><obs conceptId="140" class="obsToDisableEsp"/></td>
 		</tr>
 		<tr>
-			<td>Estado Recien Nacido:
-				<obs conceptId="144" class="obsToDisableEsp"/>
-			</td>
+			<td>Estado Recien Nacido:</td>
+			<td><obs conceptId="144" class="obsToDisableEsp"/></td>
 		</tr>
 		<tr>
-			<td>Lugar de Parto:
-				<obs conceptId="152" answerConceptIds="145,246,146,147,148,149,150,151,247" answerLabels="Centro de salud,Hospital distrital, Hospital Regional,Hospital de referencia nacional,En domicilio atendido por comadrona,En domicilio atendido por facilitador,En domicilio atendido por médico,En domicilio atendido por enfermera profesional, En domicilio atendido por auxiliar de enfermería" class="obsToDisableEsp"/>
-			</td>
+			<td>Lugar de Parto:</td>
+			<td><obs conceptId="152" answerConceptIds="145,246,146,147,148,149,150,151,247" answerLabels="Centro de salud,Hospital distrital, Hospital Regional,Hospital de referencia nacional,En domicilio atendido por comadrona,En domicilio atendido por facilitador,En domicilio atendido por médico,En domicilio atendido por enfermera profesional, En domicilio atendido por auxiliar de enfermería" class="obsToDisableEsp"/></td>
 		</tr>
 		<tr>
 			<td>Comentarios Parto:
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<obs conceptId="153" rows="4" cols="23" class="obsToDisableEsp"/>
+			<td colspan="2">
+				<obs conceptId="153" rows="4" cols="50" class="obsToDisableEsp"/>
 			</td>
 		</tr>
 	</table>
