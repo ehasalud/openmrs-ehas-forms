@@ -104,8 +104,7 @@ if(jQuery){
     	var checkedNoReferencia = getField('NoReferencia.value').attr("checked");
 
 		if (checkedNoReferencia == true) {
-        	$j("span.obsToDisable5").find("input").attr("disabled", true);
-           	$j("span.obsToDisable5").find("select").attr("disabled", true);
+        	$j("span.obsToDisable5").find("input, textarea").attr("disabled", true);
             $j('#Referencia').fadeTo('slow', 0.2);
      	}
  	});
@@ -115,7 +114,7 @@ if(jQuery){
 		var checkedTraslado= getField('NoTrasladoUrg.value').attr("checked");
 
 		if (checkedTraslado == true) {
-			$j("span.obsToDisable6").find("input").attr("disabled", true);
+			$j("span.obsToDisable6").find("input, textarea").attr("disabled", true);
 			$j('#TrasladoUrg').fadeTo('slow', 0.2); 
 		}    
 	});
@@ -490,12 +489,12 @@ if(jQuery){
 				getField('NoReferencia.value').change(function() {
 					var checked = $j(this).attr("checked");
 					if(checked == true){
-						$j("span.obsToDisable5").find("input").attr("disabled", true);
+						$j("span.obsToDisable5").find("input, textarea").attr("disabled", true);
 						$j("span.obsToDisable5").find("input").attr("checked", false);
 						$j('#Referencia').fadeTo('slow', 0.2); 
 					}
 					else{
-						$j("span.obsToDisable5").find("input").attr("disabled", false);
+						$j("span.obsToDisable5").find("input, textarea").attr("disabled", false);
 						$j("span.obsToDisable5").find("input").attr("checked", false);
 						$j('#Referencia').fadeTo('slow', 1); 
 					}	
@@ -505,8 +504,9 @@ if(jQuery){
 					var checked = $j(this).attr("checked");
 					if(checked == true){
 						setValue('NoTrasladoUrg.value', true);
-						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input, textarea").attr("disabled", true);
 						$j("span.obsToDisable6").find("input").attr("checked", false);
+						$j("span.obsToDisable5").find("input").not($j(this)).attr("checked", false);
 						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
 					}
 				  
@@ -516,12 +516,12 @@ if(jQuery){
 				getField('NoTrasladoUrg.value').change(function() {
 					var checked = $j(this).attr("checked");
 					if(checked == true){
-						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input, textarea").attr("disabled", true);
 						$j("span.obsToDisable6").find("input").attr("checked", false);
 						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
 					}
 					else{
-						$j("span.obsToDisable6").find("input").attr("disabled", false);
+						$j("span.obsToDisable6").find("input, textarea").attr("disabled", false);
 						$j("span.obsToDisable6").find("input").attr("checked", false);
 						$j('#TrasladoUrg').fadeTo('slow', 1); 
 					}
@@ -531,8 +531,9 @@ if(jQuery){
 					var checked = $j(this).attr("checked");
 					if(checked == true){
 						setValue('NoReferencia.value', true);
-						$j("span.obsToDisable5").find("input").attr("disabled", true);
+						$j("span.obsToDisable5").find("input, textarea").attr("disabled", true);
 						$j("span.obsToDisable5").find("input").attr("checked", false);
+						$j("span.obsToDisable6").find("input").not($j(this)).attr("checked", false);
 						$j('#Referencia').fadeTo('slow', 0.2); 
 					}
 				});
@@ -853,9 +854,9 @@ if(jQuery){
 
 <section headerLabel="5. Pruebas en Sangre">
 	<table class="baseline-aligned">
-		<tr> <td> <obs conceptId="88" labelText="VHB" answerConceptIds="84,85,87" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/></td>  </tr>         
-		<tr> <td> <obs conceptId="93" labelText="Sifilis" answerConceptIds="89,90,92" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td>  </tr>                 
-		<tr> <td> <obs conceptId="98" labelText="VIH" answerConceptIds="94,95,97" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="88" labelText="VHB" answerConceptIds="84,85,87" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> <obs conceptId="86" labelText="VHB positivo confirmado" id="VHBposcon" style="checkbox" class="obsToDisableAll"/> </td>  </tr>         
+		<tr> <td> <obs conceptId="93" labelText="Sifilis" answerConceptIds="89,90,92" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> <obs conceptId="91" labelText="Sifilis positivo confirmado" id="Sifposcon" style="checkbox" class="obsToDisableAll"/> </td>  </tr>                 
+		<tr> <td> <obs conceptId="98" labelText="VIH" answerConceptIds="94,95,97" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> <obs conceptId="96" labelText="VIH positivo confirmado" id="VIHposcon" style="checkbox" class="obsToDisableAll"/> </td> </tr>
 		<tr> <td> <obs id="hemoglobina" conceptId="99" labelText="Hemoglobina: " class="obsToDisableEsp"/></td></tr>    
 		<tr> <td> <obs conceptId="100" labelText="Glucosa: " class="obsToDisableEsp"/> </td> </tr>  
 		<tr> <td> <br></br> </td></tr>  
@@ -879,6 +880,7 @@ if(jQuery){
 	<tr> <td> <obs conceptId="115" labelText="Dentro de la normalidad" style="checkbox" id="DiagNorm" class="obsToDisableEsp"/> </td> </tr>
 	
 	<table id="Diagnostico">
+		<tr> <td> <obs conceptId="45" labelText="Gestación gemelar" style="checkbox" id="Feto2diag" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
 		<tr> <td> <obs conceptId="117" labelText="Cribado reactivo que necesita confirmacion" style="checkbox" id="PostivoConfirm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
 		<tr> <td> <obs conceptId="116" labelText="Hallazgo ecografico anormal" style="checkbox" id="EcoAnorm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
 		<tr> <td> <obs conceptId="118" labelText="Infección del Tracto Urinario" style="checkbox" id="ITU" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
@@ -919,6 +921,7 @@ if(jQuery){
 			<tr>  <td> <obs conceptId="129" labelText="Hospital Distrital" style="checkbox" id="HospDistrit" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
 			<tr>  <td> <obs conceptId="168" labelText="Hospital Regional" style="checkbox" id="HospReg" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
 			<tr>  <td> <obs conceptId="130" labelText="Hospital de Referencia Nacional" style="checkbox" id="HospNacion" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="248" rows="1" cols="50" labelText="Motivo de la referencia : " id="ComentRef" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
 
 		</table>     
 	</table>
@@ -935,6 +938,7 @@ if(jQuery){
 			<tr>  <td> <obs conceptId="135" labelText="Hospital Distrital" style="checkbox" id="HD" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
 			<tr>  <td> <obs conceptId="177" labelText="Hospital Regional" style="checkbox" id="HR" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
 			<tr>  <td> <obs conceptId="136" labelText="Hospital de Referencia Nacional" style="checkbox" id="HN" class="obsToDisable6 obsToDisableEsp"/> </td></tr> 
+			<tr>  <td> <obs conceptId="249" rows="1" cols="50" labelText="Motivo del traslado : " id="ComentTras" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
 
 		</table>
 	</table>

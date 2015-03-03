@@ -3,7 +3,6 @@
 <!-- Codigo para marcar el checkbox oculto para que asi Alertas de Encuentro reconozca el dropdown-->
 <script type="text/javascript">
 beforeSubmit.push(function() {
-
 	setValue('RellConf.value', false);
 	setValue('RellRevi.value', false);
 	setValue('RellReviUrg.value', false);
@@ -29,7 +28,6 @@ beforeSubmit.push(function() {
 <!--Modificado: 9/10/2014 por jc.rodriguez@ehas.org : cambio de gramos a libras-->
 
 <script type="text/javascript">
-
 if(jQuery){
 	
 	<!-- Formula de hadlock: Peso estimado=10^(2.0150655 + 0.00202644*CA + 0.01153867*LF ) -->
@@ -62,9 +60,8 @@ if(jQuery){
 	<!--Codigo que se encarga de deshabilitar los campos en el caso de que no haya ninguna referencia. -->
 	$j(function() {
     	var checkedNoReferencia = getField('NoReferencia.value').attr("checked");
-
 		if (checkedNoReferencia == true) {
-        	$j("span.obsToDisable5").find("input").attr("disabled", true);
+        	$j("span.obsToDisable5").find("input, textarea").attr("disabled", true);
            	$j("span.obsToDisable5").find("select").attr("disabled", true);
             $j('#Referencia').fadeTo('slow', 0.2);
      	}
@@ -74,7 +71,6 @@ if(jQuery){
  	$j(function() {
     	var checkedNoOrina = getField('OrinaNo.value').attr("checked");
         var checkedNeg = getField('OrinaNeg.value').attr("checked");
-
         if ((checkedNeg == true) || (checkedNoOrina == true)) {
         	$j("span.obsToDisable3").find("input").attr("disabled", true);
             $j("span.obsToDisable3").find("select").attr("disabled", true);
@@ -85,7 +81,6 @@ if(jQuery){
   	<!--  Deshabilita la seleccion de otros tratamientos si la opcion es ninguno -->
 	$j(function() {
 		var checkedNoTreat = getField('notreat.value').attr("checked");
-
 		if (checkedNoTreat == true) {
 			$j("span.treatement").find("input").attr("disabled", true);
 			$j("span.treatement").find("select").attr("disabled", true);
@@ -121,7 +116,6 @@ if(jQuery){
 		var checkedTrimestre1 = getField('Trimestre1.value').attr("checked");
 		var checkedTrimestre2 = getField('Trimestre2.value').attr("checked");
 		var checkedTrimestre3 = getField('Trimestre3.value').attr("checked");
-
 		if (checkedTrimestre1 == true) {
 			$j('#RestoTrimestre').fadeTo('slow', 0.2);
 			$j("span.obsToDisable2").find("input").attr("disabled", true);
@@ -148,7 +142,6 @@ if(jQuery){
 	
 	<!--Marcar el diagnostico de sospecha de preeclamsia si los niveles de tension arterial sistolica son >= de 140 o la distolica >=90.  -->
 	$j(function() {
-
 		getField('sistolica.value').change(function() {
 			evaluatePreeclampsia();
 		});
@@ -193,9 +186,8 @@ if(jQuery){
 	<!--Codigo que se encarga de deshabilitar los campos de traslado si no ha habido un traslado urgente. -->
 	$j(function() {
 		var checkedTraslado= getField('NoTrasladoUrg.value').attr("checked");
-
 		if (checkedTraslado == true) {
-			$j("span.obsToDisable6").find("input").attr("disabled", true);
+			$j("span.obsToDisable6").find("input, textarea").attr("disabled", true);
 			$j('#TrasladoUrg').fadeTo('slow', 0.2); 
 		}    
 	});
@@ -255,7 +247,6 @@ if(jQuery){
 						$j("span.obsToDisable1").find("input").attr("disabled", true);
 					}
 				});
-
 				getField('Trimestre2.value').change(function() {
 					var checked = $j(this).attr("checked");
 					if(checked == true){
@@ -276,7 +267,6 @@ if(jQuery){
 						$j("span.obsToDisable2").find("input").attr("disabled", true);
 					}
 				});
-
 				getField('Trimestre3.value').change(function() {
 					var checked = $j(this).attr("checked");
 					if(checked == true){
@@ -375,12 +365,12 @@ if(jQuery){
 				getField('NoReferencia.value').change(function() {
 					var checked = $j(this).attr("checked");
 					if(checked == true){
-						$j("span.obsToDisable5").find("input").attr("disabled", true);
+						$j("span.obsToDisable5").find("input, textarea").attr("disabled", true);
 						$j("span.obsToDisable5").find("input").attr("checked", false);
 						$j('#Referencia').fadeTo('slow', 0.2); 
 					}
 					else{
-						$j("span.obsToDisable5").find("input").attr("disabled", false);
+						$j("span.obsToDisable5").find("input, textarea").attr("disabled", false);
 						$j("span.obsToDisable5").find("input").attr("checked", false);
 						$j('#Referencia').fadeTo('slow', 1); 
 					}	
@@ -390,8 +380,9 @@ if(jQuery){
 					var checked = $j(this).attr("checked");
 					if(checked == true){
 						setValue('NoTrasladoUrg.value', true);
-						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input, textarea").attr("disabled", true);
 						$j("span.obsToDisable6").find("input").attr("checked", false);
+						$j("span.obsToDisable5").find("input").not($j(this)).attr("checked", false);
 						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
 					}
 				  
@@ -401,12 +392,12 @@ if(jQuery){
 				getField('NoTrasladoUrg.value').change(function() {
 					var checked = $j(this).attr("checked");
 					if(checked == true){
-						$j("span.obsToDisable6").find("input").attr("disabled", true);
+						$j("span.obsToDisable6").find("input, textarea").attr("disabled", true);
 						$j("span.obsToDisable6").find("input").attr("checked", false);
 						$j('#TrasladoUrg').fadeTo('slow', 0.2); 
 					}
 					else{
-						$j("span.obsToDisable6").find("input").attr("disabled", false);
+						$j("span.obsToDisable6").find("input, textarea").attr("disabled", false);
 						$j("span.obsToDisable6").find("input").attr("checked", false);
 						$j('#TrasladoUrg').fadeTo('slow', 1); 
 					}
@@ -416,8 +407,9 @@ if(jQuery){
 					var checked = $j(this).attr("checked");
 					if(checked == true){
 						setValue('NoReferencia.value', true);
-						$j("span.obsToDisable5").find("input").attr("disabled", true);
+						$j("span.obsToDisable5").find("input, textarea").attr("disabled", true);
 						$j("span.obsToDisable5").find("input").attr("checked", false);
+						$j("span.obsToDisable6").find("input").not($j(this)).attr("checked", false);
 						$j('#Referencia').fadeTo('slow', 0.2); 
 					}
 				});
@@ -676,9 +668,9 @@ if(jQuery){
 
 <section headerLabel="4. Pruebas en Sangre">
 	<table class="baseline-aligned">
-		<tr> <td> <obs conceptId="88" labelText="VHB" answerConceptIds="84,85,87" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/></td>  </tr>         
-		<tr> <td> <obs conceptId="93" labelText="Sifilis" answerConceptIds="89,90,92" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td>  </tr>                 
-		<tr> <td> <obs conceptId="98" labelText="VIH" answerConceptIds="94,95,97" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> </td> </tr>
+		<tr> <td> <obs conceptId="88" labelText="VHB" answerConceptIds="84,85,87" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> <obs conceptId="86" labelText="VHB positivo confirmado" id="VHBposcon" style="checkbox" class="obsToDisableAll"/> </td>  </tr>         
+		<tr> <td> <obs conceptId="93" labelText="Sifilis" answerConceptIds="89,90,92" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> <obs conceptId="91" labelText="Sifilis positivo confirmado" id="Sifposcon" style="checkbox" class="obsToDisableAll"/> </td>  </tr>                 
+		<tr> <td> <obs conceptId="98" labelText="VIH" answerConceptIds="94,95,97" answerLabels="No Reactivo, Reactivo, No se hizo" class="obsToDisableEsp"/> <obs conceptId="96" labelText="VIH positivo confirmado" id="VIHposcon" style="checkbox" class="obsToDisableAll"/> </td> </tr>
 		<tr> <td> <obs id="hemoglobina" conceptId="99" labelText="Hemoglobina: " class="obsToDisableEsp"/></td></tr>    
 		<tr> <td> <obs conceptId="100" labelText="Glucosa: " class="obsToDisableEsp"/> </td> </tr>  
 		<tr> <td> <br></br> </td></tr>  
@@ -702,6 +694,7 @@ if(jQuery){
 	<tr> <td> <obs conceptId="115" labelText="Dentro de la normalidad" style="checkbox" id="DiagNorm" class="obsToDisableEsp"/> </td> </tr>
 	
 	<table id="Diagnostico">
+		<tr> <td> <obs conceptId="45" labelText="Gestación gemelar" style="checkbox" id="Feto2diag" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
 		<tr> <td> <obs conceptId="117" labelText="Cribado reactivo que necesita confirmacion" style="checkbox" id="PostivoConfirm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
 		<tr> <td> <obs conceptId="116" labelText="Hallazgo ecografico anormal" style="checkbox" id="EcoAnorm" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
 		<tr> <td> <obs conceptId="118" labelText="Infección del Tracto Urinario" style="checkbox" id="ITU" class="obsToDisable4 obsToDisableEsp"/> </td> </tr>
@@ -742,6 +735,7 @@ if(jQuery){
 			<tr>  <td> <obs conceptId="129" labelText="Hospital Distrital" style="checkbox" id="HospDistrit" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
 			<tr>  <td> <obs conceptId="168" labelText="Hospital Regional" style="checkbox" id="HospReg" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
 			<tr>  <td> <obs conceptId="130" labelText="Hospital de Referencia Nacional" style="checkbox" id="HospNacion" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
+			<tr>  <td> <obs conceptId="248" rows="1" cols="50" labelText="Motivo de la referencia : " id="ComentRef" class="obsToDisable5 obsToDisableEsp"/> </td></tr>
 
 		</table>     
 	</table>
@@ -758,6 +752,7 @@ if(jQuery){
 			<tr>  <td> <obs conceptId="135" labelText="Hospital Distrital" style="checkbox" id="HD" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
 			<tr>  <td> <obs conceptId="177" labelText="Hospital Regional" style="checkbox" id="HR" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
 			<tr>  <td> <obs conceptId="136" labelText="Hospital de Referencia Nacional" style="checkbox" id="HN" class="obsToDisable6 obsToDisableEsp"/> </td></tr> 
+			<tr>  <td> <obs conceptId="249" rows="1" cols="50" labelText="Motivo del traslado : " id="ComentTras" class="obsToDisable6 obsToDisableEsp"/> </td></tr>
 
 		</table>
 	</table>
