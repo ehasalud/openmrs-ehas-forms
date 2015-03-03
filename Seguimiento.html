@@ -191,6 +191,23 @@ if(jQuery){
 			$j('#TrasladoUrg').fadeTo('slow', 0.2); 
 		}    
 	});
+	
+	<!-- Codigo que implementa la funcionalidad del boton Mostrar Imagenes. -->
+	$j(function() {
+		var images = $j( ".ecoImage" ).find( ".value" );
+		images.each( function( ){
+			var image  = $j(this).children( "a" ).first();
+
+			<!-- Se inserta un elemento tipo a que representa la imagen para cada imagen existente en el formulario. Es invisible por defecto. -->
+			<!-- Es necesario sustituir los signos de menor o igual porque si no htmlformentry lo malinterpreta. -->
+			image.before( "&lt;a href='" + image.attr( "href" ) + "' hidden='true' class='ecoImageDisplay' target='_blank'>&lt;img src='" + image.attr( "href" ) + "' style='width:100%'/>&lt;/a>" );
+		});
+				
+		$j( "#showEcoImages" ).click( function (){
+			$j( ".ecoImageDisplay" ).toggle();
+		});
+				
+	});
 }
 </script>
 
@@ -573,6 +590,7 @@ if(jQuery){
 </section>
  
 <section headerLabel="3. Ecografia">
+	<span style="float:right"><label><input id="showEcoImages" type="checkbox"/>Mostrar imagenes</label></span>
 	<table class="baseline-aligned">
 		<tr> <td> <b>Numero de fetos: </b></td> </tr>
                 
@@ -580,7 +598,7 @@ if(jQuery){
 			<tr>  <td> <obs conceptId="44" labelText="Feto unico" style="checkbox" id="Feto1" class="obsToDisableEsp"/> </td> </tr>
 			<tr> <td> <obs conceptId="45" labelText="Feto gemelar" style="checkbox" id="Feto2" class="obsToDisableEsp"/> </td> </tr>
 			<tr>  <td> <obs conceptId="46" labelText= "Feto triple" style="checkbox" id="Feto3" class="obsToDisableEsp"/> </td> </tr>
-			<tr>  <td><fieldset class="obsToDisableEsp"> <legend> Subir Foto del(los) Feto(s) </legend><obs conceptId="156"  id="FotoFeto1" /> </fieldset></td> </tr>
+			<tr>  <td><fieldset class="obsToDisableEsp"> <legend> Subir Foto del(los) Feto(s) </legend><obs conceptId="156"  id="FotoFeto1" class="ecoImage"/> </fieldset></td> </tr>
 					
 		</table>
 		
@@ -605,7 +623,7 @@ if(jQuery){
 		<table id="PrimerTrimestre">
 			<tr> 
 				<td> <obs conceptId="57" labelText="CRL (mm)" style="number" id="CRL" class="obsToDisable1 obsToDisableEsp"/> </td>  
-				<td> <fieldset class="obsToDisableEsp"> <legend> Subir foto CRL </legend><obs conceptId="58"  id="FotoCRL" class="obsToDisable1"/> </fieldset> </td> 
+				<td> <fieldset class="obsToDisableEsp"> <legend> Subir foto CRL </legend><obs conceptId="58"  id="FotoCRL" class="obsToDisable1 ecoImage"/> </fieldset> </td> 
 			</tr>
 		</table>
 		
@@ -616,16 +634,16 @@ if(jQuery){
 			 
 		<table id="RestoTrimestre">
 			<tr>  <td> <obs conceptId="59" labelText="DBP (mm)" style="number" id="DBP" class="obsToDisable2 obsToDisableEsp"/> </td>
-				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen DBP</legend><obs conceptId="66" id="DBPimag" class="obsToDisable2"/></fieldset> </td> 
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen DBP</legend><obs conceptId="66" id="DBPimag" class="obsToDisable2 ecoImage"/></fieldset> </td> 
 			</tr>
 			<tr>  <td> <obs conceptId="60" labelText="CC (mm)" style="number" id="CC" class="obsToDisable2 obsToDisableEsp"/> </td>
-				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen CC</legend><obs conceptId="65"  id="CCimag" class="obsToDisable2"/></fieldset> </td> 
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen CC</legend><obs conceptId="65"  id="CCimag" class="obsToDisable2 ecoImage"/></fieldset> </td> 
 			</tr>
 			<tr>  <td> <obs conceptId="61" labelText="CA (mm)" style="number" id="CA" class="obsToDisable2 obsToDisableEsp"/> </td>
-				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen CA</legend><obs conceptId="67"  id="CAimag" class="obsToDisable2"/></fieldset> </td> 
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen CA</legend><obs conceptId="67"  id="CAimag" class="obsToDisable2 ecoImage"/></fieldset> </td> 
 			</tr>
 			<tr>  <td> <obs conceptId="62" labelText="LF (mm)" style="number" id="LF" class="obsToDisable2 obsToDisableEsp"/> </td>
-				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen LF</legend><obs conceptId="64"  id="LFimag" class="obsToDisable2"/></fieldset></td> 
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen LF</legend><obs conceptId="64"  id="LFimag" class="obsToDisable2 ecoImage"/></fieldset></td> 
 			</tr>
 			<tr> <td> <br></br> </td></tr>
 			<tr>  
@@ -644,12 +662,12 @@ if(jQuery){
 			<tr>  
 				<td> <obs conceptId="74" labelText="Placenta" answerConceptIds="69,70,71,72,73" answerLabels="Fundica,Anterior, Posterior, Insercion Baja, Sospecha de Previa" class="obsToDisableEsp"/>
 				</td>    
-				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen Placenta</legend><obs conceptId="75"/></fieldset></td> 
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen Placenta</legend><obs conceptId="75" class="ecoImage"/></fieldset></td> 
 			</tr>
 
 			<tr>  
 				<td> <obs conceptId="76" labelText="Indice Liquido Amniotico" class="obsToDisableEsp"/></td>  
-				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen medida liquido amniotico</legend><obs conceptId="214"/></fieldset></td>  
+				<td> <fieldset class="obsToDisableEsp"> <legend>Imagen medida liquido amniotico</legend><obs conceptId="214" class="ecoImage"/></fieldset></td>  
 			</tr>
 		</table>
 		
